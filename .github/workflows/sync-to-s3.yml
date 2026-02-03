@@ -19,6 +19,7 @@ env:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    environment: bucketinfo
     
     steps:
       - name: Checkout repository
