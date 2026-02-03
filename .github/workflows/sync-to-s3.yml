@@ -1,0 +1,62 @@
+name: Sync to S3 (MinIO)
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+    inputs:
+      sync_path:
+        description: 'Path to sync (default: entire repo)'
+        required: false
+        default: '.'
+
+env:
+  S3_BUCKET: ${{ secrets.S3_BUCKET }}
+  S3_ENDPOINT: ${{ secrets.S3_ENDPOINT }}
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install AWS CLI
+        run: |
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          unzip -q awscliv2.zip
+          sudo ./aws/install --update
+          aws --version
+
+      - name: Configure AWS CLI for MinIO
+        run: |
+          aws configure set aws_access_key_id ${{ secrets.S3_ACCESS_KEY }}
+          aws configure set aws_secret_access_key ${{ secrets.S3_SECRET_KEY }}
+          aws configure set default.region us-east-1
+          aws configure set default.s3.signature_version s3v4
+
+      - name: Sync files to S3 (MinIO)
+        run: |
+          SYNC_PATH="${{ github.event.inputs.sync_path || '.' }}"
+          
+          echo "Syncing $SYNC_PATH to s3://$S3_BUCKET/assets"
+          
+          aws s3 sync "$SYNC_PATH" "s3://$S3_BUCKET/assets" \
+            --endpoint-url "$S3_ENDPOINT" \
+            --exclude ".git/*" \
+            --exclude ".github/*" \
+            --delete
+          
+          echo "Sync completed successfully!"
+
+      - name: List bucket contents  
+        run: |
+          echo "Current bucket contents in /assets:"
+          aws s3 ls "s3://$S3_BUCKET/assets" \
+            --endpoint-url "$S3_ENDPOINT" \
+            --recursive \
+            --human-readable \
+            --summarize
