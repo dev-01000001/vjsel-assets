@@ -47,10 +47,18 @@ jobs:
           
           echo "Syncing $SYNC_PATH to s3://$S3_BUCKET/assets"
           
+          # Exclude repo/IDE metadata at any path to avoid 403 and keep bucket clean
           aws s3 sync "$SYNC_PATH" "s3://$S3_BUCKET/assets" \
             --endpoint-url "$S3_ENDPOINT" \
             --exclude ".git/*" \
+            --exclude "*/.git/*" \
             --exclude ".github/*" \
+            --exclude "*/.github/*" \
+            --exclude ".vscode/*" \
+            --exclude "*/.vscode/*" \
+            --exclude ".DS_Store" \
+            --exclude "*/.DS_Store" \
+            --only-show-errors \
             --delete
           
           echo "Sync completed successfully!"
