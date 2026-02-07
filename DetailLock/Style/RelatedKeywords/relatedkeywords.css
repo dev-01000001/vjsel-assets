@@ -1,11 +1,12 @@
 /* ========================================
-   PHẦN TỪ KHÓA LIÊN QUAN
+   RELATED KEYWORDS SECTION
    BEM: related-keywords
    ======================================== */
 
 /* ----------------------------------------
-   Khối: related-keywords
-   Mục đích: Container từ khóa liên quan
+   Block: related-keywords
+   Mục đích: Container cho phần từ khóa liên quan
+   Figma: Content - 1440x184px
    ---------------------------------------- */
 .related-keywords {
     display: flex;
@@ -25,8 +26,9 @@
 }
 
 /* ----------------------------------------
-   Phần tử: container
+   Element: related-keywords__container
    Mục đích: Wrapper nội dung chính
+   Figma: Hero - 1280x112px
    ---------------------------------------- */
 .related-keywords__container {
     display: flex;
@@ -41,8 +43,10 @@
 }
 
 /* ----------------------------------------
-   Phần tử: title
-   Mục đích: Tiêu đề chính
+   Element: related-keywords__title
+   Mục đích: Tiêu đề chính "Từ khóa liên quan"
+   Typography: H3 - Merriweather Bold 36px
+   Figma: 1280x50px
    ---------------------------------------- */
 .related-keywords__title {
     width: 1280px;
@@ -52,11 +56,13 @@
     font-weight: 700;
     font-size: 36px;
     line-height: 140%;
+    /* 50px */
     letter-spacing: -0.01em;
     color: #212636;
     margin: 0;
     display: flex;
     align-items: center;
+    /* Inside auto layout */
     flex: none;
     order: 0;
     align-self: stretch;
@@ -64,8 +70,9 @@
 }
 
 /* ----------------------------------------
-   Phần tử: list
-   Mục đích: Danh sách tag từ khóa
+   Element: related-keywords__list
+   Mục đích: Danh sách các tag từ khóa
+   Figma: toppic - 1280x38px
    ---------------------------------------- */
 .related-keywords__list {
     display: flex;
@@ -77,6 +84,7 @@
     gap: 12px;
     width: 1280px;
     height: 38px;
+    /* Inside auto layout */
     flex: none;
     order: 1;
     align-self: stretch;
@@ -84,13 +92,14 @@
 }
 
 /* ========================================
-   COMPONENT TAG TỪ KHÓA
+   KEYWORD TAG COMPONENT
    BEM: keyword-tag
    ======================================== */
 
 /* ----------------------------------------
-   Khối: keyword-tag
+   Block: keyword-tag
    Mục đích: Button tag cho mỗi từ khóa
+   Figma: Health component
    ---------------------------------------- */
 .keyword-tag {
     display: flex;
@@ -105,14 +114,17 @@
     border-radius: 100px;
     cursor: pointer;
     transition: all 0.2s ease;
+    /* Reset button styles */
     font: inherit;
     outline: none;
+    /* Inside auto layout */
     flex: none;
     flex-grow: 0;
 }
 
 /* ----------------------------------------
-   Trạng thái: hover
+   State: keyword-tag hover
+   Mục đích: Hiệu ứng khi hover
    ---------------------------------------- */
 .keyword-tag:hover {
     background: #f5f5f5;
@@ -122,7 +134,8 @@
 }
 
 /* ----------------------------------------
-   Trạng thái: active
+   State: keyword-tag active
+   Mục đích: Hiệu ứng khi click
    ---------------------------------------- */
 .keyword-tag:active {
     transform: translateY(0);
@@ -130,8 +143,9 @@
 }
 
 /* ----------------------------------------
-   Phần tử: text
+   Element: keyword-tag__text
    Mục đích: Text bên trong tag
+   Typography: Body1 - Roboto Regular 16px
    ---------------------------------------- */
 .keyword-tag__text {
     height: 22px;
@@ -140,18 +154,20 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 140%;
+    /* 22px */
     color: #212636;
     text-align: center;
     display: flex;
     align-items: center;
     white-space: nowrap;
+    /* Inside auto layout */
     flex: none;
     order: 0;
     flex-grow: 0;
 }
 
 /* ========================================
-   RESPONSIVE (<= 1439px)
+   RESPONSIVE DESIGN (<= 1439px)
    ======================================== */
 @media (max-width: 1439px) {
     * {
@@ -174,18 +190,22 @@
         width: 100% !important;
         height: auto !important;
         font-size: 32px !important;
+        /* Slightly smaller for flexibility */
     }
 
     .related-keywords__list {
         width: 100% !important;
         height: auto !important;
         flex-wrap: wrap !important;
+        /* Ensure wrapping */
         gap: 8px !important;
+        /* Slightly tighter gap */
         justify-content: center !important;
     }
 
     .keyword-tag {
         height: auto !important;
+        /* Flex height based on content padding */
         min-height: 38px !important;
     }
 }
@@ -246,11 +266,11 @@
 }
 
 /* ========================================
-   KHẢ NĂNG TIẾP CẬN
+   ACCESSIBILITY
    ======================================== */
 
 /* ----------------------------------------
-   Focus cho điều hướng bằng bàn phím
+   Focus state cho keyboard navigation
    ---------------------------------------- */
 .keyword-tag:focus-visible {
     outline: 2px solid #212636;
@@ -258,7 +278,7 @@
 }
 
 /* ----------------------------------------
-   Giảm hiệu ứng chuyển động
+   Reduced motion cho accessibility
    ---------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
     .keyword-tag {
