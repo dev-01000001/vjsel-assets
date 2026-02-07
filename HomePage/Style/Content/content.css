@@ -20,11 +20,13 @@
     padding: 0px;
     gap: 48px;
     width: 1440px;
-    height: 2613.45px;
+    height: auto;
     flex: none;
     order: 2;
     align-self: stretch;
     flex-grow: 0;
+    margin-top: 40px;
+    margin-bottom: 48px;
 }
 
 /* Khối trái */
@@ -32,7 +34,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 40px 0px 48px 80px;
+    padding: 0 0 0 80px;
     gap: 24px;
     width: 925px;
     height: 2602px;
@@ -46,10 +48,11 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 40px 80px 48px 0px;
+    padding: 0 80px 0 0px;
     gap: 24px;
     width: 467px;
-    height: 2613.45px;
+    /* height: 2613px; */
+    height: auto;
     /* Inside auto layout */
     flex: none;
     order: 1;
@@ -157,7 +160,16 @@
     padding: 0px;
     gap: 8px;
     width: 100%;
-    height: 20px;
+    /* height: 20px; Removed fixed height to allow expansion */
+    max-height: 24px; /* Limit to 1 line initially (approx 20px + padding/buffer) */
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    position: relative; /* For offset calculations */
+}
+
+.article-card__authors.expanded {
+    max-height: none;
+    overflow: visible;
 }
 
 .article-card--with-image .article-card__authors {
@@ -661,7 +673,7 @@
 
 .issue-preview__image {
     width: 259px;
-    height: 362.6px;
+    height: auto;
     box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
     flex: none;
     order: 0;
@@ -804,7 +816,8 @@
 
 .article-preview__link {
     box-sizing: border-box;
-    display: flex;
+    /* display: flex; */
+    display: inline;
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -960,6 +973,7 @@
     order: 7;
     align-self: stretch;
     flex-grow: 0;
+    overflow: hidden;
 }
 
 .newsletter-card__background {
@@ -1722,5 +1736,239 @@
 
 .sidebar-card__more-btn.is-expanded svg {
     transform: rotate(180deg);
+}
+
+/* Custom Breakpoint for Right Column Grid (425px - 1439px) */
+@media screen and (min-width: 769px) and (max-width: 1439px) {
+    .journal-page__right-column {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        /* align-items: start; Removed to allow stretch */
+        align-items: stretch !important;
+        box-sizing: border-box;
+    }
+
+    /* Reset width constraints for children to fit grid */
+    .journal-page__right-column > * {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        align-self: stretch !important;
+        min-width: 0; /* Critical for grid items to shrink */
+    }
+
+    /* Fix internal components that might have fixed width */
+    .sidebar-card,
+    .sidebar-card__content,
+    .issue-preview,
+    .issue-preview__image-wrapper,
+    .issue-preview__info,
+    .issue-preview__title,
+    .issue-preview__count,
+    .article-preview,
+    .article-preview__content,
+    .article-preview__title,
+    .article-preview__excerpt,
+    /* .article-preview__link, Removed to prevent link from taking full width */
+    .newsletter-card,
+    .newsletter-card__content,
+    /* .newsletter-card__button, Removed from forced width 100% */
+    .newsletter-card__button span,
+    .author-list,
+    .author-list__item,
+    .author-list__name,
+    .author-list__title,
+    .video-preview__thumbnail,
+    .article-preview__image-wrapper,
+    .sidebar-card__header,
+    .sidebar-card__header-section,
+    .sidebar-card__main-title,
+    .sidebar-card__section-title,
+    .sidebar-card__title,
+    .sidebar-card__subtitle,
+    .sidebar-card__link,
+    .tag-list,
+    .tag-list__tag {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important; /* Allow shrinking */
+    }
+
+    /* Allow auto height to prevent clipping */
+    .sidebar-card,
+    .sidebar-card__content,
+    .article-preview,
+    .article-preview__content,
+    .newsletter-card,
+    .author-list__item,
+    .video-preview__thumbnail,
+    .issue-preview__image-wrapper,
+    .issue-preview,
+    .sidebar-card__header,
+    .sidebar-card__header-section,
+    .sidebar-card__main-title,
+    .sidebar-card__title,
+    .sidebar-card__section-title,
+    .issue-preview__title,
+    .issue-preview__count {
+        height: auto !important;
+    }
+    
+    /* Center images in issue preview and fix spacing */
+    .issue-preview__image-wrapper {
+        justify-content: center;
+        padding: 20px !important; /* Reduce padding for smaller spaces */
+    }
+    
+    /* Ensure text wraps and doesn't overflow */
+    .issue-preview__title,
+    .article-preview__title,
+    .newsletter-card__title,
+    .newsletter-card__title--primary,
+    .author-list__name,
+    .sidebar-card__main-title,
+    .sidebar-card__section-title,
+    .sidebar-card__title,
+    .sidebar-card__subtitle {
+        white-space: normal !important;
+        text-align: center; /* Center text generally looks better in narrow cols */
+    }
+
+    /* Exceptions for specific text alignments if needed */
+    .author-list__name, .author-list__title {
+        text-align: left;
+    }
+    
+    .sidebar-card__header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    /* Ensure tag list wraps */
+    .tag-list {
+        flex-wrap: wrap !important;
+    }
+    .tag-list__tag {
+        width: auto !important; /* Tags normally auto width */
+        max-width: 100% !important;
+    }
+
+
+    .newsletter-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        padding-bottom: 24px;
+    }
+
+    .newsletter-card__background {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        z-index: 0;
+        object-fit: cover !important;
+    }
+
+    .newsletter-card__content {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Fix newsletter card layering */
+    .newsletter-card .newsletter-card__title--shadow {
+        display: none !important;
+    }
+    
+    .newsletter-card .newsletter-card__button--dark {
+        display: none !important; /* Hide the separate shadow button */
+    }
+
+    .newsletter-card__title--primary {
+        text-shadow: 2px 2px 0px #212636;
+        margin-bottom: 0 !important;
+        white-space: normal;
+        height: auto !important;
+        font-size: 24px;
+        position: absolute !important;
+        top: 45% !important; /* Position at 1/3 of the card height */
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        width: 66% !important; /* Restrict width */
+    }
+
+    .newsletter-card__button--primary {
+        box-shadow: 4px 4px 0px #212636;
+        position: absolute !important;
+        top: 60% !important; /* Position button below title */
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        margin-top: 0 !important;
+        width: 140px !important; /* Fixed width */
+        height: 44px !important;
+    }
+    
+    .newsletter-card__button-group {
+        position: static !important;
+        height: 100% !important; /* Allow group to fill card to be reference? No, use card as reference */
+        width: 100% !important;
+    }
+    
+    /* Ensure newsletter card has height for absolute positioning to work properly */
+    .newsletter-card {
+        height: auto !important;
+        aspect-ratio: 387/353; /* Maintain original aspect ratio */
+        min-height: 250px;
+    }
+    
+    .newsletter-card__content {
+        height: 100% !important;
+        position: absolute !important;
+        top: 0; left: 0;
+    }
+
+    /* Fix article preview text overlap */
+    .sidebar-card--article-preview,
+    .sidebar-card--article-preview .sidebar-card__content,
+    .article-preview {
+        height: 100% !important;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .article-preview__image-wrapper {
+        height: 50% !important;
+        max-height: none !important; /* Remove limit */
+        flex: 0 0 50%;
+        overflow: hidden;
+    }
+    
+    .article-preview__content {
+        height: 50% !important;
+        flex: 0 0 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start; /* Align text top */
+        overflow: hidden; /* Prevent spill if text is huge */
+    }
+
+    .article-preview__title,
+    .article-preview__excerpt {
+        height: auto !important;
+        margin-bottom: 8px !important;
+    }
+
+    .article-preview__link {
+        width: auto !important; /* Ensure it stays auto width */
+        display: inline-block !important; /* Or inline-flex */
+    }
 }
 

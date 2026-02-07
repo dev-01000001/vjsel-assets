@@ -55,14 +55,20 @@
 
 /* top-nav */
 .top-nav {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
     width: 100%;
     min-height: var(--top-nav-height);
     background: var(--top-nav-color-bg);
     box-shadow: var(--top-nav-shadow);
     z-index: 9999;
+    /* overflow: hidden; */
+}
+
+@media (min-width: 769px) {
+    .top-nav {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+    }
 }
 
 .top-nav__container {
@@ -274,16 +280,14 @@
 /* ──────────────────────────────────────────
    Ultra-wide (≥ 1920px)
    ────────────────────────────────────────── */
-@media (min-width: 1920px) {
-
-}
+@media (min-width: 1920px) {}
 
 /* ──────────────────────────────────────────
     Fluid Desktop (1024px - 1439px)
    ────────────────────────────────────────── */
 @media (max-width: 1439px) and (min-width: 1024px) {
     .top-nav__container {
-        height: clamp(44px, 4.24vw, 61px);
+        /* height: clamp(44px, 4.24vw, 61px); */
         padding-block: clamp(8px, 0.83vw, 12px);
         padding-inline: clamp(40px, 5.56vw, 80px);
         gap: clamp(32px, 4.31vw, 62px);
@@ -353,7 +357,7 @@
 @media (max-width: 1023px) {
     .top-nav__container {
         width: 100%;
-        height: auto;
+        /* height: auto; */
         padding-block: 10px;
         padding-inline: 40px;
         gap: 32px;
@@ -361,7 +365,7 @@
 
     .top-nav__menu {
         width: auto;
-        max-width: 600px;
+        max-width: calc(100% - 150px);
         height: 32px;
         gap: 16px;
         overflow-x: auto;
@@ -434,7 +438,7 @@
         padding-block: 8px;
         padding-inline: 20px;
         gap: 12px;
-        height: auto;
+        /* height: auto; */
     }
 
     .top-nav__menu {
@@ -447,6 +451,7 @@
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
         padding-bottom: 4px;
+        justify-content: center;
     }
 
     .top-nav__menu::-webkit-scrollbar {
@@ -592,9 +597,11 @@
         border-width: 2px;
     }
 }
+
 /* Submenu Styles */
 .top-nav__item {
-    position: relative; /* Ensure submenu is positioned relative to the parent item */
+    position: relative;
+    /* Ensure submenu is positioned relative to the parent item */
 }
 
 .submenu {
@@ -603,7 +610,8 @@
     left: 0;
     min-width: 220px;
     background-color: var(--top-nav-color-bg);
-    border: 1px solid #f0f0f0; /* Light border */
+    border: 1px solid #f0f0f0;
+    /* Light border */
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 8px;
@@ -619,8 +627,8 @@
     gap: 4px;
 }
 
-.top-nav__item--has-submenu:hover > .submenu,
-.submenu__item:hover > .submenu {
+.top-nav__item--has-submenu:hover>.submenu,
+.submenu__item:hover>.submenu {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
@@ -654,10 +662,13 @@
 
 /* Level 3 Menu */
 .submenu--level-3 {
-    top: -8px; /* Align top with parent item */
-    left: 100%; /* Position to the right */
+    top: -8px;
+    /* Align top with parent item */
+    left: 100%;
+    /* Position to the right */
     margin-top: 0;
-    margin-left: 8px; /* Spacing between menus */
+    margin-left: 8px;
+    /* Spacing between menus */
 }
 
 /* Ensure the arrow icon rotates or highlights on hover if desired, 
@@ -703,7 +714,8 @@
     width: 100%;
     height: var(--top-nav-height, 61px);
     background-color: #fff;
-    z-index: 10001; /* Ensure it stays on top of everything */
+    z-index: 10001;
+    /* Ensure it stays on top of everything */
     padding: 0 20px;
     box-shadow: var(--top-nav-shadow, 0px 2px 6px 0px rgba(0, 0, 0, 0.08));
     box-sizing: border-box;
@@ -714,7 +726,8 @@
     border: none;
     cursor: pointer;
     padding: 8px;
-    margin-left: -8px; /* Alignment adjustment */
+    margin-left: -8px;
+    /* Alignment adjustment */
     display: flex;
     align-items: center;
     color: var(--top-nav-color-text, #212636);
@@ -735,15 +748,20 @@
 
 /* Updated Mobile Header Bar Styles */
 .mobile-header-bar {
-    display: none; /* Hidden by default */
-    position: absolute; /* Changed from fixed to absolute to scroll with hero section but sit on top */
+    display: none;
+    /* Hidden by default */
+    position: absolute;
+    /* Changed from fixed to absolute to scroll with hero section but sit on top */
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-    background-color: transparent; /* Transparent background */
-    padding: 20px 0; /* Vertical padding */
-    box-shadow: none; /* Remove shadow */
+    background-color: transparent;
+    /* Transparent background */
+    padding: 20px 0;
+    /* Vertical padding */
+    box-shadow: none;
+    /* Remove shadow */
 }
 
 /* Inner container for alignment matching hero__container */
@@ -752,9 +770,11 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    max-width: var(--hero-container-width, 1440px); /* Use hero variable or fallback */
+    max-width: var(--hero-container-width, 1440px);
+    /* Use hero variable or fallback */
     margin: 0 auto;
-    padding-inline: var(--hero-spacing-container-x, 80px); /* Use hero variable or fallback */
+    padding-inline: var(--hero-spacing-container-x, 80px);
+    /* Use hero variable or fallback */
     box-sizing: border-box;
 }
 
@@ -762,15 +782,17 @@
     .mobile-header-bar {
         display: block;
     }
-    
+
     .mobile-header-bar__inner {
-        padding-inline: 20px; /* Adjust padding for mobile */
+        padding-inline: 20px;
+        /* Adjust padding for mobile */
     }
 }
 
 /* Adjust top-nav toggle color if needed on background */
 .top-nav__toggle svg path {
-    stroke: var(--top-nav-color-text, #212636); /* Keep dark or adjustable */
+    stroke: var(--top-nav-color-text, #212636);
+    /* Keep dark or adjustable */
 }
 
 
@@ -871,9 +893,12 @@
     padding: 14px 20px;
     color: var(--top-nav-color-text, #212636);
     text-decoration: none;
-    font-family: 'Roboto', sans-serif; /* Consistent font family with other nav */
-    font-size: 14px; /* Consistent size with article text or top nav link */
-    line-height: 140%; /* Consistent line height */
+    font-family: 'Roboto', sans-serif;
+    /* Consistent font family with other nav */
+    font-size: 14px;
+    /* Consistent size with article text or top nav link */
+    line-height: 140%;
+    /* Consistent line height */
     font-weight: 500;
     transition: background-color 0.2s, color 0.2s;
 }
@@ -915,7 +940,8 @@
     padding: 0;
     margin: 0;
     background-color: #fafafa;
-    display: none; /* Hidden by default */
+    display: none;
+    /* Hidden by default */
 }
 
 .side-menu__submenu.is-open {

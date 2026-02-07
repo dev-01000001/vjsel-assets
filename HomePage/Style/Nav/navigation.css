@@ -60,6 +60,7 @@
     background: var(--top-nav-color-bg);
     box-shadow: var(--top-nav-shadow);
     z-index: 9999;
+    /* overflow: hidden; */
 }
 
 @media (min-width: 769px) {
@@ -288,7 +289,7 @@
    ────────────────────────────────────────── */
 @media (max-width: 1439px) and (min-width: 1024px) {
     .top-nav__container {
-        height: clamp(44px, 4.24vw, 61px);
+        /* height: clamp(44px, 4.24vw, 61px); */
         padding-block: clamp(8px, 0.83vw, 12px);
         padding-inline: clamp(40px, 5.56vw, 80px);
         gap: clamp(32px, 4.31vw, 62px);
@@ -358,7 +359,7 @@
 @media (max-width: 1023px) {
     .top-nav__container {
         width: 100%;
-        height: auto;
+        /* height: auto; */
         padding-block: 10px;
         padding-inline: 40px;
         gap: 32px;
@@ -366,7 +367,7 @@
 
     .top-nav__menu {
         width: auto;
-        max-width: 600px;
+        max-width: calc(100% - 150px);
         height: 32px;
         gap: 16px;
         overflow-x: auto;
@@ -439,7 +440,7 @@
         padding-block: 8px;
         padding-inline: 20px;
         gap: 12px;
-        height: auto;
+        /* height: auto; */
     }
 
     .top-nav__menu {
@@ -452,6 +453,7 @@
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
         padding-bottom: 4px;
+        justify-content: center;
     }
 
     .top-nav__menu::-webkit-scrollbar {

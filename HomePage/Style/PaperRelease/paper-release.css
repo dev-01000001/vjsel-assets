@@ -47,40 +47,26 @@
     flex-grow: 0;
 }
 
-/* articles-carousel */
-.articles-carousel {
+.carousel-container-wrapper {
     width: 1280px;
-    height: 354.67px;
     position: relative;
-    overflow: visible;
     flex: none;
     order: 1;
     align-self: stretch;
     flex-grow: 0;
 }
 
-.articles-carousel__wrapper {
+/* articles-carousel */
+.articles-carousel {
     width: 100%;
-    height: 100%;
-    overflow: hidden;
     position: relative;
-}
-
-.articles-carousel__track {
-    width: 1280px;
-    height: auto;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    padding: 0px;
-    gap: 24px;
-    isolation: isolate;
-    transition: transform 0.3s ease-in-out;
+    overflow: hidden; 
+    padding-bottom: 25px; /* Add space for pagination if needed or adjust container */
 }
 
 /* issue-card */
 .issue-card {
-    width: 193.33px;
+    /* width: 193.33px; Handled by Swiper */
     height: auto;
     display: flex;
     flex-direction: column;
@@ -88,7 +74,7 @@
     padding: 0px;
     gap: 16px;
     flex: none;
-    align-self: stretch;
+    /* align-self: stretch; */
     flex-grow: 1;
 }
 
@@ -123,8 +109,9 @@
 }
 
 .issue-card__cover {
-    width: 193.33px;
-    height: 270.67px;
+    width: 100%;
+    /* height: 270.67px; */
+    aspect-ratio: 193.33 / 270.67;
     position: relative;
     overflow: hidden;
     flex: none;
@@ -144,7 +131,7 @@
 }
 
 .issue-card__info {
-    width: 193.33px;
+    width: 100%;
     height: 68px;
     display: flex;
     flex-direction: column;
@@ -158,7 +145,7 @@
 }
 
 .issue-card__heading {
-    width: 193.33px;
+    width: 100%;
     height: 44px;
     font-family: 'Merriweather';
     font-style: normal;
@@ -179,7 +166,7 @@
 }
 
 .issue-card__meta {
-    width: 193.33px;
+    width: 100%;
     height: 20px;
     font-family: 'Roboto';
     font-style: normal;
@@ -255,8 +242,9 @@
     height: 100%;
 }
 
-/* carousel-indicators */
-.carousel-indicators {
+/* Swiper Pagination */
+.swiper-pagination {
+    position: static !important;
     display: flex;
     gap: 4px;
     align-items: center;
@@ -265,18 +253,21 @@
     order: 2;
     align-self: stretch;
     flex-grow: 0;
+    margin-top: 24px;
 }
 
-.carousel-indicators__dot {
+.swiper-pagination-bullet {
     width: 6px;
     height: 6px;
     border-radius: 8px;
     background: #d9d9d9;
     transition: all 0.3s ease;
     cursor: pointer;
+    opacity: 1;
+    margin: 0 !important;
 }
 
-.carousel-indicators__dot--active {
+.swiper-pagination-bullet-active {
     width: 16px;
     height: 6px;
     background: #007fff;
@@ -295,6 +286,11 @@
     .published-issues__container {
         width: 1280px;
         margin: 0 auto;
+    }
+
+    .carousel-container-wrapper {
+        width: 1280px;
+        position: relative;
     }
 
     .articles-carousel {
@@ -330,6 +326,10 @@
     .published-issues__heading {
         width: 100%;
         font-size: 32px;
+    }
+
+    .carousel-container-wrapper {
+        width: 100%;
     }
 
     .articles-carousel {
@@ -397,7 +397,7 @@
     }
 
     .issue-card {
-        width: 160px;
+        width: 160px; /* Set fixed width for auto slidesPerView */
         height: auto;
     }
 

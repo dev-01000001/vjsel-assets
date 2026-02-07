@@ -6,7 +6,7 @@
 
 :root {
     /* Màu sắc đặc thù (Exact Figma Colors) */
-    --cta-bg: #FFFFFF;
+    --cta-bg: #fafafa;
     --cta-card-bg: linear-gradient(0deg, #E6F2FF, #E6F2FF), #FFFFFF;
     --cta-heading-color: #212636;
     --cta-text-color: #667085;
