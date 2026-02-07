@@ -568,111 +568,590 @@
     flex: none;
 }
 
+/* ========================================
+   FILTER DROPDOWN MENU
+   ======================================== */
+
+.filter-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    max-height: 240px;
+    overflow-y: auto;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.filter-dropdown-menu--open {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.filter-dropdown-option {
+    padding: 10px 12px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    line-height: 140%;
+    color: #111827;
+    cursor: pointer;
+    transition: background-color 0.1s ease;
+}
+
+.filter-dropdown-option:hover {
+    background-color: #f3f4f6;
+}
+
+.filter-dropdown-option--selected {
+    background-color: #e0e7ff;
+    color: #4338ca;
+    font-weight: 500;
+}
+
+.filter-dropdown-option--selected:hover {
+    background-color: #c7d2fe;
+}
+
+.filter-group__select--active {
+    border-color: #4338ca;
+    box-shadow: 0 0 0 3px rgba(67, 56, 202, 0.1);
+}
+
+/* Ensure filter-group has position context */
+.filter-group {
+    position: relative;
+}
+
 
 /* ========================================
    RESPONSIVE DESIGN - GRID LAYOUT
    ======================================== */
 
-@media (max-width: 1439px) {
-    .browse-page__filter-section {
+/* Medium screens: 1025px-1439px - Scale like 1440px */
+@media (max-width: 1439px) and (min-width: 1025px) {
+    * {
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
         width: 100%;
-        padding: 0px 20px 24px;
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+
+    .browse-page {
+        width: 100%;
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+
+    /* Scale containers proportionally */
+    .browse-page__breadcrumb-section,
+    .browse-page__filter-section,
+    .browse-page__content-section {
+        width: 100% !important;
+        max-width: 100vw !important;
+    }
+
+    .browse-page__breadcrumb-section {
+        padding: 36px 28px 20px !important;
+        height: auto !important;
+    }
+
+    .browse-page__breadcrumb-section .browse-page__container {
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .browse-page__filter-section {
+        padding: 0px 28px 20px !important;
+        height: auto !important;
     }
 
     .browse-page__filter-section .browse-page__container {
-        width: 100%;
-    }
-
-    .filter-panel {
-        width: 100%;
-    }
-
-    .filter-panel__content {
-        width: 100%;
-    }
-
-    .filter-panel__filters {
-        flex-direction: column;
-    }
-
-    .filter-group {
         width: 100% !important;
-        flex-direction: row !important;
-        align-items: center !important;
-        height: auto;
-        gap: 6px !important;
-    }
-
-    .filter-group__label {
-        flex-shrink: 0 !important;
-        width: auto !important;
-        min-width: fit-content !important;
-        font-size: 13px !important;
-    }
-
-    .filter-group__select {
-        flex: 1 !important;
-        width: auto !important;
-        min-width: 0 !important;
-        padding: 6px 10px !important;
-        height: 36px !important;
-        gap: 6px !important;
-    }
-
-    .filter-group__text {
-        width: auto !important;
         max-width: 100% !important;
-        font-size: 12px !important;
-        flex: 1 !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
-        white-space: nowrap !important;
+        padding: 0 !important;
     }
 
-    .filter-group__icon {
-        width: 18px !important;
-        height: 18px !important;
-        flex-shrink: 0 !important;
+    .browse-page__content-section {
+        padding: 0px 28px 40px !important;
     }
 
     .browse-page__content {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    .browse-page__grid {
+        width: 100% !important;
+        max-width: 100% !important;
+        gap: 32px;
+        height: auto;
+    }
+
+    .filter-panel {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .filter-panel__content {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .filter-panel__header {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .filter-panel__filters {
+        width: 100% !important;
+        max-width: 100% !important;
+        gap: 16px;
+        flex-direction: row;
+    }
+
+    .filter-group {
+        flex-direction: row;
+        gap: 8px;
+        height: auto;
+    }
+
+    .filter-group--decade {
+        width: auto;
+        min-width: 200px;
+        flex: 0 0 auto;
+    }
+
+    .filter-group--year {
+        width: auto;
+        min-width: 180px;
+        flex: 0 0 auto;
+    }
+
+    .filter-group--issue {
+        flex: 1 1 auto;
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .filter-group__label {
+        font-size: 13px;
+        width: auto;
+        min-width: fit-content;
+        flex-shrink: 0;
+    }
+
+    .filter-group--decade .filter-group__label {
+        width: auto;
+    }
+
+    .filter-group--year .filter-group__label {
+        width: auto;
+    }
+
+    .filter-group--issue .filter-group__label {
+        width: auto;
+    }
+
+    .filter-group__select {
+        height: 34px;
+        padding: 5px 10px;
+        flex: 1;
+        min-width: 0;
+    }
+
+    .filter-group--decade .filter-group__select,
+    .filter-group--year .filter-group__select {
+        width: auto;
+        min-width: 130px;
+    }
+
+    .filter-group--issue .filter-group__select {
         width: 100%;
-        padding: 0px 20px;
+        max-width: 100%;
+    }
+
+    .filter-group__text {
+        font-size: 12px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .filter-group--issue .filter-group__text {
+        max-width: calc(100% - 28px);
+    }
+
+    .filter-group__icon {
+        width: 18px;
+        height: 18px;
     }
 
     .grid-row {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        gap: 14px;
+        align-items: flex-start;
+        margin-bottom: 24px;
+    }
+
+    .issue-card {
+        width: calc(33.333% - 9.33px) !important;
+        min-width: 0 !important;
+        max-width: none !important;
+        flex: 1 1 calc(33.333% - 9.33px) !important;
+        height: auto !important;
+        box-sizing: border-box;
+    }
+
+    .issue-card__content {
+        width: 100% !important;
+        height: auto !important;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .issue-card__main {
+        width: 100% !important;
+        height: auto !important;
+        gap: 8px;
+        flex: none;
+    }
+
+    .issue-card__book {
+        width: 100% !important;
+        height: auto !important;
+        flex: none;
+    }
+
+    .issue-card__image {
+        width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 270/378;
+    }
+
+    .issue-card__title-section {
+        width: 100% !important;
+        height: auto !important;
+        gap: 2px;
+    }
+
+    .issue-card__title {
+        width: 100% !important;
+        height: auto !important;
+        font-size: 16px;
+        line-height: 140%;
+    }
+
+    .issue-card__meta {
+        width: 100% !important;
+        font-size: 13px;
+    }
+}
+
+/* Tablet & Mobile: ≤1024px */
+@media (max-width: 1024px) {
+    :root {
+        --spacing-container-horizontal: 20px;
+    }
+
+    /* Force no horizontal scroll */
+    html,
+    body {
         width: 100%;
-        flex-wrap: wrap;
+        max-width: 100vw;
+        overflow-x: hidden !important;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    .browse-page {
+        width: 100%;
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+
+    .browse-page__breadcrumb-section {
+        width: 100% !important;
+        max-width: 100vw !important;
+        padding: 24px 20px !important;
+        height: auto !important;
+    }
+
+    .browse-page__filter-section {
+        width: 100% !important;
+        max-width: 100vw !important;
+        padding: 0px 20px 24px !important;
+        height: auto !important;
+    }
+
+    .browse-page__filter-section .browse-page__container {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .filter-panel {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .filter-panel__content {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .browse-page__content-section {
+        width: 100% !important;
+        max-width: 100vw !important;
+        padding: 0px 20px 48px !important;
+    }
+
+    .browse-page__content {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+    }
+
+    .grid-row {
+        width: 100% !important;
+        max-width: 100% !important;
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 24px;
         height: auto;
     }
 
     .issue-card {
-        width: calc(50% - 12px);
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        height: auto !important;
+    }
+
+    .issue-card__content {
+        width: 100% !important;
+        height: auto !important;
+        padding: 16px;
+    }
+
+    .issue-card__main {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .issue-card__book {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .issue-card__image {
+        width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 270/378;
+    }
+
+    .issue-card__title-section {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .issue-card__title {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .issue-card__meta {
+        width: 100% !important;
+    }
+
+    /* Mobile specific layout: 3-column filter grid */
+
+    /* Filter Panel - 3 Column Mobile Layout */
+    .filter-panel {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .filter-panel__content {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        padding: 12px !important;
+        gap: 12px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Header Row - 3 Columns: Title (2 cols) + Clear Button (1 col) */
+    .filter-panel__header {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        gap: 8px !important;
+        align-items: center !important;
+        box-sizing: border-box !important;
+    }
+
+    .filter-panel__title {
+        grid-column: 1 / 3 !important;
+        width: auto !important;
+        max-width: 100% !important;
+        height: auto !important;
+        font-size: 16px !important;
+    }
+
+    .filter-panel__clear {
+        grid-column: 3 / 4 !important;
+        justify-self: end !important;
+        width: auto !important;
+        height: auto !important;
+        font-size: 12px !important;
+    }
+
+    /* Filters Row - 3 Columns: Each filter gets 1 column */
+    .filter-panel__filters {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        gap: 6px !important;
+        align-items: start !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Filter Groups in Mobile 3-Column Layout */
+    .filter-group {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        height: auto !important;
+        gap: 4px !important;
+        box-sizing: border-box !important;
+    }
+
+    .filter-group--decade {
+        grid-column: 1 / 2 !important;
+        order: 0 !important;
+    }
+
+    .filter-group--year {
+        grid-column: 2 / 3 !important;
+        order: 0 !important;
+    }
+
+    .filter-group--issue {
+        grid-column: 3 / 4 !important;
+        order: 0 !important;
+        width: 100% !important;
+    }
+
+    .filter-group__label {
+        width: 100% !important;
+        max-width: 100% !important;
+        font-size: 10px !important;
+        height: auto !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        font-weight: 500 !important;
+    }
+
+    .filter-group__select {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        height: 28px !important;
+        padding: 4px 4px 4px 8px !important;
+        gap: 2px !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+    }
+
+    .filter-group__text {
+        font-size: 9px !important;
+        width: 100% !important;
+        max-width: calc(100% - 18px) !important;
+        min-width: 0 !important;
+        height: auto !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+        flex: 1 !important;
+        line-height: 1.2 !important;
+    }
+
+    .filter-group__icon {
+        width: 14px !important;
+        height: 14px !important;
+        flex-shrink: 0 !important;
+        margin-left: 2px !important;
     }
 }
 
-@media (max-width: 768px) {
-    .browse-page__content-section {
-        padding: 0px 20px 48px;
-    }
-
+/* Mobile: Single Column Layout (≤640px) */
+@media (max-width: 640px) {
     .grid-row {
-        flex-direction: column;
-        gap: 24px;
+        grid-template-columns: 1fr !important;
+        gap: 20px;
     }
 
     .issue-card {
-        width: 100%;
+        width: 100% !important;
+        max-width: 100% !important;
     }
-}
 
+    .issue-card__content {
+        width: 100% !important;
+        padding: 16px;
+    }
 
+    .issue-card__main {
+        width: 100% !important;
+    }
 
-/* Tablet & Mobile tweaks */
-@media (max-width: 767px) {
-    .filter-panel__header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
+    .issue-card__book {
+        width: 100% !important;
+    }
+
+    .issue-card__image {
+        width: 100% !important;
+    }
+
+    .issue-card__title-section {
+        width: 100% !important;
+    }
+
+    .issue-card__title {
+        width: 100% !important;
+        font-size: 18px;
+    }
+
+    .issue-card__meta {
+        width: 100% !important;
+        font-size: 13px;
     }
 }
