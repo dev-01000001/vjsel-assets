@@ -431,7 +431,7 @@ function createDemoArticles(count) {
 
                                     <!-- Article image -->
                                     <div class="article-card__thumbnail">
-                                        <img src="asset/img_body/img_body1.png" alt="Article thumbnail"
+                                        <img src="https://dn.media-soft.cloud/original/assets/SearchPage/asset/img_body/img_body1.png" alt="Article thumbnail"
                                             class="article-card__thumbnail-img">
                                     </div>
                                 </div>
