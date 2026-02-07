@@ -1,4 +1,4 @@
-/* 
+﻿/* 
    MAIN STYLESHEET - Modular Architecture
    Import các components để dễ maintain
     */
@@ -6,20 +6,20 @@
 /* 
    IMPORT BASE RESET
     */
-@import url('https://cdn.media-soft.cloud/original/assets/HomePage_EN/Style/basereset.css');
+@import url('./Style/basereset.css');
 
 /* 
    IMPORT COMPONENTS
     */
-@import url('https://cdn.media-soft.cloud/original/assets/HomePage_EN/Style/Header/hero.css');
-@import url('https://cdn.media-soft.cloud/original/assets/HomePage_EN/Style/Nav/navigation.css');
-@import url('https://cdn.media-soft.cloud/original/assets/HomePage_EN/Style/Category/category-nav.css');
-@import url('https://cdn.media-soft.cloud/original/assets/HomePage_EN/Style/Content/content.css');
-@import url('https://cdn.media-soft.cloud/original/assets/HomePage_EN/Style/PaperRelease/paper-release.css');
-@import url('https://cdn.media-soft.cloud/original/assets/HomePage_EN/Style/ResourcesInfo/resources.css');
-@import url('https://cdn.media-soft.cloud/original/assets/HomePage_EN/Style/CategoriesFoot/categories-foot.css');
-@import url('https://cdn.media-soft.cloud/original/assets/HomePage_EN/Style/Cta/cta.css');
-@import url('https://cdn.media-soft.cloud/original/assets/HomePage_EN/Style/Footer/footer.css');
+@import url('./Style/Header/hero.css');
+@import url('./Style/Nav/navigation.css');
+@import url('./Style/Category/category-nav.css');
+@import url('./Style/Content/content.css');
+@import url('./Style/PaperRelease/paper-release.css');
+@import url('./Style/ResourcesInfo/resources.css');
+@import url('./Style/CategoriesFoot/categories-foot.css');
+@import url('./Style/Cta/cta.css');
+@import url('./Style/Footer/footer.css');
 
 /* 
    MAIN CONTENT & FOOTER
