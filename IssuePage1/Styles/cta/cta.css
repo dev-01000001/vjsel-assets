@@ -1,0 +1,212 @@
+/* ==========================================================================
+   SUBMISSION CTA COMPONENT
+   Thành phần kêu gọi hành động gửi bài (CTA) - 100% Khớp thiết kế Figma 1440px
+   Note: Đồng bộ hóa thông số chính xác từ Figma Specs
+   ========================================================================== */
+
+:root {
+    /* Màu sắc đặc thù (Exact Figma Colors) */
+    --sub-cta-bg: #FFFFFF;
+    --sub-cta-card-bg: linear-gradient(0deg, #E6F2FF, #E6F2FF), #FFFFFF;
+    --sub-cta-heading-color: #212636;
+    --sub-cta-text-color: #667085;
+    --sub-cta-primary-btn-bg: #007FFF;
+    --sub-cta-primary-btn-text: #FDFDFD;
+    --sub-cta-secondary-btn-text: #434A60;
+}
+
+/* Container chính (Content)
+   1440px Fill x 441px Hug */
+.submission-cta {
+    width: 1440px;
+    /* Restored fixed width */
+    min-height: 441px;
+    padding: 48px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    background: var(--sub-cta-bg);
+    margin: 0 auto;
+    /* Centering for large screens */
+}
+
+/* Thẻ card trung tâm (Scroll Card)
+   1062px x 345px */
+.submission-cta__card {
+    width: 1062px;
+    /* Restored fixed width */
+    height: 345px;
+    /* Restored fixed height */
+    background: var(--sub-cta-card-bg);
+    border-radius: 16px;
+    padding: 40px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+/* Khối nội dung văn bản (Text)
+   1014px x 125px */
+.submission-cta__content {
+    width: 1014px;
+    /* Restored fixed width */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+}
+
+/* Tiêu đề (Ready To Submit?)
+   H2 - Merriweather Bold 48px */
+.submission-cta__heading {
+    width: 100%;
+    font-family: 'Merriweather', serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 140%;
+    /* 67px */
+    letter-spacing: -0.01em;
+    color: var(--sub-cta-heading-color);
+    margin: 0;
+}
+
+/* Mô tả (Description)
+   Body1 - Roboto Regular 16px */
+.submission-cta__description {
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    /* 22px */
+    color: var(--sub-cta-text-color);
+    margin: 0;
+}
+
+/* Khối nút hành động (CTAs)
+   195px x 100px */
+.submission-cta__actions {
+    width: 195px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Nút dạng Contained (Primary)
+   180px x 48px */
+.submission-cta__button--primary {
+    width: 180px;
+    height: 48px;
+    background: var(--sub-cta-primary-btn-bg);
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.submission-cta__button--primary span {
+    /* Base inner auto layout */
+    padding: 8px 22px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    /* Typography */
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 140%;
+    /* 21px */
+    color: var(--sub-cta-primary-btn-text);
+}
+
+.submission-cta__button--primary:hover {
+    filter: brightness(0.9);
+}
+
+/* Nút dạng Text (Secondary)
+   195px x 48px */
+.submission-cta__button--text {
+    width: 195px;
+    height: 48px;
+    background: transparent;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.submission-cta__button--text span {
+    /* Base inner auto layout */
+    padding: 11px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    /* Typography */
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 140%;
+    /* 21px */
+    text-decoration-line: underline;
+    color: var(--sub-cta-secondary-btn-text);
+}
+
+.submission-cta__button--text:hover span {
+    opacity: 0.8;
+}
+
+/* RESPONSIVE Adjustments (Duy trì tính linh hoạt) */
+@media (max-width: 1439px) {
+    .submission-cta {
+        width: 100%;
+        /* Override to responsive */
+        padding: 48px 24px;
+    }
+
+    .submission-cta__card {
+        width: 100%;
+        /* Override to responsive */
+        height: auto;
+        /* Override to responsive */
+    }
+
+    .submission-cta__content {
+        width: 100%;
+        /* Override to responsive */
+    }
+}
+
+@media (max-width: 767px) {
+    .submission-cta {
+        padding: 32px 16px;
+        min-height: auto;
+    }
+
+    .submission-cta__card {
+        height: auto;
+        padding: 32px 20px;
+        gap: 32px;
+    }
+
+    .submission-cta__heading {
+        font-size: 32px;
+    }
+}

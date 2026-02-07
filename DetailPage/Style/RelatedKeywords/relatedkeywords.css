@@ -1,0 +1,295 @@
+/* ========================================
+   RELATED KEYWORDS SECTION
+   BEM: related-keywords
+   ======================================== */
+
+/* ----------------------------------------
+   Block: related-keywords
+   Mục đích: Container cho phần từ khóa liên quan
+   Figma: Content - 1440x184px
+   ---------------------------------------- */
+.related-keywords {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 48px 80px 24px;
+    gap: 10px;
+    width: 100%;
+    max-width: 1440px;
+    height: 184px;
+    margin: 0 auto;
+    background-color: #fafafa;
+    box-sizing: border-box;
+    /* Extend background to full viewport width */
+    box-shadow: 0 0 0 100vw #FAFAFA;
+    clip-path: inset(0 -100vw);
+}
+
+/* ----------------------------------------
+   Element: related-keywords__container
+   Mục đích: Wrapper nội dung chính
+   Figma: Hero - 1280x112px
+   ---------------------------------------- */
+.related-keywords__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    gap: 24px;
+    width: 1280px;
+    height: 112px;
+    flex: none;
+    align-self: stretch;
+}
+
+/* ----------------------------------------
+   Element: related-keywords__title
+   Mục đích: Tiêu đề chính "Từ khóa liên quan"
+   Typography: H3 - Merriweather Bold 36px
+   Figma: 1280x50px
+   ---------------------------------------- */
+.related-keywords__title {
+    width: 1280px;
+    height: 50px;
+    font-family: 'Merriweather', serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 140%;
+    /* 50px */
+    letter-spacing: -0.01em;
+    color: #212636;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+/* ----------------------------------------
+   Element: related-keywords__list
+   Mục đích: Danh sách các tag từ khóa
+   Figma: toppic - 1280x38px
+   ---------------------------------------- */
+.related-keywords__list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+    padding: 0;
+    gap: 12px;
+    width: 1280px;
+    height: 38px;
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+/* ========================================
+   KEYWORD TAG COMPONENT
+   BEM: keyword-tag
+   ======================================== */
+
+/* ----------------------------------------
+   Block: keyword-tag
+   Mục đích: Button tag cho mỗi từ khóa
+   Figma: Health component
+   ---------------------------------------- */
+.keyword-tag {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 12px;
+    gap: 20px;
+    height: 38px;
+    background: #FFFFFF;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    /* Reset button styles */
+    font: inherit;
+    outline: none;
+    /* Inside auto layout */
+    flex: none;
+    flex-grow: 0;
+}
+
+/* ----------------------------------------
+   State: keyword-tag hover
+   Mục đích: Hiệu ứng khi hover
+   ---------------------------------------- */
+.keyword-tag:hover {
+    background: #f5f5f5;
+    border: 1px solid #e0e0e0;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* ----------------------------------------
+   State: keyword-tag active
+   Mục đích: Hiệu ứng khi click
+   ---------------------------------------- */
+.keyword-tag:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+/* ----------------------------------------
+   Element: keyword-tag__text
+   Mục đích: Text bên trong tag
+   Typography: Body1 - Roboto Regular 16px
+   ---------------------------------------- */
+.keyword-tag__text {
+    height: 22px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    /* 22px */
+    color: #212636;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN (<= 1439px)
+   ======================================== */
+@media (max-width: 1439px) {
+    * {
+        box-sizing: border-box;
+    }
+
+    .related-keywords {
+        width: 100% !important;
+        height: auto !important;
+        padding: 40px 24px 20px !important;
+    }
+
+    .related-keywords__container {
+        width: 100% !important;
+        height: auto !important;
+        gap: 16px !important;
+    }
+
+    .related-keywords__title {
+        width: 100% !important;
+        height: auto !important;
+        font-size: 32px !important;
+        /* Slightly smaller for flexibility */
+    }
+
+    .related-keywords__list {
+        width: 100% !important;
+        height: auto !important;
+        flex-wrap: wrap !important;
+        /* Ensure wrapping */
+        gap: 8px !important;
+        /* Slightly tighter gap */
+        justify-content: center !important;
+    }
+
+    .keyword-tag {
+        height: auto !important;
+        /* Flex height based on content padding */
+        min-height: 38px !important;
+    }
+}
+
+/* ----------------------------------------
+   Tablet: 768px - 1024px
+   ---------------------------------------- */
+@media (max-width: 1024px) {
+    .related-keywords {
+        padding: 40px 40px 20px;
+    }
+
+    .related-keywords__title {
+        font-size: 32px;
+    }
+}
+
+/* ----------------------------------------
+   Mobile: < 768px
+   ---------------------------------------- */
+@media (max-width: 768px) {
+    .related-keywords {
+        padding: 32px 20px 16px;
+    }
+
+    .related-keywords__title {
+        font-size: 28px;
+    }
+
+    .related-keywords__list {
+        gap: 8px;
+    }
+
+    .keyword-tag {
+        padding: 6px 10px;
+    }
+
+    .keyword-tag__text {
+        font-size: 14px;
+    }
+}
+
+/* ----------------------------------------
+   Small Mobile: < 480px
+   ---------------------------------------- */
+@media (max-width: 480px) {
+    .related-keywords {
+        padding: 24px 16px 12px;
+    }
+
+    .related-keywords__title {
+        font-size: 24px;
+    }
+
+    .related-keywords__container {
+        gap: 16px;
+    }
+}
+
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+
+/* ----------------------------------------
+   Focus state cho keyboard navigation
+   ---------------------------------------- */
+.keyword-tag:focus-visible {
+    outline: 2px solid #212636;
+    outline-offset: 2px;
+}
+
+/* ----------------------------------------
+   Reduced motion cho accessibility
+   ---------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    .keyword-tag {
+        transition: none;
+    }
+
+    .keyword-tag:hover {
+        transform: none;
+    }
+
+    .keyword-tag:active {
+        transform: none;
+    }
+}

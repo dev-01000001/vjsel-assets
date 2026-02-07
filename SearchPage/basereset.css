@@ -1,0 +1,499 @@
+/* ============================================
+   BASE RESET & COMMON STYLES - Search Page
+   Các styles dùng chung cho toàn bộ project
+   Không ảnh hưởng đến thiết kế 1440px body và filter
+   ============================================ */
+
+/* ============================================
+   CSS RESET - Reset mặc định của browser
+   ============================================ */
+
+/* Box-sizing cho tất cả elements */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ============================================
+   CSS VARIABLES - Biến màu và font dùng chung
+   ============================================ */
+
+:root {
+    /* Colors - Màu sắc chung */
+    --color-primary: #007FFF;
+    --color-primary-hover: #0056CC;
+    --color-text-primary: #212636;
+    --color-text-secondary: #667085;
+    --color-bg-white: #FFFFFF;
+    --color-bg-light: #FAFAFA;
+    --color-bg-gray: #F1F3F4;
+    --color-border: #E5E7EB;
+    --color-error: #DC2626;
+    --color-success: #16A34A;
+    --color-warning: #F59E0B;
+
+    /* Typography - Font families */
+    --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-roboto: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-merriweather: 'Merriweather', Georgia, serif;
+    --font-poppins: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+    /* Z-index layers - Lớp hiển thị */
+    --z-base: 1;
+    --z-dropdown: 100;
+    --z-sticky: 500;
+    --z-modal: 1000;
+    --z-tooltip: 1500;
+}
+
+/* ============================================
+   BASE STYLES - Styles cơ bản
+   ============================================ */
+
+/* HTML & Body */
+html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+body {
+    font-family: var(--font-inter);
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--color-text-primary);
+    background: var(--color-bg-white);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    /* Note: Body base styles, không set layout để component tự xử lý */
+}
+
+/* ============================================
+   TYPOGRAPHY - Kiểu chữ chung
+   ============================================ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--color-text-primary);
+}
+
+p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* ============================================
+   LINKS - Liên kết
+   ============================================ */
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--color-primary-hover);
+    text-decoration: underline;
+}
+
+a:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+/* ============================================
+   BUTTONS - Nút bấm chung
+   ============================================ */
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: inherit;
+    font-size: inherit;
+    transition: all 0.2s ease;
+}
+
+button:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* ============================================
+   FORM ELEMENTS - Phần tử form
+   ============================================ */
+
+input,
+textarea,
+select {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    cursor: pointer;
+    accent-color: var(--color-primary);
+}
+
+input[type="checkbox"]:focus-visible,
+input[type="radio"]:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* ============================================
+   SCROLLBAR - Thanh cuộn tùy chỉnh
+   ============================================ */
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-bg-gray);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #C4C7C5;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #A8A8A8;
+}
+
+/* ============================================
+   SELECTION - Text được bôi đen
+   ============================================ */
+
+::selection {
+    background: rgba(0, 127, 255, 0.15);
+    color: var(--color-text-primary);
+}
+
+::-moz-selection {
+    background: rgba(0, 127, 255, 0.15);
+    color: var(--color-text-primary);
+}
+
+/* ============================================
+   FOCUS VISIBLE - Hiển thị focus rõ ràng
+   ============================================ */
+
+*:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* ============================================
+   ANIMATIONS - Hiệu ứng chung
+   ============================================ */
+
+/* Fade In - Hiệu ứng mờ dần vào */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Slide Down - Hiệu ứng trượt xuống */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Spin - Hiệu ứng quay tròn */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Loading Skeleton - Hiệu ứng loading */
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* ============================================
+   UTILITY CLASSES - Class tiện ích dùng chung
+   ============================================ */
+
+/* Loading State - Trạng thái đang tải */
+.loading {
+    opacity: 0.7;
+    pointer-events: none;
+    position: relative;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid var(--color-border);
+    border-top: 2px solid var(--color-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Skeleton - Khung loading */
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: 4px;
+}
+
+/* Error State - Trạng thái lỗi */
+.error {
+    color: var(--color-error);
+    background: #FEF2F2;
+    border: 1px solid #FECACA;
+    border-radius: 6px;
+    padding: 12px;
+    font-size: 14px;
+}
+
+/* Success State - Trạng thái thành công */
+.success {
+    color: var(--color-success);
+    background: #F0FDF4;
+    border: 1px solid #BBF7D0;
+    border-radius: 6px;
+    padding: 12px;
+    font-size: 14px;
+}
+
+/* Warning State - Trạng thái cảnh báo */
+.warning {
+    color: var(--color-warning);
+    background: #FFFBEB;
+    border: 1px solid #FEF3C7;
+    border-radius: 6px;
+    padding: 12px;
+    font-size: 14px;
+}
+
+/* Screen Reader Only - Chỉ cho screen reader */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Text Utilities - Tiện ích text */
+.text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+/* Spacing Utilities - Tiện ích khoảng cách */
+.mb-0 {
+    margin-bottom: 0;
+}
+
+.mb-1 {
+    margin-bottom: 8px;
+}
+
+.mb-2 {
+    margin-bottom: 16px;
+}
+
+.mb-3 {
+    margin-bottom: 24px;
+}
+
+.mb-4 {
+    margin-bottom: 32px;
+}
+
+.mb-5 {
+    margin-bottom: 40px;
+}
+
+.mb-6 {
+    margin-bottom: 48px;
+}
+
+.mt-0 {
+    margin-top: 0;
+}
+
+.mt-1 {
+    margin-top: 8px;
+}
+
+.mt-2 {
+    margin-top: 16px;
+}
+
+.mt-3 {
+    margin-top: 24px;
+}
+
+.mt-4 {
+    margin-top: 32px;
+}
+
+.mt-5 {
+    margin-top: 40px;
+}
+
+.mt-6 {
+    margin-top: 48px;
+}
+
+/* ============================================
+   ACCESSIBILITY - Hỗ trợ khả năng tiếp cận
+   ============================================ */
+
+/* High Contrast Mode - Chế độ tương phản cao */
+@media (prefers-contrast: high) {
+    *:focus-visible {
+        outline-width: 3px;
+    }
+}
+
+/* Reduced Motion - Giảm chuyển động */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Skip Link - Link bỏ qua cho accessibility */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-primary);
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 0 0 4px 0;
+    z-index: var(--z-tooltip);
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* ============================================
+   PRINT STYLES - Kiểu in ấn
+   ============================================ */
+
+@media print {
+
+    /* Ẩn các element không cần thiết khi in */
+    nav,
+    .sidebar,
+    button,
+    .actions {
+        display: none !important;
+    }
+
+    /* Tối ưu cho in ấn */
+    body {
+        background: white;
+        color: black;
+    }
+
+    a {
+        color: black;
+        text-decoration: underline;
+    }
+
+    /* Đảm bảo content không bị cắt */
+    article {
+        page-break-inside: avoid;
+    }
+}
+
+/* ============================================
+   RTL SUPPORT - Hỗ trợ văn bản từ phải sang trái
+   ============================================ */
+
+[dir="rtl"] {
+    direction: rtl;
+}
+
+[dir="rtl"] .text-left {
+    text-align: right;
+}
+
+[dir="rtl"] .text-right {
+    text-align: left;
+}

@@ -1,0 +1,229 @@
+/* Base Reset & CSS Variables */
+/* Tailwind CSS Base Reset */
+@layer theme {
+
+    :root,
+    :host {
+        --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        --text-base: 1rem;
+        --text-lg: 1.125rem;
+        --text-xl: 1.25rem;
+        --text-2xl: 1.5rem;
+        --font-weight-normal: 400;
+        --font-weight-medium: 500;
+        --default-font-family: var(--font-sans);
+        --default-font-feature-settings: var(--font-sans--font-feature-settings);
+        --default-font-variation-settings: var(--font-sans--font-variation-settings);
+        --default-mono-font-family: var(--font-mono);
+        --default-mono-font-feature-settings: var(--font-mono--font-feature-settings);
+        --default-mono-font-variation-settings: var(--font-mono--font-variation-settings);
+        --color-border: var(--border);
+    }
+}
+
+@layer base {
+
+    *,
+    :after,
+    :before,
+    ::backdrop {
+        box-sizing: border-box;
+        border: 0 solid;
+        margin: 0;
+        padding: 0;
+    }
+
+    ::file-selector-button {
+        box-sizing: border-box;
+        border: 0 solid;
+        margin: 0;
+        padding: 0;
+    }
+
+    html,
+    :host {
+        -webkit-text-size-adjust: 100%;
+        tab-size: 4;
+        line-height: 1.5;
+        font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+        font-feature-settings: var(--default-font-feature-settings, normal);
+        font-variation-settings: var(--default-font-variation-settings, normal);
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+        line-height: inherit;
+    }
+
+    hr {
+        height: 0;
+        color: inherit;
+        border-top-width: 1px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-size: inherit;
+        font-weight: inherit;
+    }
+
+    a {
+        color: inherit;
+        text-decoration: inherit;
+    }
+
+    b,
+    strong {
+        font-weight: bolder;
+    }
+
+    code,
+    kbd,
+    samp,
+    pre {
+        font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+        font-feature-settings: var(--default-mono-font-feature-settings, normal);
+        font-variation-settings: var(--default-mono-font-variation-settings, normal);
+        font-size: 1em;
+    }
+
+    small {
+        font-size: 80%;
+    }
+
+    ol,
+    ul,
+    menu {
+        list-style: none;
+    }
+
+    img,
+    svg,
+    video,
+    canvas,
+    audio,
+    iframe,
+    embed,
+    object {
+        vertical-align: middle;
+        display: block;
+    }
+
+    img,
+    video {
+        max-width: 100%;
+        height: auto;
+    }
+
+    button,
+    input,
+    select,
+    optgroup,
+    textarea {
+        font: inherit;
+        font-feature-settings: inherit;
+        font-variation-settings: inherit;
+        letter-spacing: inherit;
+        color: inherit;
+        background-color: transparent;
+    }
+
+    ::placeholder {
+        opacity: 1;
+        color: currentColor;
+    }
+
+    textarea {
+        resize: vertical;
+    }
+
+    button,
+    input:where([type="button"], [type="reset"], [type="submit"]) {
+        appearance: button;
+    }
+
+    [hidden]:where(:not([hidden="until-found"])) {
+        display: none !important;
+    }
+
+    * {
+        border-color: var(--border);
+        outline-color: var(--ring);
+    }
+
+    body {
+        background-color: var(--background);
+        color: var(--foreground);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+/* Custom CSS Variables */
+:root {
+    /* Color Variables */
+    --color-page-bg: #f9fafb;
+    --color-card-bg: #fff;
+    --color-text-primary: #111827;
+    --color-text-body: #212636;
+    --color-text-secondary: #667085;
+    --color-accent-blue: #007fff;
+    --color-accent-blue-hover: #1e88e5;
+    --color-border: #dcdfe4;
+    --color-separator-dot: #8a94a6;
+
+    /* Font Families */
+    --font-merriweather: "Merriweather", serif;
+    --font-roboto: "Roboto", sans-serif;
+    --font-inter: "Inter", sans-serif;
+    --font-poppins: "Poppins", sans-serif;
+
+    /* Spacing Variables */
+    --spacing-container-horizontal: 80px;
+    --spacing-breadcrumb-top: 48px;
+    --spacing-breadcrumb-bottom: 24px;
+    --spacing-section-bottom: 48px;
+    --spacing-row-gap: 48px;
+    --spacing-card-padding: 24px;
+    --spacing-card-padding-sm: 16px;
+    --spacing-gap-major: 24px;
+    --spacing-gap-minor: 16px;
+    --spacing-gap-small: 12px;
+    --spacing-gap-micro: 8px;
+    --spacing-gap-tiny: 4px;
+    --spacing-gap-separator: 6px;
+
+    /* Layout Variables */
+    --container-max-width: 1440px;
+    --issue-sidebar-width: 230px;
+    --dropdown-width: 200px;
+
+    /* Border Radius */
+    --radius-card: 12px;
+    --radius-pill: 100px;
+    --radius-button-outlined: 44px;
+    --radius-dot: 6px;
+
+    /* Shadow */
+    --shadow-issue-cover: 0px 3px 14px 0px #00000014;
+
+    /* Base Font Size */
+    --font-size: 16px;
+
+    /* Other Variables */
+    --background: #fff;
+    --foreground: oklch(.145 0 0);
+    --border: #0000001a;
+    --ring: oklch(.708 0 0);
+    --font-weight-medium: 500;
+    --font-weight-normal: 400;
+}
+
+html {
+    font-size: var(--font-size);
+}

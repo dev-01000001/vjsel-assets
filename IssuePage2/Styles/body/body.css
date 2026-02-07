@@ -1,0 +1,678 @@
+/* ========================================
+   BROWSE PAGE - MAIN LAYOUT
+   ======================================== */
+
+.browse-page {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-page-bg);
+    min-height: 100vh;
+}
+
+.browse-page__breadcrumb-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 48px 80px 24px;
+    gap: 24px;
+    width: 1440px;
+    height: 96px;
+    background-color: var(--color-card-bg);
+    margin: 0 auto;
+    align-self: stretch;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    background: #fafafa;
+}
+
+/* Explicitly removing the extra container styling if it's redundant now, 
+   but keeping the class in HTML for structure if needed. 
+   Since the padding is now on the section itself as per user specs. */
+.browse-page__breadcrumb-section .browse-page__container {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.browse-page__filter-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px 80px 24px;
+    gap: 24px;
+
+    width: 1440px;
+    height: 164px;
+    margin: 0 auto;
+    /* Centering for large screens */
+
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    align-self: center;
+    /* Ensure horizontal centering */
+    flex-grow: 0;
+}
+
+.browse-page__filter-section .browse-page__container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 24px;
+
+    width: 1280px;
+    height: 140px;
+
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+/* Content Section - Chứa lưới các số báo */
+.browse-page__content-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 80px 48px;
+    gap: 48px;
+    order: 2;
+}
+
+/* Content Container - Chứa lưới số báo */
+.browse-page__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    gap: 48px;
+    width: 1280px;
+    height: auto;
+}
+
+/* Grid container - 4 hàng các số báo */
+.browse-page__grid {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 48px;
+    align-self: stretch;
+}
+
+/* ========================================
+   BREADCRUMB COMPONENT
+   ======================================== */
+
+.breadcrumb {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    width: 160px;
+    height: 24px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.breadcrumb__link {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    width: auto;
+    /* Figma said 45px/92px but auto is safer for dynamic text */
+    height: 24px;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    flex: none;
+    flex-grow: 0;
+}
+
+.breadcrumb__link--inactive {
+    color: #667085;
+    order: 0;
+}
+
+.breadcrumb__link--active {
+    color: #212636;
+    order: 2;
+}
+
+.breadcrumb__separator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    width: 23px;
+    height: 24px;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: #667085;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    justify-content: center;
+}
+
+/* ========================================
+   FILTER PANEL COMPONENT
+   ======================================== */
+
+.filter-panel {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 16px;
+
+    width: 1280px;
+    height: 140px;
+
+    background: #FFFFFF;
+    border-radius: 12px;
+
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 1;
+
+    /* Sticky behavior if requested by layout, but Figma says flex child */
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.filter-panel__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px;
+    gap: 24px;
+
+    width: 1280px;
+    height: 140px;
+
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 1;
+}
+
+.filter-panel__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px;
+    gap: 16px;
+
+    width: 1232px;
+    height: 28px;
+
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.filter-panel__title {
+    width: 141px;
+    height: 28px;
+
+    /* typography/H6 */
+    font-family: 'Merriweather', serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+    /* identical to box height, or 28px */
+    display: flex;
+    align-items: center;
+
+    color: #212636;
+    margin: 0;
+
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.filter-panel__clear {
+    width: 52px;
+    height: 20px;
+
+    /* typography/Body 2 */
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 140%;
+    /* identical to box height, or 20px */
+    display: flex;
+    align-items: center;
+    text-decoration: underline;
+
+    color: #667085;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.filter-panel__filters {
+    /* inffo */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 24px;
+
+    width: 1232px;
+    height: 40px;
+
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+/* ========================================
+   FILTER GROUP COMPONENT
+   ======================================== */
+
+.filter-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 12px;
+
+    height: 40px;
+
+    /* Inside auto layout */
+    flex: none;
+    flex-grow: 0;
+}
+
+.filter-group--decade {
+    width: 275px;
+    order: 0;
+}
+
+.filter-group--year {
+    width: 253px;
+    order: 1;
+}
+
+.filter-group--issue {
+    width: 656px;
+    order: 2;
+    flex-grow: 1;
+}
+
+.filter-group__label {
+    height: 22px;
+
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 140%;
+    /* or 22px */
+    display: flex;
+    align-items: center;
+
+    color: #212636;
+
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.filter-group--decade .filter-group__label {
+    width: 63px;
+}
+
+.filter-group--year .filter-group__label {
+    width: 41px;
+}
+
+.filter-group--issue .filter-group__label {
+    width: 42px;
+}
+
+.filter-group__select {
+    box-sizing: border-box;
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    gap: 4px;
+
+    height: 40px;
+
+    background: #FFFFFF;
+    border: 1px solid #DCDFE4;
+    border-radius: 100px;
+    /* Base says radius-pill, figma says 100px/64px - taking 100px */
+
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    cursor: pointer;
+}
+
+.filter-group--decade .filter-group__select,
+.filter-group--year .filter-group__select {
+    width: 200px;
+}
+
+.filter-group--issue .filter-group__select {
+    width: 602px;
+    flex-grow: 1;
+}
+
+.filter-group__text {
+    height: 21px;
+
+    /* typography/Body 3 */
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    /* identical to box height, or 21px */
+
+    color: #212636;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.filter-group--decade .filter-group__text,
+.filter-group--year .filter-group__text {
+    width: 35px;
+    /* Note: This is very small, might truncate real content, but figma spec says this */
+}
+
+.filter-group--issue .filter-group__text {
+    width: 254px;
+}
+
+.filter-group__icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+/* ========================================
+   GRID ROW - MỖI HÀNG 4 THẺ SỐ BÁO
+   ======================================== */
+
+/* Hàng chứa 4 thẻ số báo */
+.grid-row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 24px;
+    width: 1280px;
+    height: 502px;
+    flex: none;
+    align-self: stretch;
+}
+
+/* ========================================
+   ISSUE CARD - THẺ SỐ BÁO
+   ======================================== */
+
+/* Thẻ số báo riêng lẻ */
+.issue-card {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 16px;
+    width: 302px;
+    height: 502px;
+    background: #FFFFFF;
+    border-radius: 12px;
+    flex: none;
+    flex-grow: 1;
+}
+
+/* Nội dung bên trong thẻ */
+.issue-card__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px;
+    gap: 16px;
+    width: 302px;
+    height: 502px;
+    flex: none;
+    align-self: stretch;
+    flex-grow: 1;
+}
+
+/* Wrapper chứa ảnh + title */
+.issue-card__main {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 16px;
+    width: 270px;
+    height: 470px;
+    flex: none;
+    align-self: stretch;
+}
+
+/* Ảnh bìa số báo */
+.issue-card__book {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 10px;
+    width: 270px;
+    height: 378px;
+    background: #F9FAFB;
+    flex: none;
+    align-self: stretch;
+}
+
+/* Hình ảnh bìa báo */
+.issue-card__image {
+    width: 270px;
+    height: 378px;
+    background: url(image.png);
+    box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
+    flex: none;
+    flex-grow: 1;
+    object-fit: cover;
+}
+
+/* Phần tiêu đề và thông tin */
+.issue-card__title-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 4px;
+    width: 270px;
+    height: 76px;
+    flex: none;
+    align-self: stretch;
+}
+
+/* Tiêu đề số báo */
+.issue-card__title {
+    width: 270px;
+    height: 28px;
+    font-family: 'Merriweather';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    color: #111827;
+    flex: none;
+    align-self: stretch;
+}
+
+/* Thông tin xuất bản */
+.issue-card__meta {
+    width: 168.69px;
+    height: 20px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    color: #667085;
+    flex: none;
+}
+
+
+/* ========================================
+   RESPONSIVE DESIGN - GRID LAYOUT
+   ======================================== */
+
+@media (max-width: 1439px) {
+    .browse-page__filter-section {
+        width: 100%;
+        padding: 0px 20px 24px;
+    }
+
+    .browse-page__filter-section .browse-page__container {
+        width: 100%;
+    }
+
+    .filter-panel {
+        width: 100%;
+    }
+
+    .filter-panel__content {
+        width: 100%;
+    }
+
+    .filter-panel__filters {
+        flex-direction: column;
+    }
+
+    .filter-group {
+        width: 100% !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        height: auto;
+        gap: 6px !important;
+    }
+
+    .filter-group__label {
+        flex-shrink: 0 !important;
+        width: auto !important;
+        min-width: fit-content !important;
+        font-size: 13px !important;
+    }
+
+    .filter-group__select {
+        flex: 1 !important;
+        width: auto !important;
+        min-width: 0 !important;
+        padding: 6px 10px !important;
+        height: 36px !important;
+        gap: 6px !important;
+    }
+
+    .filter-group__text {
+        width: auto !important;
+        max-width: 100% !important;
+        font-size: 12px !important;
+        flex: 1 !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+    }
+
+    .filter-group__icon {
+        width: 18px !important;
+        height: 18px !important;
+        flex-shrink: 0 !important;
+    }
+
+    .browse-page__content {
+        width: 100%;
+        padding: 0px 20px;
+    }
+
+    .grid-row {
+        width: 100%;
+        flex-wrap: wrap;
+        height: auto;
+    }
+
+    .issue-card {
+        width: calc(50% - 12px);
+    }
+}
+
+@media (max-width: 768px) {
+    .browse-page__content-section {
+        padding: 0px 20px 48px;
+    }
+
+    .grid-row {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .issue-card {
+        width: 100%;
+    }
+}
+
+
+
+/* Tablet & Mobile tweaks */
+@media (max-width: 767px) {
+    .filter-panel__header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}

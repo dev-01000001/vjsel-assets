@@ -1,0 +1,34 @@
+/* ========================================
+   Reset & Base Styles
+   Shared reset and base styles for all pages
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --color-primary: #007fff;
+    --color-primary-dark: #0074e8;
+    --color-primary-light: #e6f2ff;
+    --color-text-primary: #212636;
+    --color-text-secondary: #667085;
+    --color-text-tertiary: #111827;
+    --color-text-link: #007fff;
+    --color-bg-white: #ffffff;
+    --color-bg-light: #f3f9ff;
+    --color-bg-highlight: #f3f9ff;
+    --color-border: #dcdfe4;
+    --font-merriweather: 'Merriweather', serif;
+    --font-roboto: 'Roboto', sans-serif;
+    --font-inter: 'Inter', sans-serif;
+}
+
+body {
+    font-family: var(--font-roboto);
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-white);
+    line-height: 1.4;
+}

@@ -1,0 +1,795 @@
+// ===== SEARCH PAGE JAVASCRIPT =====
+// JavaScript cho trang tìm kiếm - xử lý tương tác và chức năng
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Khởi tạo các chức năng
+  initializeFilters();
+  initializeSearch();
+  initializeArticleCards();
+  initializeLoadMore();
+  initializeAccessibility();
+  initReadMore(); // Thêm function "Mở rộng" cho abstract
+
+  console.log("Search page initialized");
+});
+
+// ===== FILTER FUNCTIONALITY =====
+// Xử lý chức năng bộ lọc
+function initializeFilters() {
+  const filterOptions = document.querySelectorAll(
+    '.filter-option input[type="checkbox"]',
+  );
+  const clearAllBtn = document.querySelector(".sidebar__clear-btn");
+  const yearRangeBtns = document.querySelectorAll(".year-range-btn");
+  const dropdownBtns = document.querySelectorAll(".dropdown-btn");
+
+  // Xử lý thay đổi filter checkbox
+  filterOptions.forEach((checkbox) => {
+    checkbox.addEventListener("change", function () {
+      handleFilterChange(this);
+      updateSearchResults();
+    });
+  });
+
+  // Xử lý nút Clear All
+  if (clearAllBtn) {
+    clearAllBtn.addEventListener("click", function () {
+      clearAllFilters();
+    });
+  }
+
+  // Xử lý year range buttons
+  yearRangeBtns.forEach((btn) => {
+    btn.addEventListener("click", function () {
+      handleYearRangeClick(this);
+    });
+  });
+
+  // Xử lý dropdown buttons
+  dropdownBtns.forEach((btn) => {
+    btn.addEventListener("click", function () {
+      handleDropdownClick(this);
+    });
+  });
+}
+
+// Xử lý thay đổi filter
+function handleFilterChange(checkbox) {
+  const filterGroup = checkbox.closest(".sidebar__filter-group");
+  const activeFilters = filterGroup.querySelectorAll(
+    'input[type="checkbox"]:checked',
+  );
+
+  // Cập nhật visual state
+  if (checkbox.checked) {
+    checkbox.closest(".filter-option").classList.add("filter-option--active");
+  } else {
+    checkbox
+      .closest(".filter-option")
+      .classList.remove("filter-option--active");
+  }
+
+  // Log filter change cho analytics
+  console.log("Filter changed:", {
+    group: filterGroup.querySelector(".filter-group__title").textContent,
+    option: checkbox.nextElementSibling.textContent,
+    checked: checkbox.checked,
+  });
+}
+
+// Xử lý nút Clear All
+function clearAllFilters() {
+  const filterOptions = document.querySelectorAll(
+    '.filter-option input[type="checkbox"]',
+  );
+  const yearRangeBtns = document.querySelectorAll(".year-range-btn");
+
+  // Uncheck tất cả checkbox
+  filterOptions.forEach((checkbox) => {
+    if (checkbox.checked) {
+      checkbox.checked = false;
+      checkbox
+        .closest(".filter-option")
+        .classList.remove("filter-option--active");
+    }
+  });
+
+  // Reset year range
+  yearRangeBtns.forEach((btn) => {
+    btn.classList.remove("year-range-btn--active");
+  });
+
+  // Cập nhật kết quả tìm kiếm
+  updateSearchResults();
+
+  console.log("All filters cleared");
+}
+
+// Xử lý year range buttons
+function handleYearRangeClick(button) {
+  const isActive = button.classList.contains("year-range-btn--active");
+
+  if (!isActive) {
+    button.classList.add("year-range-btn--active");
+  } else {
+    button.classList.remove("year-range-btn--active");
+  }
+
+  updateSearchResults();
+}
+
+// Xử lý dropdown click
+function handleDropdownClick(button) {
+  const isOpen = button.getAttribute("aria-expanded") === "true";
+
+  // Toggle dropdown state
+  button.setAttribute("aria-expanded", !isOpen);
+
+  // Rotate icon (nếu có)
+  const icon = button.querySelector(".dropdown-btn__icon");
+  if (icon) {
+    icon.style.transform = !isOpen ? "rotate(180deg)" : "rotate(0deg)";
+  }
+
+  console.log("Dropdown toggled:", !isOpen);
+}
+
+// ===== SEARCH FUNCTIONALITY =====
+// Xử lý chức năng tìm kiếm
+function initializeSearch() {
+  // Có thể thêm search input nếu cần
+  const searchParams = new URLSearchParams(window.location.search);
+  const query = searchParams.get("q");
+
+  if (query) {
+    updateSearchHeader(query);
+  }
+}
+
+// Cập nhật header với query
+function updateSearchHeader(query) {
+  const subtitle = document.querySelector(".main-content__subtitle");
+  if (subtitle && query) {
+    subtitle.textContent = `142 articles found for "${query}"`;
+  }
+}
+
+// Cập nhật kết quả tìm kiếm
+function updateSearchResults() {
+  // Hiển thị loading state
+  const articlesList = document.querySelector(".articles-list");
+  if (articlesList) {
+    articlesList.classList.add("loading");
+  }
+
+  // Simulate API call
+  setTimeout(() => {
+    // Ở đây sẽ gọi API thực tế để lấy kết quả mới
+    if (articlesList) {
+      articlesList.classList.remove("loading");
+    }
+
+    // Cập nhật số lượng kết quả
+    updateResultCount();
+
+    console.log("Search results updated");
+  }, 1000);
+}
+
+// Cập nhật số lượng kết quả
+function updateResultCount() {
+  const subtitle = document.querySelector(".main-content__subtitle");
+  if (subtitle) {
+    // Simulate new count
+    const newCount = Math.floor(Math.random() * 200) + 50;
+    const currentText = subtitle.textContent;
+    const newText = currentText.replace(/\d+/, newCount);
+    subtitle.textContent = newText;
+  }
+}
+
+// ===== ARTICLE CARDS FUNCTIONALITY =====
+// Xử lý tương tác với article cards
+function initializeArticleCards() {
+  const articleCards = document.querySelectorAll(".article-card");
+  const actionBtns = document.querySelectorAll(".article-card__action-btn");
+  const accessBadges = document.querySelectorAll(".article-card__access-badge");
+
+  // Thêm hover effects
+  articleCards.forEach((card) => {
+    card.addEventListener("mouseenter", function () {
+      this.style.animation = "fadeIn 0.3s ease";
+    });
+  });
+
+  // Xử lý action buttons
+  actionBtns.forEach((btn) => {
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
+      handleArticleAction(this);
+    });
+  });
+
+  // Xử lý access badges
+  accessBadges.forEach((badge) => {
+    badge.addEventListener("click", function (e) {
+      e.preventDefault();
+      handleAccessRequest(this);
+    });
+  });
+}
+
+// Xử lý hành động với article
+function handleArticleAction(button) {
+  const action = button.textContent.trim();
+  const article = button.closest(".article-card");
+  const title = article.querySelector(".article-card__title").textContent;
+
+  // Visual feedback
+  button.style.transform = "scale(0.95)";
+  setTimeout(() => {
+    button.style.transform = "scale(1)";
+  }, 150);
+
+  // Xử lý theo loại action
+  switch (action) {
+    case "PDF":
+      handlePDFDownload(article);
+      break;
+    case "Save":
+      handleSaveArticle(article);
+      break;
+    default:
+      console.log("Unknown action:", action);
+  }
+
+  console.log(`${action} clicked for article:`, title);
+}
+
+// Xử lý download PDF
+function handlePDFDownload(article) {
+  const title = article.querySelector(".article-card__title").textContent;
+
+  // Hiển thị loading state
+  const pdfBtn = article.querySelector(".article-card__action-btn:has(svg)");
+  if (pdfBtn) {
+    pdfBtn.classList.add("loading");
+  }
+
+  // Simulate PDF download
+  setTimeout(() => {
+    if (pdfBtn) {
+      pdfBtn.classList.remove("loading");
+    }
+
+    // Hiển thị success message
+    showNotification("PDF download started", "success");
+
+    console.log("PDF downloaded:", title);
+  }, 2000);
+}
+
+// Xử lý save article
+function handleSaveArticle(article) {
+  const title = article.querySelector(".article-card__title").textContent;
+  const saveBtn = article.querySelector(
+    ".article-card__action-btn:nth-child(2)",
+  );
+
+  if (saveBtn) {
+    const isSaved = saveBtn.classList.contains("saved");
+
+    if (!isSaved) {
+      saveBtn.classList.add("saved");
+      saveBtn.innerHTML = saveBtn.innerHTML.replace("Save", "Saved");
+      showNotification("Article saved", "success");
+    } else {
+      saveBtn.classList.remove("saved");
+      saveBtn.innerHTML = saveBtn.innerHTML.replace("Saved", "Save");
+      showNotification("Article unsaved", "info");
+    }
+  }
+
+  console.log("Article save toggled:", title);
+}
+
+// Xử lý yêu cầu access
+function handleAccessRequest(badge) {
+  const article = badge.closest(".article-card");
+  const title = article.querySelector(".article-card__title").textContent;
+
+  // Animation effect
+  badge.style.animation = "slideDown 0.3s ease";
+
+  // Simulate access request
+  setTimeout(() => {
+    showNotification("Access request sent", "info");
+    console.log("Access requested for:", title);
+  }, 500);
+}
+
+// ===== LOAD MORE FUNCTIONALITY =====
+// Xử lý nút Load More
+function initializeLoadMore() {
+  const loadMoreBtn = document.querySelector(".load-more-btn");
+
+  if (loadMoreBtn) {
+    loadMoreBtn.addEventListener("click", function () {
+      handleLoadMore(this);
+    });
+  }
+}
+
+// Xử lý load more articles
+function handleLoadMore(button) {
+  const articlesList = document.querySelector(".articles-list");
+
+  // Hiển thị loading state
+  button.classList.add("loading");
+  button.disabled = true;
+
+  // Simulate loading more articles
+  setTimeout(() => {
+    // Tạo thêm article cards (demo)
+    const newArticles = createDemoArticles(5);
+
+    newArticles.forEach((articleHTML) => {
+      const articleElement = document.createElement("div");
+      articleElement.innerHTML = articleHTML;
+      articlesList.appendChild(articleElement.firstElementChild);
+    });
+
+    // Remove loading state
+    button.classList.remove("loading");
+    button.disabled = false;
+
+    // Re-initialize event listeners cho articles mới
+    initializeArticleCards();
+
+    // Update result count
+    updateResultCount();
+
+    showNotification("More articles loaded", "success");
+    console.log("More articles loaded");
+  }, 2000);
+}
+
+// Tạo demo articles (sử dụng cho load more)
+function createDemoArticles(count) {
+  const articles = [];
+
+  for (let i = 0; i < count; i++) {
+    const articleHTML = `
+                                    <article class="articles-list__item article-card">
+                            <div class="article-card__content">
+                                <div class="article-card__body">
+                                    <div class="article-card__main">
+                                        <header class="article-card__header">
+                                            <h2 class="article-card__title">
+                                                <a href="#" class="article-card__title-link">
+                                                    Treatment outcomes for gallbladder carcinoma at Viet Duc University
+                                                    Hospital from 2015 to 2022
+                                                </a>
+                                            </h2>
+
+                                            <div class="article-card__authors authors-list">
+                                                <span class="authors-list__prefix">By</span>
+                                                <div class="authors-list__items">
+                                                    <span class="authors-list__author">
+                                                        <span class="authors-list__name">Tran Dinh Tho</span>
+                                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M15.625 8.75C15.625 8.91576 15.5592 9.07473 15.4419 9.19194C15.3247 9.30915 15.1658 9.375 15 9.375H11.875C11.7092 9.375 11.5503 9.30915 11.4331 9.19194C11.3158 9.07473 11.25 8.91576 11.25 8.75C11.25 8.58424 11.3158 8.42527 11.4331 8.30806C11.5503 8.19085 11.7092 8.125 11.875 8.125H15C15.1658 8.125 15.3247 8.19085 15.4419 8.30806C15.5592 8.42527 15.625 8.58424 15.625 8.75ZM15 10.625H11.875C11.7092 10.625 11.5503 10.6908 11.4331 10.8081C11.3158 10.9253 11.25 11.0842 11.25 11.25C11.25 11.4158 11.3158 11.5747 11.4331 11.6919C11.5503 11.8092 11.7092 11.875 11.875 11.875H15C15.1658 11.875 15.3247 11.8092 15.4419 11.6919C15.5592 11.5747 15.625 11.4158 15.625 11.25C15.625 11.0842 15.5592 10.9253 15.4419 10.8081C15.3247 10.6908 15.1658 10.625 15 10.625ZM18.125 4.375V15.625C18.125 15.9565 17.9933 16.2745 17.7589 16.5089C17.5245 16.7433 17.2065 16.875 16.875 16.875H3.125C2.79348 16.875 2.47554 16.7433 2.24112 16.5089C2.0067 16.2745 1.875 15.9565 1.875 15.625V4.375C1.875 4.04348 2.0067 3.72554 2.24112 3.49112C2.47554 3.2567 2.79348 3.125 3.125 3.125H16.875C17.2065 3.125 17.5245 3.2567 17.7589 3.49112C17.9933 3.72554 18.125 4.04348 18.125 4.375ZM16.875 15.625V4.375H3.125V15.625H16.875ZM10.6047 12.9688C10.6461 13.1293 10.6221 13.2998 10.5378 13.4426C10.4536 13.5855 10.316 13.689 10.1555 13.7305C9.99489 13.7719 9.82442 13.7479 9.68157 13.6636C9.53872 13.5794 9.43519 13.4418 9.39375 13.2812C9.18828 12.4797 8.37344 11.875 7.49922 11.875C6.625 11.875 5.81094 12.4797 5.60469 13.2812C5.56325 13.4418 5.45971 13.5794 5.31686 13.6636C5.17401 13.7479 5.00355 13.7719 4.84297 13.7305C4.68239 13.689 4.54485 13.5855 4.4606 13.4426C4.37636 13.2998 4.35231 13.1293 4.39375 12.9688C4.59656 12.2139 5.07598 11.5629 5.73672 11.1453C5.3856 10.7963 5.14602 10.3508 5.04835 9.86549C4.95068 9.38013 4.99932 8.8767 5.1881 8.41902C5.37688 7.96134 5.6973 7.57001 6.10875 7.29465C6.52019 7.01929 7.00413 6.87229 7.49922 6.87229C7.99431 6.87229 8.47825 7.01929 8.88969 7.29465C9.30114 7.57001 9.62156 7.96134 9.81034 8.41902C9.99912 8.8767 10.0478 9.38013 9.95009 9.86549C9.85242 10.3508 9.61284 10.7963 9.26172 11.1453C9.92318 11.5623 10.403 12.2135 10.6055 12.9688H10.6047ZM7.5 10.625C7.74723 10.625 7.9889 10.5517 8.19446 10.4143C8.40002 10.277 8.56024 10.0818 8.65485 9.85335C8.74946 9.62495 8.77421 9.37361 8.72598 9.13114C8.67775 8.88866 8.5587 8.66593 8.38388 8.49112C8.20907 8.3163 7.98634 8.19725 7.74386 8.14902C7.50139 8.10079 7.25005 8.12554 7.02165 8.22015C6.79324 8.31476 6.59801 8.47498 6.46066 8.68054C6.32331 8.8861 6.25 9.12777 6.25 9.375C6.25 9.70652 6.3817 10.0245 6.61612 10.2589C6.85054 10.4933 7.16848 10.625 7.5 10.625Z"
+                                                                fill="#667085" />
+                                                        </svg>
+                                                    </span>
+                                                    <span class="authors-list__author">
+                                                        <span class="authors-list__name">Nguyen Hai Nam</span>
+                                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M15.625 8.75C15.625 8.91576 15.5592 9.07473 15.4419 9.19194C15.3247 9.30915 15.1658 9.375 15 9.375H11.875C11.7092 9.375 11.5503 9.30915 11.4331 9.19194C11.3158 9.07473 11.25 8.91576 11.25 8.75C11.25 8.58424 11.3158 8.42527 11.4331 8.30806C11.5503 8.19085 11.7092 8.125 11.875 8.125H15C15.1658 8.125 15.3247 8.19085 15.4419 8.30806C15.5592 8.42527 15.625 8.58424 15.625 8.75ZM15 10.625H11.875C11.7092 10.625 11.5503 10.6908 11.4331 10.8081C11.3158 10.9253 11.25 11.0842 11.25 11.25C11.25 11.4158 11.3158 11.5747 11.4331 11.6919C11.5503 11.8092 11.7092 11.875 11.875 11.875H15C15.1658 11.875 15.3247 11.8092 15.4419 11.6919C15.5592 11.5747 15.625 11.4158 15.625 11.25C15.625 11.0842 15.5592 10.9253 15.4419 10.8081C15.3247 10.6908 15.1658 10.625 15 10.625ZM18.125 4.375V15.625C18.125 15.9565 17.9933 16.2745 17.7589 16.5089C17.5245 16.7433 17.2065 16.875 16.875 16.875H3.125C2.79348 16.875 2.47554 16.7433 2.24112 16.5089C2.0067 16.2745 1.875 15.9565 1.875 15.625V4.375C1.875 4.04348 2.0067 3.72554 2.24112 3.49112C2.47554 3.2567 2.79348 3.125 3.125 3.125H16.875C17.2065 3.125 17.5245 3.2567 17.7589 3.49112C17.9933 3.72554 18.125 4.04348 18.125 4.375ZM16.875 15.625V4.375H3.125V15.625H16.875ZM10.6047 12.9688C10.6461 13.1293 10.6221 13.2998 10.5378 13.4426C10.4536 13.5855 10.316 13.689 10.1555 13.7305C9.99489 13.7719 9.82442 13.7479 9.68157 13.6636C9.53872 13.5794 9.43519 13.4418 9.39375 13.2812C9.18828 12.4797 8.37344 11.875 7.49922 11.875C6.625 11.875 5.81094 12.4797 5.60469 13.2812C5.56325 13.4418 5.45971 13.5794 5.31686 13.6636C5.17401 13.7479 5.00355 13.7719 4.84297 13.7305C4.68239 13.689 4.54485 13.5855 4.4606 13.4426C4.37636 13.2998 4.35231 13.1293 4.39375 12.9688C4.59656 12.2139 5.07598 11.5629 5.73672 11.1453C5.3856 10.7963 5.14602 10.3508 5.04835 9.86549C4.95068 9.38013 4.99932 8.8767 5.1881 8.41902C5.37688 7.96134 5.6973 7.57001 6.10875 7.29465C6.52019 7.01929 7.00413 6.87229 7.49922 6.87229C7.99431 6.87229 8.47825 7.01929 8.88969 7.29465C9.30114 7.57001 9.62156 7.96134 9.81034 8.41902C9.99912 8.8767 10.0478 9.38013 9.95009 9.86549C9.85242 10.3508 9.61284 10.7963 9.26172 11.1453C9.92318 11.5623 10.403 12.2135 10.6055 12.9688H10.6047ZM7.5 10.625C7.74723 10.625 7.9889 10.5517 8.19446 10.4143C8.40002 10.277 8.56024 10.0818 8.65485 9.85335C8.74946 9.62495 8.77421 9.37361 8.72598 9.13114C8.67775 8.88866 8.5587 8.66593 8.38388 8.49112C8.20907 8.3163 7.98634 8.19725 7.74386 8.14902C7.50139 8.10079 7.25005 8.12554 7.02165 8.22015C6.79324 8.31476 6.59801 8.47498 6.46066 8.68054C6.32331 8.8861 6.25 9.12777 6.25 9.375C6.25 9.70652 6.3817 10.0245 6.61612 10.2589C6.85054 10.4933 7.16848 10.625 7.5 10.625Z"
+                                                                fill="#667085" />
+                                                        </svg>
+                                                    </span>
+                                                    <span class="authors-list__author">
+                                                        <span class="authors-list__name">Nguyen Thi Lan</span>
+                                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M15.625 8.75C15.625 8.91576 15.5592 9.07473 15.4419 9.19194C15.3247 9.30915 15.1658 9.375 15 9.375H11.875C11.7092 9.375 11.5503 9.30915 11.4331 9.19194C11.3158 9.07473 11.25 8.91576 11.25 8.75C11.25 8.58424 11.3158 8.42527 11.4331 8.30806C11.5503 8.19085 11.7092 8.125 11.875 8.125H15C15.1658 8.125 15.3247 8.19085 15.4419 8.30806C15.5592 8.42527 15.625 8.58424 15.625 8.75ZM15 10.625H11.875C11.7092 10.625 11.5503 10.6908 11.4331 10.8081C11.3158 10.9253 11.25 11.0842 11.25 11.25C11.25 11.4158 11.3158 11.5747 11.4331 11.6919C11.5503 11.8092 11.7092 11.875 11.875 11.875H15C15.1658 11.875 15.3247 11.8092 15.4419 11.6919C15.5592 11.5747 15.625 11.4158 15.625 11.25C15.625 11.0842 15.5592 10.9253 15.4419 10.8081C15.3247 10.6908 15.1658 10.625 15 10.625ZM18.125 4.375V15.625C18.125 15.9565 17.9933 16.2745 17.7589 16.5089C17.5245 16.7433 17.2065 16.875 16.875 16.875H3.125C2.79348 16.875 2.47554 16.7433 2.24112 16.5089C2.0067 16.2745 1.875 15.9565 1.875 15.625V4.375C1.875 4.04348 2.0067 3.72554 2.24112 3.49112C2.47554 3.2567 2.79348 3.125 3.125 3.125H16.875C17.2065 3.125 17.5245 3.2567 17.7589 3.49112C17.9933 3.72554 18.125 4.04348 18.125 4.375ZM16.875 15.625V4.375H3.125V15.625H16.875ZM10.6047 12.9688C10.6461 13.1293 10.6221 13.2998 10.5378 13.4426C10.4536 13.5855 10.316 13.689 10.1555 13.7305C9.99489 13.7719 9.82442 13.7479 9.68157 13.6636C9.53872 13.5794 9.43519 13.4418 9.39375 13.2812C9.18828 12.4797 8.37344 11.875 7.49922 11.875C6.625 11.875 5.81094 12.4797 5.60469 13.2812C5.56325 13.4418 5.45971 13.5794 5.31686 13.6636C5.17401 13.7479 5.00355 13.7719 4.84297 13.7305C4.68239 13.689 4.54485 13.5855 4.4606 13.4426C4.37636 13.2998 4.35231 13.1293 4.39375 12.9688C4.59656 12.2139 5.07598 11.5629 5.73672 11.1453C5.3856 10.7963 5.14602 10.3508 5.04835 9.86549C4.95068 9.38013 4.99932 8.8767 5.1881 8.41902C5.37688 7.96134 5.6973 7.57001 6.10875 7.29465C6.52019 7.01929 7.00413 6.87229 7.49922 6.87229C7.99431 6.87229 8.47825 7.01929 8.88969 7.29465C9.30114 7.57001 9.62156 7.96134 9.81034 8.41902C9.99912 8.8767 10.0478 9.38013 9.95009 9.86549C9.85242 10.3508 9.61284 10.7963 9.26172 11.1453C9.92318 11.5623 10.403 12.2135 10.6055 12.9688H10.6047ZM7.5 10.625C7.74723 10.625 7.9889 10.5517 8.19446 10.4143C8.40002 10.277 8.56024 10.0818 8.65485 9.85335C8.74946 9.62495 8.77421 9.37361 8.72598 9.13114C8.67775 8.88866 8.5587 8.66593 8.38388 8.49112C8.20907 8.3163 7.98634 8.19725 7.74386 8.14902C7.50139 8.10079 7.25005 8.12554 7.02165 8.22015C6.79324 8.31476 6.59801 8.47498 6.46066 8.68054C6.32331 8.8861 6.25 9.12777 6.25 9.375C6.25 9.70652 6.3817 10.0245 6.61612 10.2589C6.85054 10.4933 7.16848 10.625 7.5 10.625Z"
+                                                                fill="#667085" />
+                                                        </svg>
+                                                    </span>
+                                                    <span class="authors-list__author">
+                                                        <span class="authors-list__name">Nguyen Thi Ha</span>
+                                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M15.625 8.75C15.625 8.91576 15.5592 9.07473 15.4419 9.19194C15.3247 9.30915 15.1658 9.375 15 9.375H11.875C11.7092 9.375 11.5503 9.30915 11.4331 9.19194C11.3158 9.07473 11.25 8.91576 11.25 8.75C11.25 8.58424 11.3158 8.42527 11.4331 8.30806C11.5503 8.19085 11.7092 8.125 11.875 8.125H15C15.1658 8.125 15.3247 8.19085 15.4419 8.30806C15.5592 8.42527 15.625 8.58424 15.625 8.75ZM15 10.625H11.875C11.7092 10.625 11.5503 10.6908 11.4331 10.8081C11.3158 10.9253 11.25 11.0842 11.25 11.25C11.25 11.4158 11.3158 11.5747 11.4331 11.6919C11.5503 11.8092 11.7092 11.875 11.875 11.875H15C15.1658 11.875 15.3247 11.8092 15.4419 11.6919C15.5592 11.5747 15.625 11.4158 15.625 11.25C15.625 11.0842 15.5592 10.9253 15.4419 10.8081C15.3247 10.6908 15.1658 10.625 15 10.625ZM18.125 4.375V15.625C18.125 15.9565 17.9933 16.2745 17.7589 16.5089C17.5245 16.7433 17.2065 16.875 16.875 16.875H3.125C2.79348 16.875 2.47554 16.7433 2.24112 16.5089C2.0067 16.2745 1.875 15.9565 1.875 15.625V4.375C1.875 4.04348 2.0067 3.72554 2.24112 3.49112C2.47554 3.2567 2.79348 3.125 3.125 3.125H16.875C17.2065 3.125 17.5245 3.2567 17.7589 3.49112C17.9933 3.72554 18.125 4.04348 18.125 4.375ZM16.875 15.625V4.375H3.125V15.625H16.875ZM10.6047 12.9688C10.6461 13.1293 10.6221 13.2998 10.5378 13.4426C10.4536 13.5855 10.316 13.689 10.1555 13.7305C9.99489 13.7719 9.82442 13.7479 9.68157 13.6636C9.53872 13.5794 9.43519 13.4418 9.39375 13.2812C9.18828 12.4797 8.37344 11.875 7.49922 11.875C6.625 11.875 5.81094 12.4797 5.60469 13.2812C5.56325 13.4418 5.45971 13.5794 5.31686 13.6636C5.17401 13.7479 5.00355 13.7719 4.84297 13.7305C4.68239 13.689 4.54485 13.5855 4.4606 13.4426C4.37636 13.2998 4.35231 13.1293 4.39375 12.9688C4.59656 12.2139 5.07598 11.5629 5.73672 11.1453C5.3856 10.7963 5.14602 10.3508 5.04835 9.86549C4.95068 9.38013 4.99932 8.8767 5.1881 8.41902C5.37688 7.96134 5.6973 7.57001 6.10875 7.29465C6.52019 7.01929 7.00413 6.87229 7.49922 6.87229C7.99431 6.87229 8.47825 7.01929 8.88969 7.29465C9.30114 7.57001 9.62156 7.96134 9.81034 8.41902C9.99912 8.8767 10.0478 9.38013 9.95009 9.86549C9.85242 10.3508 9.61284 10.7963 9.26172 11.1453C9.92318 11.5623 10.403 12.2135 10.6055 12.9688H10.6047ZM7.5 10.625C7.74723 10.625 7.9889 10.5517 8.19446 10.4143C8.40002 10.277 8.56024 10.0818 8.65485 9.85335C8.74946 9.62495 8.77421 9.37361 8.72598 9.13114C8.67775 8.88866 8.5587 8.66593 8.38388 8.49112C8.20907 8.3163 7.98634 8.19725 7.74386 8.14902C7.50139 8.10079 7.25005 8.12554 7.02165 8.22015C6.79324 8.31476 6.59801 8.47498 6.46066 8.68054C6.32331 8.8861 6.25 9.12777 6.25 9.375C6.25 9.70652 6.3817 10.0245 6.61612 10.2589C6.85054 10.4933 7.16848 10.625 7.5 10.625Z"
+                                                                fill="#667085" />
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <div class="article-card__meta">
+                                                <span class="article-card__journal">No 01 - Volume 08 - 2018</span>
+                                                <span class="article-card__meta-separator"></span>
+                                                <span class="article-card__date">Published 25/10/2025</span>
+                                            </div>
+                                        </header>
+
+                                        <p class="article-card__abstract">
+                                            Abstract Introduction: Gallbladder carcinoma (GBC) is a rare but aggressive
+                                            tumor. Operability is crucial for survival, yet late-stage diagnosis is...
+                                        </p>
+
+                                        <a href="#" class="article-card__doi">https://doi.org/10.55199/vjcr.2024.2.3</a>
+                                    </div>
+
+                                    <!-- Article image -->
+                                    <div class="article-card__thumbnail">
+                                        <img src="asset/img_body/img_body1.png" alt="Article thumbnail"
+                                            class="article-card__thumbnail-img">
+                                    </div>
+                                </div>
+
+                                <footer class="article-card__footer">
+                                    <div class="article-card__citation">
+                                        <svg class="article-card__quote-icon" width="20" height="20" viewBox="0 0 20 20"
+                                            fill="none">
+                                            <path
+                                                d="M7.8125 4.375H3.125C2.79348 4.375 2.47554 4.5067 2.24112 4.74112C2.0067 4.97554 1.875 5.29348 1.875 5.625V10.625C1.875 10.9565 2.0067 11.2745 2.24112 11.5089C2.47554 11.7433 2.79348 11.875 3.125 11.875H7.8125V12.5C7.8125 13.163 7.54911 13.7989 7.08027 14.2678C6.61143 14.7366 5.97554 15 5.3125 15C5.14674 15 4.98777 15.0658 4.87056 15.1831C4.75335 15.3003 4.6875 15.4592 4.6875 15.625C4.6875 15.7908 4.75335 15.9497 4.87056 16.0669C4.98777 16.1842 5.14674 16.25 5.3125 16.25C6.30674 16.249 7.25997 15.8535 7.96301 15.1505C8.66605 14.4475 9.06147 13.4942 9.0625 12.5V5.625C9.0625 5.29348 8.9308 4.97554 8.69638 4.74112C8.46196 4.5067 8.14402 4.375 7.8125 4.375ZM7.8125 10.625H3.125V5.625H7.8125V10.625ZM16.875 4.375H12.1875C11.856 4.375 11.538 4.5067 11.3036 4.74112C11.0692 4.97554 10.9375 5.29348 10.9375 5.625V10.625C10.9375 10.9565 11.0692 11.2745 11.3036 11.5089C11.538 11.7433 11.856 11.875 12.1875 11.875H16.875V12.5C16.875 13.163 16.6116 13.7989 16.1428 14.2678C15.6739 14.7366 15.038 15 14.375 15C14.2092 15 14.0503 15.0658 13.9331 15.1831C13.8158 15.3003 13.75 15.4592 13.75 15.625C13.75 15.7908 13.8158 15.9497 13.9331 16.0669C14.0503 16.1842 14.2092 16.25 14.375 16.25C15.3692 16.249 16.3225 15.8535 17.0255 15.1505C17.7285 14.4475 18.124 13.4942 18.125 12.5V5.625C18.125 5.29348 17.9933 4.97554 17.7589 4.74112C17.5245 4.5067 17.2065 4.375 16.875 4.375ZM16.875 10.625H12.1875V5.625H16.875V10.625Z"
+                                                fill="#667085" />
+                                        </svg>
+                                        <span class="article-card__cite-text">12 Cite</span>
+                                    </div>
+
+                                    <!-- Access badge for restricted content -->
+                                    <div class="article-card__access-badge">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M10 8.75C9.47469 8.75018 8.96698 8.93939 8.56967 9.28305C8.17237 9.62671 7.912 10.1019 7.83616 10.6217C7.76031 11.1415 7.87406 11.6712 8.15661 12.1141C8.43916 12.5569 8.87164 12.8833 9.375 13.0336V14.375C9.375 14.5408 9.44085 14.6997 9.55806 14.8169C9.67527 14.9342 9.83424 15 10 15C10.1658 15 10.3247 14.9342 10.4419 14.8169C10.5592 14.6997 10.625 14.5408 10.625 14.375V13.0336C11.1284 12.8833 11.5608 12.5569 11.8434 12.1141C12.1259 11.6712 12.2397 11.1415 12.1638 10.6217C12.088 10.1019 11.8276 9.62671 11.4303 9.28305C11.033 8.93939 10.5253 8.75018 10 8.75ZM10 11.875C9.81458 11.875 9.63332 11.82 9.47915 11.717C9.32498 11.614 9.20482 11.4676 9.13386 11.2963C9.06291 11.125 9.04434 10.9365 9.08051 10.7546C9.11669 10.5727 9.20598 10.4057 9.33709 10.2746C9.4682 10.1435 9.63525 10.0542 9.8171 10.018C9.99896 9.98184 10.1875 10.0004 10.3588 10.0714C10.5301 10.1423 10.6765 10.2625 10.7795 10.4167C10.8825 10.5708 10.9375 10.7521 10.9375 10.9375C10.9375 11.1861 10.8387 11.4246 10.6629 11.6004C10.4871 11.7762 10.2486 11.875 10 11.875ZM16.25 6.25H13.75V4.375C13.75 3.38044 13.3549 2.42661 12.6517 1.72335C11.9484 1.02009 10.9946 0.625 10 0.625C9.00544 0.625 8.05161 1.02009 7.34835 1.72335C6.64509 2.42661 6.25 3.38044 6.25 4.375V6.25H3.75C3.41848 6.25 3.10054 6.3817 2.86612 6.61612C2.6317 6.85054 2.5 7.16848 2.5 7.5V16.25C2.5 16.5815 2.6317 16.8995 2.86612 17.1339C3.10054 17.3683 3.41848 17.5 3.75 17.5H16.25C16.5815 17.5 16.8995 17.3683 17.1339 17.1339C17.3683 16.8995 17.5 16.5815 17.5 16.25V7.5C17.5 7.16848 17.3683 6.85054 17.1339 6.61612C16.8995 6.3817 16.5815 6.25 16.25 6.25ZM7.5 4.375C7.5 3.71196 7.76339 3.07607 8.23223 2.60723C8.70107 2.13839 9.33696 1.875 10 1.875C10.663 1.875 11.2989 2.13839 11.7678 2.60723C12.2366 3.07607 12.5 3.71196 12.5 4.375V6.25H7.5V4.375ZM16.25 16.25H3.75V7.5H16.25V16.25Z"
+                                                fill="#F04438" />
+                                        </svg>
+                                        <span class="article-card__access-text">Get Access</span>
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M11.5441 6.96145L7.79414 10.7114C7.71596 10.7896 7.60992 10.8336 7.49935 10.8336C7.38878 10.8336 7.28274 10.7896 7.20456 10.7114C7.12637 10.6333 7.08245 10.5272 7.08245 10.4167C7.08245 10.3061 7.12637 10.2 7.20456 10.1219L10.2436 7.08332H2.08268C1.97218 7.08332 1.86619 7.03942 1.78805 6.96128C1.70991 6.88314 1.66602 6.77716 1.66602 6.66665C1.66602 6.55615 1.70991 6.45017 1.78805 6.37203C1.86619 6.29389 1.97218 6.24999 2.08268 6.24999H10.2436L7.20456 3.21145C7.12637 3.13326 7.08245 3.02722 7.08245 2.91665C7.08245 2.80609 7.12637 2.70005 7.20456 2.62186C7.28274 2.54368 7.38878 2.49976 7.49935 2.49976C7.60992 2.49976 7.71596 2.54368 7.79414 2.62186L11.5441 6.37186C11.5829 6.41056 11.6136 6.45651 11.6346 6.5071C11.6556 6.55768 11.6663 6.6119 11.6663 6.66665C11.6663 6.72141 11.6556 6.77563 11.6346 6.82621C11.6136 6.8768 11.5829 6.92275 11.5441 6.96145Z"
+                                                fill="#007FFF" />
+                                        </svg>
+                                    </div>
+
+                                    <div class="article-card__actions">
+
+                                        <button class="article-card__action-btn">
+                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                <path
+                                                    d="M17.5 11.875C17.5 12.0408 17.4342 12.1997 17.3169 12.3169C17.1997 12.4342 17.0408 12.5 16.875 12.5H15V13.75H16.25C16.4158 13.75 16.5747 13.8158 16.6919 13.9331C16.8092 14.0503 16.875 14.2092 16.875 14.375C16.875 14.5408 16.8092 14.6997 16.6919 14.8169C16.5747 14.9342 16.4158 15 16.25 15H15V16.25C15 16.4158 14.9342 16.5747 14.8169 16.6919C14.6997 16.8092 14.5408 16.875 14.375 16.875C14.2092 16.875 14.0503 16.8092 13.9331 16.6919C13.8158 16.5747 13.75 16.4158 13.75 16.25V11.875C13.75 11.7092 13.8158 11.5503 13.9331 11.4331C14.0503 11.3158 14.2092 11.25 14.375 11.25H16.875C17.0408 11.25 17.1997 11.3158 17.3169 11.4331C17.4342 11.5503 17.5 11.7092 17.5 11.875ZM7.1875 13.4375C7.1875 14.0177 6.95703 14.5741 6.5468 14.9843C6.13656 15.3945 5.58016 15.625 5 15.625H4.375V16.25C4.375 16.4158 4.30915 16.5747 4.19194 16.6919C4.07473 16.8092 3.91576 16.875 3.75 16.875C3.58424 16.875 3.42527 16.8092 3.30806 16.6919C3.19085 16.5747 3.125 16.4158 3.125 16.25V11.875C3.125 11.7092 3.19085 11.5503 3.30806 11.4331C3.42527 11.3158 3.58424 11.25 3.75 11.25H5C5.58016 11.25 6.13656 11.4805 6.5468 11.8907C6.95703 12.3009 7.1875 12.8573 7.1875 13.4375ZM5.9375 13.4375C5.9375 13.1889 5.83873 12.9504 5.66291 12.7746C5.4871 12.5988 5.24864 12.5 5 12.5H4.375V14.375H5C5.24864 14.375 5.4871 14.2762 5.66291 14.1004C5.83873 13.9246 5.9375 13.6861 5.9375 13.4375ZM12.8125 14.0625C12.8125 14.8084 12.5162 15.5238 11.9887 16.0512C11.4613 16.5787 10.7459 16.875 10 16.875H8.75C8.58424 16.875 8.42527 16.8092 8.30806 16.6919C8.19085 16.5747 8.125 16.4158 8.125 16.25V11.875C8.125 11.7092 8.19085 11.5503 8.30806 11.4331C8.42527 11.3158 8.58424 11.25 8.75 11.25H10C10.7459 11.25 11.4613 11.5463 11.9887 12.0738C12.5162 12.6012 12.8125 13.3166 12.8125 14.0625ZM11.5625 14.0625C11.5625 13.6481 11.3979 13.2507 11.1049 12.9576C10.8118 12.6646 10.4144 12.5 10 12.5H9.375V15.625H10C10.4144 15.625 10.8118 15.4604 11.1049 15.1674C11.3979 14.8743 11.5625 14.4769 11.5625 14.0625ZM3.125 8.75V3.125C3.125 2.79348 3.2567 2.47554 3.49112 2.24112C3.72554 2.0067 4.04348 1.875 4.375 1.875H11.875C11.9571 1.87494 12.0384 1.89105 12.1143 1.92241C12.1902 1.95378 12.2591 1.99979 12.3172 2.05781L16.6922 6.43281C16.7502 6.4909 16.7962 6.55985 16.8276 6.63572C16.859 6.71159 16.8751 6.7929 16.875 6.875V8.75C16.875 8.91576 16.8092 9.07473 16.6919 9.19194C16.5747 9.30915 16.4158 9.375 16.25 9.375C16.0842 9.375 15.9253 9.30915 15.8081 9.19194C15.6908 9.07473 15.625 8.91576 15.625 8.75V7.5H11.875C11.7092 7.5 11.5503 7.43415 11.4331 7.31694C11.3158 7.19973 11.25 7.04076 11.25 6.875V3.125H4.375V8.75C4.375 8.91576 4.30915 9.07473 4.19194 9.19194C4.07473 9.30915 3.91576 9.375 3.75 9.375C3.58424 9.375 3.42527 9.30915 3.30806 9.19194C3.19085 9.07473 3.125 8.91576 3.125 8.75ZM12.5 6.25H14.7414L12.5 4.00859V6.25Z"
+                                                    fill="#667085" />
+                                            </svg>
+                                            <span>PDF</span>
+                                        </button>
+                                        <button class="article-card__action-btn">
+                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                <path
+                                                    d="M14.375 2.5H5.625C5.29348 2.5 4.97554 2.6317 4.74112 2.86612C4.5067 3.10054 4.375 3.41848 4.375 3.75V17.5C4.37506 17.6115 4.40496 17.721 4.46161 17.8171C4.51826 17.9132 4.59959 17.9924 4.69716 18.0464C4.79473 18.1005 4.90498 18.1274 5.01648 18.1245C5.12798 18.1215 5.23666 18.0888 5.33125 18.0297L10 15.1117L14.6695 18.0297C14.7641 18.0886 14.8727 18.1212 14.9841 18.124C15.0955 18.1268 15.2056 18.0998 15.303 18.0458C15.4005 17.9918 15.4817 17.9127 15.5383 17.8167C15.5949 17.7208 15.6249 17.6114 15.625 17.5V3.75C15.625 3.41848 15.4933 3.10054 15.2589 2.86612C15.0245 2.6317 14.7065 2.5 14.375 2.5ZM14.375 16.3727L10.3305 13.8453C10.2311 13.7832 10.1164 13.7503 9.99922 13.7503C9.88208 13.7503 9.7673 13.7832 9.66797 13.8453L5.625 16.3727V3.75H14.375V16.3727Z"
+                                                    fill="#667085" />
+                                            </svg>
+                                            <span>Save</span>
+                                        </button>
+                                    </div>
+                                </footer>
+                            </div>
+                        </article>
+        `;
+
+    articles.push(articleHTML);
+  }
+
+  return articles;
+}
+
+// ===== NOTIFICATION SYSTEM =====
+// Hệ thống thông báo
+function showNotification(message, type = "info") {
+  const notification = document.createElement("div");
+  notification.className = `notification notification--${type}`;
+  notification.innerHTML = `
+        <div class="notification__content">
+            <span class="notification__message">${message}</span>
+            <button class="notification__close" aria-label="Close notification">×</button>
+        </div>
+    `;
+
+  // Styles for notification
+  notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        min-width: 300px;
+        padding: 12px 16px;
+        border-radius: 8px;
+        color: white;
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        ${getNotificationStyles(type)}
+    `;
+
+  document.body.appendChild(notification);
+
+  // Show animation
+  requestAnimationFrame(() => {
+    notification.style.transform = "translateX(0)";
+  });
+
+  // Close button functionality
+  const closeBtn = notification.querySelector(".notification__close");
+  closeBtn.addEventListener("click", () => {
+    hideNotification(notification);
+  });
+
+  // Auto hide after 4 seconds
+  setTimeout(() => {
+    hideNotification(notification);
+  }, 4000);
+}
+
+function getNotificationStyles(type) {
+  switch (type) {
+    case "success":
+      return "background-color: #059669; border-left: 4px solid #10B981;";
+    case "error":
+      return "background-color: #DC2626; border-left: 4px solid #EF4444;";
+    case "warning":
+      return "background-color: #D97706; border-left: 4px solid #F59E0B;";
+    default:
+      return "background-color: #0369A1; border-left: 4px solid #3B82F6;";
+  }
+}
+
+function hideNotification(notification) {
+  notification.style.transform = "translateX(100%)";
+  setTimeout(() => {
+    if (notification.parentNode) {
+      notification.parentNode.removeChild(notification);
+    }
+  }, 300);
+}
+
+// ===== ACCESSIBILITY FEATURES =====
+// Tính năng hỗ trợ accessibility
+function initializeAccessibility() {
+  // Skip link
+  addSkipLink();
+
+  // Keyboard navigation
+  initializeKeyboardNavigation();
+
+  // ARIA labels
+  updateAriaLabels();
+
+  // Focus management
+  initializeFocusManagement();
+}
+
+function addSkipLink() {
+  const skipLink = document.createElement("a");
+  skipLink.href = "#main-content";
+  skipLink.className = "skip-link";
+  skipLink.textContent = "Skip to main content";
+
+  document.body.insertBefore(skipLink, document.body.firstChild);
+}
+
+function initializeKeyboardNavigation() {
+  document.addEventListener("keydown", function (e) {
+    // ESC key để đóng dropdowns
+    if (e.key === "Escape") {
+      const openDropdowns = document.querySelectorAll('[aria-expanded="true"]');
+      openDropdowns.forEach((dropdown) => {
+        dropdown.setAttribute("aria-expanded", "false");
+      });
+    }
+
+    // Enter/Space cho buttons
+    if ((e.key === "Enter" || e.key === " ") && e.target.matches("button")) {
+      e.preventDefault();
+      e.target.click();
+    }
+  });
+}
+
+function updateAriaLabels() {
+  // Main content
+  const mainContent = document.querySelector(".main-content");
+  if (mainContent) {
+    mainContent.id = "main-content";
+    mainContent.setAttribute("role", "main");
+  }
+
+  // Sidebar
+  const sidebar = document.querySelector(".sidebar");
+  if (sidebar) {
+    sidebar.setAttribute("role", "complementary");
+    sidebar.setAttribute("aria-label", "Search filters");
+  }
+
+  // Articles list
+  const articlesList = document.querySelector(".articles-list");
+  if (articlesList) {
+    articlesList.setAttribute("role", "feed");
+    articlesList.setAttribute("aria-label", "Search results");
+  }
+
+  // Filter checkboxes
+  const filterOptions = document.querySelectorAll(
+    '.filter-option input[type="checkbox"]',
+  );
+  filterOptions.forEach((checkbox, index) => {
+    const label = checkbox.nextElementSibling;
+    if (label && !checkbox.id) {
+      checkbox.id = `filter-${index}`;
+      label.setAttribute("for", checkbox.id);
+    }
+  });
+}
+
+function initializeFocusManagement() {
+  // Trap focus trong modals nếu có
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Tab") {
+      // Có thể thêm logic trap focus ở đây nếu cần
+    }
+  });
+}
+
+// ===== PERFORMANCE OPTIMIZATION =====
+// Tối ưu hóa hiệu suất
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+// Lazy loading cho images (nếu có)
+function initializeLazyLoading() {
+  if ("IntersectionObserver" in window) {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.dataset.src;
+          img.classList.remove("lazy");
+          observer.unobserve(img);
+        }
+      });
+    });
+
+    const lazyImages = document.querySelectorAll("img[data-src]");
+    lazyImages.forEach((img) => imageObserver.observe(img));
+  }
+}
+
+// Analytics tracking (nếu cần)
+function trackEvent(category, action, label = "", value = 0) {
+  if (typeof gtag !== "undefined") {
+    gtag("event", action, {
+      event_category: category,
+      event_label: label,
+      value: value,
+    });
+  }
+
+  console.log("Event tracked:", { category, action, label, value });
+}
+
+// ===== READ MORE FUNCTIONALITY - Học từ HomePage =====
+// Xử lý nút Xem thêm / Thu gọn cho abstract
+function initReadMore() {
+  const descriptions = document.querySelectorAll(".article-card__abstract");
+
+  // Hàm thực hiện cắt chuỗi
+  const truncate = (element) => {
+    // Lưu text gốc nếu chưa có
+    if (!element.dataset.fullText) {
+      element.dataset.fullText = element.textContent.trim();
+    }
+
+    const fullText = element.dataset.fullText;
+    // Tính toán chiều cao tối đa cho 2 dòng (line-height 1.4 * 16px ~ 22.4px/dòng)
+    const lineHeight = parseFloat(window.getComputedStyle(element).lineHeight);
+    const maxHeight = lineHeight * 2;
+
+    // Reset về full text để đo
+    element.innerHTML = fullText;
+
+    // Nếu không bị tràn thì thôi
+    if (element.scrollHeight <= maxHeight + 2) {
+      // +2 buffer
+      return;
+    }
+
+    // Binary search để tìm độ dài chuỗi phù hợp
+    let start = 0;
+    let end = fullText.length;
+    let middle;
+    let result = "";
+
+    const suffix = '... <button class="inline-read-more">Mở rộng</button>';
+
+    // Loop tối đa 20 lần cho performance
+    while (start <= end) {
+      middle = Math.floor((start + end) / 2);
+      element.innerHTML = fullText.slice(0, middle) + suffix;
+
+      if (element.offsetHeight <= maxHeight + 2) {
+        result = fullText.slice(0, middle);
+        start = middle + 1;
+      } else {
+        end = middle - 1;
+      }
+    }
+
+    // Áp dụng kết quả cuối cùng
+    element.innerHTML = result + suffix;
+
+    // Gán sự kiện click cho nút vừa tạo
+    const btn = element.querySelector(".inline-read-more");
+    if (btn) {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        // Toggle mở rộng
+        element.innerHTML =
+          fullText + ' <button class="inline-read-more">Thu gọn</button>';
+        element.classList.add("article-card__abstract--expanded");
+
+        // Gán sự kiện thu gọn cho nút mới tạo
+        element
+          .querySelector(".inline-read-more")
+          .addEventListener("click", (ev) => {
+            ev.stopPropagation();
+            element.classList.remove("article-card__abstract--expanded");
+            truncate(element); // Cắt lại
+          });
+      });
+    }
+  };
+
+  descriptions.forEach((desc) => truncate(desc));
+
+  // Xử lý resize window (debounce)
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      descriptions.forEach((desc) => {
+        // Chỉ chạy lại truncate nếu đang không ở trạng thái mở rộng
+        const btn = desc.querySelector(".inline-read-more");
+        if (!btn || btn.innerText === "Mở rộng") {
+          truncate(desc);
+        }
+      });
+    }, 200);
+  });
+}
+
+// Export functions nếu cần sử dụng từ bên ngoài
+window.SearchPageApp = {
+  updateSearchResults,
+  showNotification,
+  trackEvent,
+};

@@ -1,0 +1,1599 @@
+/* ========================================
+   Style phần body trang chi tiết
+   Các component theo bố cục Figma
+   ======================================== */
+
+/* ========================================
+   Container nội dung chính
+   ======================================== */
+.article {
+    width: 100%;
+    min-height: 100vh;
+    background: #FAFAFA;
+}
+
+.article__container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0;
+    background: #fafafa;
+}
+
+.article__content {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0;
+    gap: 48px;
+    width: 100%;
+    max-width: 1440px;
+    height: auto;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.article__left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 0;
+    width: 925px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.article__sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px 80px 48px 0px;
+    gap: 24px;
+    width: 467px;
+    height: 944px;
+    flex: none;
+    order: 1;
+    flex-grow: 1;
+    position: relative;
+}
+
+/* ========================================
+   Tiêu đề bài viết
+   ======================================== */
+.article__header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px 0 24px 80px;
+    gap: 24px;
+    width: 925px;
+    height: 320px;
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+    position: relative;
+}
+
+.article__title {
+    width: 845px;
+    height: 90px;
+    font-family: var(--font-merriweather);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 140%;
+    letter-spacing: 0.5px;
+    /* Giãn rộng chu text */
+    display: flex;
+    align-items: center;
+    color: #111827;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+/* ========================================
+   Danh sách tác giả
+   ======================================== */
+.author-list {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0;
+    gap: 12px;
+    width: 845px;
+    height: 80px;
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    position: relative;
+    scroll-behavior: smooth;
+    /* Ẩn thanh cuộn */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.author-list::-webkit-scrollbar {
+    display: none;
+}
+
+.author-card {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0;
+    gap: 4px;
+    width: 220px;
+    height: 80px;
+    flex: none;
+    flex-grow: 0;
+}
+
+.author-card__avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 200px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    object-fit: cover;
+}
+
+.author-card__avatar--initial {
+    width: 48px;
+    height: 48px;
+    background: #E6F2FF;
+    border-radius: 200px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.author-card__avatar--initial::after {
+    content: attr(data-initial);
+    position: absolute;
+    width: 48px;
+    height: 28px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-inter);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 28px;
+    text-align: center;
+    color: #007FFF;
+}
+
+.author-card__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 0;
+    gap: 0px;
+    width: 168px;
+    height: 80px;
+    flex: none;
+    order: 1;
+    flex-grow: 1;
+}
+
+.author-card__name {
+    font-family: var(--font-roboto);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    color: #212636;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    position: relative;
+}
+
+/* Star icon for lead author (first author card) */
+.author-list .author-card:first-child .author-card__name::before {
+    content: '★';
+    /* Star Unicode */
+    color: #FFB800;
+    font-size: 16px;
+    margin-right: 6px;
+    display: inline-block;
+}
+
+.author-card__institution {
+    font-family: var(--font-roboto);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 140%;
+    display: flex;
+    align-items: flex-start;
+    color: #667085;
+    flex: none;
+    order: 0;
+    flex-grow: 1;
+    align-self: stretch;
+}
+
+.author-card__role {
+    display: none;
+}
+
+/* ========================================
+   Nút cuộn danh sách tác giả
+   ======================================== */
+.author-list__scroll-btn {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    position: absolute;
+    width: 38px;
+    height: 38px;
+    left: 906px;
+    top: 136px;
+    background: #FDFDFD;
+    border: 1px solid rgba(30, 136, 229, 0.5);
+    box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
+    border-radius: 44px;
+    cursor: pointer;
+    transition: all 0.2s;
+    z-index: 10;
+}
+
+.author-list__scroll-btn:hover {
+    background: #f5f9ff;
+    border-color: rgba(30, 136, 229, 0.8);
+}
+
+.author-list__scroll-btn-base {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    width: 38px;
+    height: 38px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    position: relative;
+}
+
+.author-list__scroll-icon {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+}
+
+.author-list__scroll-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    transform: scale(1.4);
+    /* Phóng to icon */
+}
+
+/* ========================================
+   Thông tin xuất bản
+   ======================================== */
+.publication-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    gap: 16px;
+    width: 478px;
+    height: 22px;
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+}
+
+.publication-info__date {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    gap: 4px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.publication-info__label {
+    font-family: var(--font-roboto);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    color: #667085;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.publication-info__value {
+    font-family: var(--font-roboto);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    color: #212636;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.publication-info__separator {
+    width: 1px;
+    height: 16px;
+    background: #212636;
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+}
+
+
+.publication-info__doi {
+    font-family: var(--font-roboto);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    color: #007FFF;
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+    text-decoration: none;
+}
+
+.publication-info__doi:hover {
+    text-decoration: underline;
+}
+
+/* ========================================
+   Thống kê bài viết
+   ======================================== */
+.stats {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0;
+    gap: 16px;
+    width: 845px;
+    height: 20px;
+    flex: none;
+    order: 3;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.stats__item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    gap: 6px;
+    flex: none;
+    flex-grow: 0;
+}
+
+.stats__icon {
+    width: 20px;
+    height: 20px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.stats__text {
+    font-family: var(--font-roboto);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    color: #111827;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+/* ========================================
+   Nội dung bài viết & Sidebar hành động
+   ======================================== */
+
+/* Khung chứa nội dung chính và sidebar */
+.article__body {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 24px 0 48px 80px;
+    gap: 24px;
+    width: 925px;
+    min-height: 1768.12px;
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+/* Thanh sidebar các hành động (Like, Share...) */
+.action-sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    gap: 14px;
+    width: 40px;
+    height: 338px;
+    filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.08));
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    /* Sticky positioning */
+    position: sticky;
+    top: 90px;
+    align-self: flex-start;
+}
+
+/* Nút hành động trong sidebar */
+.action-sidebar__btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+    width: 40px;
+    height: 40px;
+    background: #FFFFFF;
+    border-radius: 100px;
+    flex: none;
+    align-self: stretch;
+    flex-grow: 0;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.action-sidebar__btn:hover {
+    background-color: #f5f5f5;
+}
+
+.action-sidebar__icon {
+    width: 20px;
+    height: 20px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.action-sidebar__divider {
+    width: 40px;
+    height: 0;
+    border-top: 1px solid #DCDFE4;
+    flex: none;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+/* ========================================
+   Phần nội dung chính
+   ======================================== */
+
+/* Khu vực hiển thị nội dung bài (Tóm tắt, Kết quả...) */
+/* ============================================
+   KHÓA NỘI DUNG - CSS THUẦN
+   Chuyển từ React sang HTML/CSS 1:1
+   Bố cục BEM, dễ bảo trì
+   ============================================ */
+
+/* 1. Container chính phần khóa nội dung */
+.content-lock {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-start;
+    position: relative;
+    width: 100%;
+    max-width: 781px;
+    margin: 0 auto;
+}
+
+/* 2. Preview: Phần hiển tiêu đề và ảnh PDF mờ */
+.content-lock__preview {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+    position: relative;
+    width: 100%;
+}
+
+.content-lock__preview-title {
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.4;
+    color: #111827;
+    margin: 0;
+}
+
+.content-lock__preview-image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 745 / 1058;
+    /* Giữ tỉ lệ chuẩn PDF */
+    background: #F3F4F6;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.content-lock__preview-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+/* 3. Lockout: Khối thông báo chặn nội dung (nền xanh nhạt) */
+.content-lock__lockout {
+    background: #F3F9FF;
+    position: relative;
+    width: 100%;
+    max-width: 781px;
+    min-height: 519px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 24px;
+    gap: 16px;
+    box-sizing: border-box;
+}
+
+/* Biểu tượng ổ khóa màu đỏ */
+.content-lock__badge {
+    box-sizing: border-box;
+    background: #FEF3F2;
+    padding: 16px;
+    gap: 10px;
+    width: 64px;
+    height: 64px;
+    border: 1px solid #FDAAA4;
+    border-radius: 100px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content-lock__badge-icon {
+    width: 32px;
+    height: 32px;
+}
+
+.content-lock__title {
+    width: 100%;
+    max-width: 235px;
+    height: auto;
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #111827;
+    margin: 0;
+}
+
+.content-lock__description {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #212636;
+    margin: 0;
+}
+
+/* 4. Benefits: Danh sách quyền lợi khi đăng nhập */
+.content-lock__benefits {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    min-height: 132px;
+    border: 1px solid #8AC4FF;
+    border-radius: 12px;
+    list-style: none;
+    background: #FFFFFF;
+    margin: 0;
+}
+
+/* Mỗi mục quyền lợi */
+.content-lock__benefit-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 4px 16px;
+    isolation: isolate;
+    width: 100%;
+    height: auto;
+    min-height: 36px;
+    flex: none;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+/* Icon checkmark */
+.content-lock__benefit-icon {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    margin-right: 32px;
+    flex: none;
+    flex-shrink: 0;
+}
+
+/* Nội dung mục quyền lợi */
+.content-lock__benefit-text {
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 140%;
+    color: #212636;
+    padding: 4px 0;
+    flex: 1;
+    flex-grow: 1;
+}
+
+/* 5. Actions: Nhóm nút hành động */
+.content-lock__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    width: 100%;
+}
+
+.content-lock__btn {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+/* Nút Đăng nhập (dạng viền thuốc) */
+.content-lock__btn--signin {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 22px;
+    gap: 8px;
+    width: 262px;
+    height: 48px;
+    background: #FDFDFD;
+    border: 1px solid rgba(30, 136, 229, 0.5);
+    border-radius: 44px;
+}
+
+.content-lock__btn--signin:hover {
+    background: #E6F2FF;
+    border-color: #1E88E5;
+}
+
+.content-lock__btn-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 140%;
+    color: #007FFF;
+    white-space: nowrap;
+}
+
+.content-lock__btn-icon {
+    width: 18px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* Nút Tạo tài khoản (kiểu text) */
+.content-lock__btn--register {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 16px;
+    gap: 8px;
+    width: auto;
+    height: 21px;
+    border-radius: 44px;
+}
+
+.content-lock__btn--register:hover .content-lock__register-link {
+    text-decoration: underline;
+}
+
+.content-lock__register-prompt {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 140%;
+    color: #667085;
+    white-space: nowrap;
+}
+
+.content-lock__register-link {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 140%;
+    color: #007FFF;
+    white-space: nowrap;
+}
+
+/* 6. Responsive cho Mobile */
+@media (max-width: 768px) {
+    .content-lock__lockout {
+        padding: 32px 16px;
+        min-height: auto;
+    }
+
+    .content-lock__title {
+        font-size: 18px;
+    }
+
+    .content-lock__description {
+        font-size: 14px;
+        max-width: 100%;
+    }
+
+    .content-lock__benefit-icon {
+        margin-right: 12px;
+    }
+
+    .content-lock__benefit-item {
+        padding: 4px 12px;
+    }
+
+    .content-lock__benefits {
+        max-width: 100%;
+        padding: 8px;
+    }
+
+    .content-lock__btn--signin {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-lock__lockout {
+        padding: 24px 12px;
+        gap: 12px;
+    }
+
+    .content-lock__badge {
+        width: 56px;
+        height: 56px;
+        padding: 12px;
+    }
+
+    .content-lock__badge-icon {
+        width: 28px;
+        height: 28px;
+    }
+
+    .content-lock__title {
+        font-size: 16px;
+    }
+
+    .content-lock__description {
+        font-size: 13px;
+    }
+
+    .content-lock__benefit-text {
+        font-size: 13px;
+    }
+
+    .content-lock__btn-text,
+    .content-lock__register-prompt,
+    .content-lock__register-link {
+        font-size: 14px;
+    }
+}
+
+/* ========================================
+   Danh sách tài liệu tham khảo
+   ======================================== */
+
+/* Container danh sách */
+.reference-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Một mục tài liệu */
+.reference-item {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0;
+    gap: 4px;
+    isolation: isolate;
+    width: 629px;
+    position: relative;
+    flex: none;
+    flex-grow: 0;
+}
+
+/* Số thứ tự (1., 2., ...) */
+.reference-item__number {
+    width: 24px;
+    height: 22px;
+    font-family: var(--font-roboto);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    color: #212636;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    z-index: 0;
+}
+
+/* Nội dung trích dẫn */
+.reference-item__text {
+    width: 601px;
+    height: 66px;
+    font-family: var(--font-roboto);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    color: #212636;
+    flex: none;
+    order: 1;
+    flex-grow: 1;
+    z-index: 1;
+    letter-spacing: 0.005em;
+    word-break: break-all;
+}
+
+/* Các icon liên kết (PDF, Link) */
+.reference-item__links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    gap: 10px;
+    position: absolute;
+    width: 50px;
+    height: 20px;
+    left: 188px;
+    top: 46px;
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+    z-index: 2;
+    margin: 0;
+    vertical-align: baseline;
+}
+
+.reference-item__link-icon {
+    width: 20px;
+    height: 20px;
+    flex: none;
+    flex-grow: 0;
+}
+
+/* ========================================
+   Các kiểu nút
+   ======================================== */
+.btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    gap: 8px;
+    border-radius: 44px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex: none;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.btn--primary {
+    width: 339px;
+    height: 38px;
+    background: #007FFF;
+    order: 1;
+    font-family: var(--font-inter);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 140%;
+    color: #FDFDFD;
+}
+
+.btn--primary:hover {
+    background-color: #0066d9;
+}
+
+.btn--secondary {
+    box-sizing: border-box;
+    width: 339px;
+    height: 38px;
+    background: #FDFDFD;
+    border: 1px solid rgba(30, 136, 229, 0.5);
+    order: 2;
+    font-family: var(--font-inter);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 140%;
+    color: #007FFF;
+}
+
+.btn--secondary:hover {
+    background-color: #f5f9ff;
+}
+
+.btn--tertiary {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    width: 205px;
+    height: 32px;
+    justify-content: center;
+    align-items: center;
+    background: #FDFDFD;
+    border: 1px solid rgba(67, 74, 96, 0.5);
+    border-radius: 44px;
+    order: 1;
+    align-self: center;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 140%;
+    color: #434A60;
+    padding: 6px 16px;
+    white-space: nowrap;
+}
+
+.btn--tertiary:hover {
+    background-color: #f5f5f5;
+}
+
+.btn__icon {
+    width: 24px;
+    height: 24px;
+    flex: none;
+    flex-grow: 0;
+}
+
+.btn__chevron {
+    width: 20px;
+    height: 20px;
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+}
+
+/* ========================================
+   Card truy cập
+   ======================================== */
+.access-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px;
+    gap: 16px;
+    width: 387px;
+    height: 260px;
+    background: #FFFFFF;
+    border-radius: 12px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.access-card__title {
+    width: 179px;
+    height: 28px;
+    font-family: var(--font-merriweather);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    color: #212636;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.access-card__divider {
+    width: 339px;
+    height: 0;
+    border: 1px solid #DCDFE4;
+    flex: none;
+    order: 3;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+/* ========================================
+   Phần trích dẫn
+   ======================================== */
+.citation-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    gap: 0;
+    width: 339px;
+    flex: none;
+    order: 4;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+/* ========================================
+   Tab trích dẫn
+   ======================================== */
+.citation-tabs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0;
+    gap: 0;
+    width: 339px;
+    height: 52px;
+    flex: none;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.citation-tabs__tab {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 0px;
+    gap: 4px;
+    width: 113px;
+    height: 52px;
+    box-sizing: border-box;
+    flex: none;
+    flex-grow: 1;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 140%;
+    text-align: center;
+    color: #212636;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+/* .citation-tabs__tab:hover {
+    color: var(--color-primary);
+}
+
+.citation-tabs__tab--active {
+    border-bottom: 2px solid #007FFF;
+    color: #007FFF;
+}
+
+.citation-tabs__icon {
+    width: 20px;
+    height: 20px;
+    flex: none;
+    flex-grow: 0;
+} */
+
+
+/* ========================================
+   Card số phát hành
+   ======================================== */
+.issue-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px;
+    gap: 16px;
+    width: 387px;
+    height: 248px;
+    background: #FFFFFF;
+    border-radius: 12px;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.issue-card__title {
+    width: 64px;
+    height: 34px;
+    font-family: var(--font-merriweather);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    color: #212636;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.issue-card__content {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0;
+    gap: 16px;
+    width: 339px;
+    height: 150px;
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.issue-card__cover {
+    width: 107px;
+    height: 150px;
+    box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    object-fit: cover;
+}
+
+.issue-card__info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    gap: 4px;
+    width: 216px;
+    height: 80px;
+    flex: none;
+    order: 1;
+    flex-grow: 1;
+}
+
+.issue-card__name {
+    width: 216px;
+    font-family: var(--font-merriweather);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    color: #111827;
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.issue-card__meta {
+    font-family: var(--font-roboto);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    color: #667085;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+/* ========================================
+   Mục lục
+   ======================================== */
+.toc-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px;
+    gap: 16px;
+    width: 387px;
+    height: 332px;
+    background: #FFFFFF;
+    border-radius: 12px;
+    flex: none;
+    order: 2;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.toc-card__title {
+    width: 157px;
+    height: 34px;
+    font-family: var(--font-merriweather);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    color: #212636;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.toc-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    gap: 4px;
+    width: 339px;
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+    list-style: none;
+}
+
+.toc-list__item {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 4px 8px;
+    gap: 4px;
+    width: 339px;
+    height: 30px;
+    border-left: 2px solid #DCDFE4;
+    flex: none;
+    align-self: stretch;
+    flex-grow: 0;
+    font-family: var(--font-roboto);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    color: #667085;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.toc-list__item:hover {
+    color: var(--color-primary);
+    border-left-color: var(--color-primary);
+}
+
+.toc-list__item--active {
+    border-left: 2px solid #007FFF;
+    font-family: var(--font-merriweather);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 140%;
+    color: #0074E8;
+}
+
+/* ========================================
+   RESPONSIVE (<= 1439px)
+   ======================================== */
+@media (max-width: 1439px) {
+
+    /* Reset toàn cục trong scope */
+    * {
+        box-sizing: border-box;
+    }
+
+    /* 1. Container và Layout chính */
+    .article__container {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        overflow-x: hidden;
+    }
+
+    .article__content {
+        width: 100% !important;
+        height: auto !important;
+        flex-direction: column !important;
+        padding: 0 16px !important;
+        gap: 24px !important;
+        align-items: center !important;
+    }
+
+    /* 2. Cột nội dung bên trái */
+    .article__left {
+        width: 100% !important;
+        max-width: 100% !important;
+        align-items: center !important;
+        padding: 0 !important;
+        order: 2 !important;
+    }
+
+    .article__header {
+        width: 100% !important;
+        height: auto !important;
+        padding: 24px 0 !important;
+        align-items: center !important;
+    }
+
+    .article__title {
+        width: 100% !important;
+        height: auto !important;
+        font-size: 24px !important;
+        text-align: center !important;
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+        hyphens: auto !important;
+    }
+
+    .author-list {
+        width: 100% !important;
+        justify-content: center !important;
+    }
+
+    .author-list__scroll-btn {
+        display: none !important;
+    }
+
+    .stats {
+        width: 100% !important;
+        height: auto !important;
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+    }
+
+    .article__body {
+        width: 100% !important;
+        min-height: auto !important;
+        height: auto !important;
+        padding: 0 !important;
+        gap: 16px !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    /* 3. Sidebar */
+    .article__sidebar {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        padding: 24px 0 !important;
+        position: static !important;
+        order: 1 !important;
+        align-items: center !important;
+    }
+
+    /* 4. Action Sidebar (Floating) */
+    .action-sidebar {
+        display: none !important;
+    }
+
+    /* 5a. Các thành phần nội dung bên trong */
+    .content-main,
+    .content-section,
+    .content-section--highlight,
+    .content-section__title,
+    .content-section--highlight .content-section__title,
+    .content-section__text,
+    .content-section--highlight .content-section__text {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 16px !important;
+        box-sizing: border-box !important;
+        height: auto !important;
+    }
+
+    .content-section__title,
+    .content-section--highlight .content-section__title,
+    .content-section__text,
+    .content-section--highlight .content-section__text {
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+        white-space: normal !important;
+    }
+
+    .content-section--highlight {
+        background: #F3F9FF;
+    }
+
+    /* 6. References */
+    .reference-list {
+        width: 100% !important;
+    }
+
+    .reference-item {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .reference-item__text {
+        width: 100% !important;
+        height: auto !important;
+        word-break: break-word !important;
+        white-space: normal !important;
+    }
+
+    .reference-item__links {
+        position: static !important;
+        margin-top: 8px !important;
+        padding-left: 28px !important;
+    }
+
+    /* 7. Component Sidebar & Card */
+    .access-card,
+    .issue-card,
+    .toc-card,
+    .access-card__title,
+    .access-card__divider,
+    .issue-card__content,
+    .issue-card__title,
+    .issue-card__name,
+    .toc-card__title,
+    .toc-list,
+    .toc-list__item {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        box-sizing: border-box !important;
+    }
+
+    .issue-card,
+    .access-card,
+    .toc-card {
+        padding: 16px !important;
+    }
+
+    .issue-card__content {
+        overflow: hidden !important;
+    }
+
+    .issue-card__title {
+        font-size: 20px !important;
+    }
+
+    .issue-card__title,
+    .issue-card__name,
+    .toc-card__title,
+    .toc-list__item {
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+        white-space: normal !important;
+        min-width: 0 !important;
+        overflow: hidden !important;
+    }
+
+    .issue-card__info {
+        width: 100% !important;
+        min-width: 0 !important;
+        flex: 1 !important;
+    }
+
+    .issue-card__name {
+        font-size: 16px !important;
+        line-height: 1.4 !important;
+    }
+
+    /* Thành phần trích dẫn */
+    .citation-container,
+    .citation-tabs,
+    .citation-box,
+    .citation-box__text {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+    }
+
+    .citation-box__text {
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+        white-space: normal !important;
+        hyphens: auto !important;
+    }
+
+    .citation-tabs__tab {
+        width: 33% !important;
+        flex-grow: 1 !important;
+    }
+
+    .btn--primary,
+    .btn--secondary,
+    .btn--tertiary {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Thông tin xuất bản */
+    .publication-info {
+        width: 100% !important;
+        flex-wrap: wrap !important;
+        height: auto !important;
+        gap: 8px !important;
+    }
+
+    * {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    .post-card,
+    .article__container {
+        margin: 0 auto !important;
+    }
+}

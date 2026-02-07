@@ -1,0 +1,1457 @@
+/* ========================================
+   Detail Page Body Styles - Figma Synchronized
+   All component styles matching Figma auto-layout
+   ======================================== */
+
+/* ========================================
+   Smooth Scroll Behavior
+   ======================================== */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ========================================
+   Main Content Container
+   ======================================== */
+.article {
+    width: 100%;
+    min-height: 100vh;
+    background: #FAFAFA;
+}
+
+.article__container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0;
+    background: #fafafa;
+}
+
+.article__content {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0;
+    gap: 48px;
+    width: 100%;
+    max-width: 1440px;
+    height: auto;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.article__left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 0;
+    width: 925px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.article__sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px 80px 48px 0px;
+    gap: 24px;
+    width: 467px;
+    height: 1144px;
+    flex: none;
+    order: 1;
+    flex-grow: 1;
+    position: relative;
+}
+
+/* ========================================
+   Article Header
+   ======================================== */
+.article__header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px 0 24px 80px;
+    gap: 24px;
+    width: 925px;
+    height: 320px;
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+    position: relative;
+}
+
+.article__title {
+    width: 845px;
+    height: 90px;
+    font-family: var(--font-merriweather);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 140%;
+    letter-spacing: 0.5px;
+    /* Adjust spacing to match Figma rendering width - Force wider text */
+    display: flex;
+    align-items: center;
+    color: #111827;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+/* ========================================
+   Author List & Cards
+   ======================================== */
+.author-list {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0;
+    gap: 12px;
+    width: 845px;
+    height: 80px;
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    position: relative;
+    scroll-behavior: smooth;
+    /* Hide scrollbar */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+}
+
+.author-list::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Opera */
+}
+
+.author-card {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0;
+    gap: 4px;
+    width: 220px;
+    height: 80px;
+    flex: none;
+    flex-grow: 0;
+}
+
+.author-card__avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 200px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    object-fit: cover;
+}
+
+.author-card__avatar--initial {
+    width: 48px;
+    height: 48px;
+    background: #E6F2FF;
+    border-radius: 200px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.author-card__avatar--initial::after {
+    content: attr(data-initial);
+    position: absolute;
+    width: 48px;
+    height: 28px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-inter);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 28px;
+    text-align: center;
+    color: #007FFF;
+}
+
+.author-card__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 0;
+    gap: 0px;
+    width: 168px;
+    height: 80px;
+    flex: none;
+    order: 1;
+    flex-grow: 1;
+}
+
+.author-card__name {
+    font-family: var(--font-roboto);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    color: #212636;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    position: relative;
+}
+
+/* Star icon for lead author (first author card) */
+.author-list .author-card:first-child .author-card__name::before {
+    content: '★';
+    /* Star Unicode */
+    color: #FFB800;
+    font-size: 16px;
+    margin-right: 6px;
+    display: inline-block;
+}
+
+.author-card__institution {
+    font-family: var(--font-roboto);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 140%;
+    display: flex;
+    align-items: flex-start;
+    color: #667085;
+    flex: none;
+    order: 0;
+    flex-grow: 1;
+    align-self: stretch;
+}
+
+.author-card__role {
+    display: none;
+}
+
+/* ========================================
+   Author List Scroll Button
+   ======================================== */
+.author-list__scroll-btn {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    position: absolute;
+    width: 38px;
+    height: 38px;
+    left: 906px;
+    top: 136px;
+    background: #FDFDFD;
+    border: 1px solid rgba(30, 136, 229, 0.5);
+    box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
+    border-radius: 44px;
+    cursor: pointer;
+    transition: all 0.2s;
+    z-index: 10;
+}
+
+.author-list__scroll-btn:hover {
+    background: #f5f9ff;
+    border-color: rgba(30, 136, 229, 0.8);
+}
+
+.author-list__scroll-btn-base {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    /* Remove padding that shrinks the icon if box-sizing is border-box */
+    padding: 0;
+    width: 38px;
+    height: 38px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    position: relative;
+    /* Context for absolute icon */
+}
+
+.author-list__scroll-icon {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+}
+
+.author-list__scroll-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    transform: scale(1.4);
+    /* Visually increase size to match design feel */
+}
+
+/* ========================================
+   Publication Info
+   ======================================== */
+.publication-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    gap: 16px;
+    width: 484px;
+    height: 22px;
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+}
+
+.publication-info__date {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    gap: 4px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.publication-info__label {
+    font-family: var(--font-roboto);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    color: #667085;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.publication-info__value {
+    font-family: var(--font-roboto);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    color: #212636;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.publication-info__separator {
+    width: 1px;
+    height: 16px;
+    background: #212636;
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+}
+
+
+.publication-info__doi {
+    font-family: var(--font-roboto);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    color: #007FFF;
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+    text-decoration: none;
+}
+
+.publication-info__doi:hover {
+    text-decoration: underline;
+}
+
+/* ========================================
+   Statistics Row
+   ======================================== */
+.stats {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0;
+    gap: 16px;
+    width: 845px;
+    height: 20px;
+    flex: none;
+    order: 3;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.stats__item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    gap: 6px;
+    flex: none;
+    flex-grow: 0;
+}
+
+.stats__icon {
+    width: 20px;
+    height: 20px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.stats__text {
+    font-family: var(--font-roboto);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    color: #111827;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+/* ========================================
+   Article Body & Action Sidebar
+   ======================================== */
+
+/* Content (Figma Frame: Content) */
+/* Khung chứa nội dung chính và sidebar hành động */
+.article__body {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 24px 0 48px 80px;
+    gap: 24px;
+    width: 925px;
+    min-height: 1942px;
+    /* User strict request: 925x1942 */
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+/* List (Figma Frame: List) */
+/* Thanh sidebar chứa các hành động (Like, Share, etc.) */
+.action-sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    gap: 14px;
+    width: 40px;
+    height: 338px;
+    filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.08));
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    /* Sticky positioning */
+    position: sticky;
+    top: 90px;
+    align-self: flex-start;
+}
+
+/* Icon (Figma Frame: Icon) */
+/* Nút hành động trong sidebar */
+.action-sidebar__btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+    width: 40px;
+    height: 40px;
+    background: #FFFFFF;
+    border-radius: 100px;
+    flex: none;
+    align-self: stretch;
+    flex-grow: 0;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.action-sidebar__btn:hover {
+    background-color: #f5f5f5;
+}
+
+.action-sidebar__icon {
+    width: 20px;
+    height: 20px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.action-sidebar__divider {
+    width: 40px;
+    height: 0;
+    border-top: 1px solid #DCDFE4;
+    flex: none;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+/* ========================================
+   Main Content Sections
+   ======================================== */
+
+/* Main Content (Figma Frame: Main Content) */
+/* Khu vực hiển thị nội dung bài viết (Tóm tắt, Kết quả...) */
+.content-main {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    gap: 24px;
+    width: 781px;
+    /* 1870px height in Figma, keeping auto for dynamic content */
+    flex: none;
+    order: 1;
+    flex-grow: 1;
+}
+
+/* Content (Figma Frame: Content) */
+/* Section thường (không highlight) */
+.content-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    gap: 16px;
+    width: 781px;
+    flex: none;
+    align-self: stretch;
+    flex-grow: 0;
+    scroll-margin-top: 90px;
+    /* Account for sticky header */
+}
+
+/* Content Highlight (Figma Frame: Content - with blue bg) */
+/* Section được highlight (màu nền xanh nhạt) */
+.content-section--highlight {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px;
+    gap: 16px;
+    width: 781px;
+    background: #F3F9FF;
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+/* Quantum Error Correc (Title) */
+/* Tiêu đề của section highlight - chỉnh width 733px để tránh tràn (781 - 48 padding) */
+.content-section--highlight .content-section__title {
+    width: 733px;
+    height: 28px;
+    font-family: var(--font-merriweather);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    color: #111827;
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+/* This paper introduce (Body Text) */
+/* Nội dung text của section highlight - chỉnh width 733px */
+.content-section--highlight .content-section__text {
+    width: 733px;
+    height: 176px;
+    font-family: var(--font-roboto);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    color: #212636;
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+    overflow: visible;
+}
+
+/* Normal Section Title */
+/* Tiêu đề section thường */
+.content-section__title {
+    width: 781px;
+    height: 28px;
+    font-family: var(--font-merriweather);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    color: #111827;
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+/* Normal Section Text */
+/* Nội dung text section thường */
+.content-section__text {
+    width: 781px;
+    height: 176px;
+    font-family: var(--font-roboto);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    color: #212636;
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+    overflow: visible;
+}
+
+/* ========================================
+   Reference List
+   ======================================== */
+
+/* Reference List Container */
+/* Danh sách tài liệu tham khảo */
+.reference-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* ref (Figma Frame: ref) */
+/* Một mục tài liệu tham khảo */
+.reference-item {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0;
+    gap: 4px;
+    isolation: isolate;
+    width: 629px;
+    position: relative;
+    flex: none;
+    flex-grow: 0;
+}
+
+/* Reference Number */
+/* Số thứ tự (1., 2., ...) */
+.reference-item__number {
+    width: 24px;
+    height: 22px;
+    font-family: var(--font-roboto);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    color: #212636;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    z-index: 0;
+}
+
+/* Reference Text */
+/* Nội dung trích dẫn */
+.reference-item__text {
+    width: 601px;
+    height: 66px;
+    font-family: var(--font-roboto);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    color: #212636;
+    flex: none;
+    order: 1;
+    flex-grow: 1;
+    z-index: 1;
+    letter-spacing: 0.005em;
+    word-break: break-all;
+}
+
+/* link (Figma Frame: link) */
+/* Các icon liên kết (PDF, Link) */
+.reference-item__links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    gap: 10px;
+    position: absolute;
+    width: 50px;
+    height: 20px;
+    left: 188px;
+    top: 46px;
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+    z-index: 2;
+    margin: 0;
+    vertical-align: baseline;
+}
+
+.reference-item__link-icon {
+    width: 20px;
+    height: 20px;
+    flex: none;
+    flex-grow: 0;
+}
+
+/* ========================================
+   Button Components
+   ======================================== */
+.btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    gap: 8px;
+    border-radius: 44px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex: none;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.btn--primary {
+    width: 339px;
+    height: 38px;
+    background: #007FFF;
+    order: 1;
+    font-family: var(--font-inter);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 140%;
+    color: #FDFDFD;
+}
+
+.btn--primary:hover {
+    background-color: #0066d9;
+}
+
+.btn--secondary {
+    box-sizing: border-box;
+    width: 339px;
+    height: 38px;
+    background: #FDFDFD;
+    border: 1px solid rgba(30, 136, 229, 0.5);
+    order: 2;
+    font-family: var(--font-inter);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 140%;
+    color: #007FFF;
+}
+
+.btn--secondary:hover {
+    background-color: #f5f9ff;
+}
+
+.btn--tertiary {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    width: 228px;
+    height: 32px;
+    justify-content: center;
+    align-items: center;
+    background: #FDFDFD;
+    border: 1px solid rgba(67, 74, 96, 0.5);
+    border-radius: 44px;
+    order: 1;
+    align-self: center;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 140%;
+    color: #434A60;
+    padding: 6px 16px;
+    white-space: nowrap;
+}
+
+.btn--tertiary:hover {
+    background-color: #f5f5f5;
+}
+
+.btn__icon {
+    width: 24px;
+    height: 24px;
+    flex: none;
+    flex-grow: 0;
+}
+
+.btn__chevron {
+    width: 20px;
+    height: 20px;
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+}
+
+/* ========================================
+   Access Card
+   ======================================== */
+.access-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px;
+    gap: 16px;
+    width: 387px;
+    height: 456px;
+    background: #FFFFFF;
+    border-radius: 12px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.access-card__title {
+    width: 165px;
+    height: 28px;
+    font-family: var(--font-merriweather);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    color: #212636;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.access-card__divider {
+    width: 339px;
+    height: 0;
+    border: 1px solid #DCDFE4;
+    flex: none;
+    order: 3;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+/* ========================================
+   Citation Section Container
+   ======================================== */
+.citation-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    gap: 0;
+    width: 339px;
+    flex: none;
+    order: 4;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+/* ========================================
+   Citation Tabs
+   ======================================== */
+.citation-tabs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0;
+    gap: 0;
+    width: 339px;
+    height: 52px;
+    flex: none;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.citation-tabs__tab {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 0px;
+    gap: 4px;
+    width: 113px;
+    height: 52px;
+    box-sizing: border-box;
+    flex: none;
+    flex-grow: 1;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 140%;
+    text-align: center;
+    color: #212636;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.citation-tabs__tab:hover {
+    color: var(--color-primary);
+}
+
+.citation-tabs__tab--active {
+    border-bottom: 2px solid #007FFF;
+    color: #007FFF;
+}
+
+.citation-tabs__icon {
+    width: 20px;
+    height: 20px;
+    flex: none;
+    flex-grow: 0;
+}
+
+
+
+/* ========================================
+   Citation Box
+   ======================================== */
+.citation-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+    gap: 12px;
+    width: 339px;
+    height: 188px;
+    background: #F3F9FF;
+    border-radius: 12px;
+    flex: none;
+    flex-grow: 0;
+}
+
+.citation-box__text {
+    width: 315px;
+    height: 120px;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    color: #212636;
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+    margin: 0;
+}
+
+/* ========================================
+   Issue Card
+   ======================================== */
+.issue-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px;
+    gap: 16px;
+    width: 387px;
+    height: 248px;
+    background: #FFFFFF;
+    border-radius: 12px;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.issue-card__title {
+    width: 159px;
+    height: 34px;
+    font-family: var(--font-merriweather);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    color: #212636;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.issue-card__content {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0;
+    gap: 16px;
+    width: 339px;
+    height: 150px;
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.issue-card__cover {
+    width: 107px;
+    height: 150px;
+    box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    object-fit: cover;
+}
+
+.issue-card__info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    gap: 4px;
+    width: 216px;
+    height: 80px;
+    flex: none;
+    order: 1;
+    flex-grow: 1;
+}
+
+.issue-card__name {
+    width: 216px;
+    font-family: var(--font-merriweather);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    color: #111827;
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.issue-card__meta {
+    font-family: var(--font-roboto);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    color: #667085;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+/* ========================================
+   Table of Contents
+   ======================================== */
+.toc-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px;
+    gap: 16px;
+    width: 387px;
+    height: 332px;
+    background: #FFFFFF;
+    border-radius: 12px;
+    flex: none;
+    order: 2;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.toc-card__title {
+    width: 114px;
+    height: 34px;
+    font-family: var(--font-merriweather);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    color: #212636;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.toc-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    gap: 4px;
+    width: 339px;
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+    list-style: none;
+}
+
+.toc-list__item {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 4px 8px;
+    gap: 4px;
+    width: 339px;
+    height: 30px;
+    border-left: 2px solid #DCDFE4;
+    flex: none;
+    align-self: stretch;
+    flex-grow: 0;
+    font-family: var(--font-roboto);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    color: #667085;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.toc-list__link {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+}
+
+.toc-list__item:hover {
+    color: var(--color-primary);
+    border-left-color: var(--color-primary);
+}
+
+.toc-list__item--active {
+    border-left: 2px solid #007FFF;
+    font-family: var(--font-merriweather);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 140%;
+    color: #0074E8;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN (<= 1439px)
+   ======================================== */
+/* ========================================
+   RESPONSIVE DESIGN (<= 1439px)
+   ======================================== */
+/* ========================================
+   RESPONSIVE DESIGN (<= 1439px)
+   ======================================== */
+@media (max-width: 1439px) {
+
+    /* Global Reset within scope */
+    * {
+        box-sizing: border-box;
+    }
+
+    /* 1. Main Container & Layout */
+    .article__container {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        overflow-x: hidden;
+        /* Prevent horizontal scroll */
+    }
+
+    .article__content {
+        width: 100% !important;
+        height: auto !important;
+        flex-direction: column !important;
+        /* Stack Content and Sidebar */
+        padding: 0 16px !important;
+        /* Reduced padding for mobile */
+        gap: 24px !important;
+        align-items: center !important;
+        /* Center content */
+    }
+
+    /* 2. Left Content Column */
+    .article__left {
+        width: 100% !important;
+        max-width: 100% !important;
+        align-items: center !important;
+        padding: 0 !important;
+        order: 2 !important;
+    }
+
+    .article__header {
+        width: 100% !important;
+        height: auto !important;
+        padding: 24px 0 !important;
+        align-items: center !important;
+    }
+
+    .article__title {
+        width: 100% !important;
+        height: auto !important;
+        font-size: 24px !important;
+        text-align: center !important;
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+        hyphens: auto !important;
+    }
+
+    .author-list {
+        width: 100% !important;
+        justify-content: center !important;
+    }
+
+    .author-list__scroll-btn {
+        display: none !important;
+    }
+
+    .stats {
+        width: 100% !important;
+        height: auto !important;
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+    }
+
+    .article__body {
+        width: 100% !important;
+        min-height: auto !important;
+        height: auto !important;
+        padding: 0 !important;
+        gap: 16px !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    /* 3. Sidebar */
+    .article__sidebar {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        padding: 24px 0 !important;
+        position: static !important;
+        order: 1 !important;
+        align-items: center !important;
+    }
+
+    /* 4. Action Sidebar (Floating) */
+    .action-sidebar {
+        display: none !important;
+    }
+
+    /* 5a. Main Content Inner Components */
+    .content-main,
+    .content-section,
+    .content-section--highlight,
+    .content-section__title,
+    .content-section--highlight .content-section__title,
+    .content-section__text,
+    .content-section--highlight .content-section__text {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 16px !important;
+        box-sizing: border-box !important;
+        height: auto !important;
+    }
+
+    .content-section__title,
+    .content-section--highlight .content-section__title,
+    .content-section__text,
+    .content-section--highlight .content-section__text {
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+        white-space: normal !important;
+    }
+
+    .content-section--highlight {
+        background: #F3F9FF;
+    }
+
+    /* 6. References */
+    .reference-list {
+        width: 100% !important;
+    }
+
+    .reference-item {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .reference-item__text {
+        width: 100% !important;
+        height: auto !important;
+        word-break: break-word !important;
+        /* Ensure long text wraps */
+        white-space: normal !important;
+    }
+
+    .reference-item__links {
+        position: static !important;
+        margin-top: 8px !important;
+        padding-left: 28px !important;
+    }
+
+    /* 7. Sidebar Components & Cards Overrides */
+    .access-card,
+    .issue-card,
+    .toc-card,
+    .access-card__title,
+    .access-card__divider,
+    .issue-card__content,
+    .issue-card__title,
+    .issue-card__name,
+    .toc-card__title,
+    .toc-list,
+    .toc-list__item {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        box-sizing: border-box !important;
+    }
+
+    .issue-card,
+    .access-card,
+    .toc-card {
+        padding: 16px !important;
+    }
+
+    .issue-card__content {
+        overflow: hidden !important;
+    }
+
+    .issue-card__title {
+        font-size: 20px !important;
+    }
+
+    .issue-card__title,
+    .issue-card__name,
+    .toc-card__title,
+    .toc-list__item {
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+        white-space: normal !important;
+        min-width: 0 !important;
+        overflow: hidden !important;
+    }
+
+    .issue-card__info {
+        width: 100% !important;
+        min-width: 0 !important;
+        flex: 1 !important;
+    }
+
+    .issue-card__name {
+        font-size: 16px !important;
+        line-height: 1.4 !important;
+    }
+
+    /* Citation Components */
+    .citation-container,
+    .citation-tabs,
+    .citation-box,
+    .citation-box__text {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+    }
+
+    .citation-box__text {
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+        white-space: normal !important;
+        hyphens: auto !important;
+    }
+
+    .citation-tabs__tab {
+        width: 33% !important;
+        flex-grow: 1 !important;
+    }
+
+    .btn--primary,
+    .btn--secondary,
+    .btn--tertiary {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Publication Info */
+    .publication-info {
+        width: 100% !important;
+        flex-wrap: wrap !important;
+        height: auto !important;
+        gap: 8px !important;
+    }
+
+    /* Ensure no negative margins or shifts */
+    * {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    /* Restore specific margins where needed (like auto centering) */
+    .post-card,
+    .article__container {
+        margin: 0 auto !important;
+    }
+}

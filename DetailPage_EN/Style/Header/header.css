@@ -1,0 +1,387 @@
+/* ==========================================================================
+   Site Header - English Version (1440px Figma Dimensions)
+   ========================================================================== */
+
+.site-header {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 80px;
+    gap: 78px;
+    width: 100%;
+    max-width: 1440px;
+    height: 68px;
+    /* Figma: 68px */
+    margin: 0 auto;
+    background: #FFFFFF;
+    border-bottom: 1px solid #DCDFE4;
+    position: sticky;
+    top: 0;
+    z-index: 1100;
+    /* Extend background to full viewport width */
+    box-shadow: 0 0 0 100vw #FFFFFF, 0 1px 2px rgba(0, 0, 0, 0.05);
+    clip-path: inset(0 -100vw);
+}
+
+/* Phần Logo */
+.site-header__logo {
+    display: flex;
+    align-items: center;
+    width: 385px;
+    /* Figma: 385px */
+    height: 44px;
+    /* Figma: 44px */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.site-header__logo-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Menu chính */
+.site-header__nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 20px;
+    /* Figma: 20px */
+    margin: 0 auto;
+    width: 601px;
+    /* Figma: 601px */
+    height: 36px;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.main-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+}
+
+.main-nav__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    height: 36px;
+    border-radius: 100px;
+    flex: none;
+    flex-grow: 0;
+}
+
+/* Chiều rộng từng mục từ Figma */
+.main-nav__item:nth-child(1) {
+    width: 58px;
+    order: 0;
+}
+
+/* Home */
+.main-nav__item:nth-child(2) {
+    width: 101px;
+    order: 1;
+}
+
+/* Aim & Scope */
+.main-nav__item:nth-child(3) {
+    width: 109px;
+    order: 2;
+}
+
+/* Ban biên tập */
+.main-nav__item:nth-child(4) {
+    width: 69px;
+    order: 3;
+}
+
+/* Các bài viết */
+.main-nav__item:nth-child(5) {
+    width: 94px;
+    order: 4;
+}
+
+/* Dành cho tác giả */
+.main-nav__item:nth-child(6) {
+    width: 70px;
+    order: 5;
+}
+
+/* Liên hệ */
+
+.main-nav__link {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 10px;
+    gap: 4px;
+    width: 100%;
+    height: 28px;
+    border-radius: 8px;
+    text-decoration: none;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 140%;
+    color: #212636;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+}
+
+.main-nav__link:hover {
+    background-color: #F3F4F6;
+}
+
+/* Phần thao tác user */
+.site-header__actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 12px;
+    width: 138px;
+    /* Figma: 138px */
+    height: 37px;
+    margin: 0 auto;
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+}
+
+/* Nút đăng nhập */
+.login-btn {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    width: 88px;
+    /* Figma: 88px */
+    height: 37px;
+    /* Figma: 37px */
+    background: #FDFDFD;
+    border: 1px solid rgba(30, 136, 229, 0.5);
+    border-radius: 44px;
+    text-decoration: none;
+
+    /* Typography từ Figma Base */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 140%;
+    color: #007FFF;
+    transition: all 0.2s ease;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.login-btn:hover {
+    background: #F5F9FF;
+    border-color: #1E88E5;
+}
+
+/* Chọn ngôn ngữ */
+.language-selector {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0px;
+    gap: 4px;
+    width: 38px;
+    /* Figma: 38px */
+    height: 20px;
+    cursor: pointer;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.language-selector__text {
+    width: 18px;
+    height: 20px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 140%;
+    color: #667085;
+}
+
+.language-selector__icon {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.language-selector__icon svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* Ghi đè responsive (Chiều rộng linh hoạt dưới 1440px) */
+@media (max-width: 1439px) {
+    .site-header {
+        width: 100% !important;
+        height: auto !important;
+        min-height: 84px !important;
+        /* Tăng chiều cao cho chế độ 2 dòng */
+        padding: 16px 15px !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        gap: 16px 0 !important;
+    }
+
+    .site-header__logo {
+        width: auto !important;
+        max-width: calc(100% - 180px) !important;
+        /* Giới hạn chiều rộng logo để dành chỗ cho nút */
+        height: auto !important;
+        order: 0 !important;
+        margin: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    .site-header__logo-img {
+        max-height: 28px !important;
+        /* Logo nhỏ hơn cho tất cả responsive */
+        width: auto !important;
+        max-width: 100% !important;
+        object-fit: contain !important;
+    }
+
+    .site-header__actions {
+        width: auto !important;
+        max-width: 50% !important;
+        order: 1 !important;
+        margin: 0 !important;
+        flex-shrink: 0 !important;
+        justify-content: flex-end !important;
+        gap: 8px !important;
+    }
+
+    .login-btn {
+        width: auto !important;
+        min-width: 65px !important;
+        height: 32px !important;
+        padding: 0 10px !important;
+        font-size: 12px !important;
+    }
+
+    .language-selector {
+        width: auto !important;
+        gap: 4px !important;
+    }
+
+    .language-selector__text {
+        font-size: 13px !important;
+    }
+
+    .site-header__nav {
+        order: 2 !important;
+        width: 100% !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding-top: 12px !important;
+        border-top: 1px solid #F3F4F6 !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: thin !important;
+        scrollbar-color: #DCDFE4 #F1F3F4 !important;
+    }
+
+    .site-header__nav::-webkit-scrollbar {
+        height: 4px !important;
+    }
+
+    .site-header__nav::-webkit-scrollbar-track {
+        background: #F1F3F4 !important;
+        border-radius: 8px !important;
+    }
+
+    .site-header__nav::-webkit-scrollbar-thumb {
+        background: #DCDFE4 !important;
+        border-radius: 8px !important;
+    }
+
+    .site-header__nav::-webkit-scrollbar-thumb:hover {
+        background: #C1C7CD !important;
+    }
+
+    .main-nav {
+        flex-wrap: nowrap !important;
+        justify-content: flex-start !important;
+        height: auto !important;
+        gap: 8px 12px !important;
+    }
+
+    .main-nav__item {
+        width: auto !important;
+        height: auto !important;
+        flex-shrink: 0 !important;
+    }
+
+    .main-nav__link {
+        padding: 4px 8px !important;
+        font-size: 12px !important;
+        white-space: nowrap !important;
+    }
+}
+
+/* Điều chỉnh cụ thể cho màn hình rất hẹp (ví dụ 320px) */
+@media (max-width: 375px) {
+    .site-header {
+        padding: 12px 10px !important;
+        min-height: 80px !important;
+    }
+
+    .site-header__logo {
+        max-width: 45% !important;
+    }
+
+    .site-header__logo-img {
+        max-height: 20px !important;
+        /* Logo rất nhỏ để tránh chồng lấp trên 320px */
+    }
+
+    .site-header__actions {
+        gap: 4px !important;
+    }
+
+    .login-btn {
+        min-width: 58px !important;
+        height: 28px !important;
+        font-size: 11px !important;
+        padding: 0 6px !important;
+    }
+
+    .language-selector__text {
+        font-size: 11px !important;
+    }
+}

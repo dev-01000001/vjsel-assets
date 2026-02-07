@@ -1,0 +1,436 @@
+:root {
+    --category-bg-digestive: #ECFDF3;
+    --category-text-digestive: #039855;
+
+    --category-bg-hepatobiliary: #FFFAEB;
+    --category-text-hepatobiliary: #DC6803;
+
+    --category-bg-cardiovascular: #E6F2FF;
+    --category-text-cardiovascular: #0074E8;
+
+    --category-bg-orthopedic: #F1F1F4;
+    --category-text-orthopedic: #212636;
+
+    --category-bg-plastic: #FEE4E2;
+    --category-text-plastic: #BB241A;
+
+    --category-bg-spine: #CFF8FE;
+    --category-text-spine: #0E6F90;
+
+    --category-bg-neurosurgery: #ECDDFF;
+    --category-text-neurosurgery: #98007C;
+
+    --category-bg-urology: #E8FFDD;
+    --category-text-urology: #237000;
+
+    --category-bg-anesthesia: #FDDDFF;
+    --category-text-anesthesia: #800088;
+
+    --category-bg-nursing: #FDFFDD;
+    --category-text-nursing: #A2AE00;
+
+    --category-bg-other: #D0D0D0;
+    --category-text-other: #212636;
+
+    --category-spacing-container-x: 80px;
+    --category-spacing-container-y: 24px;
+    --category-spacing-gap: 12px;
+    --category-spacing-tag-x: 16px;
+    --category-spacing-tag-y: 12px;
+
+    --category-tag-radius: 100px;
+    --category-button-size: 38px;
+    --category-button-radius: 44px;
+    --category-icon-size: 24px;
+    --category-container-width: 1360px;
+    --category-container-height: 94px;
+    --category-scroll-width: 1280px;
+    --category-scroll-height: 46px;
+}
+
+/* Block BEM: category-nav */
+.category-nav {
+    width: 100%;
+    background-color: #fafafa;
+    position: relative;
+}
+
+.category-nav__container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px 80px;
+    gap: 24px;
+    width: var(--category-container-width);
+    height: var(--category-container-height);
+    position: relative;
+    box-sizing: border-box;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.category-nav__scroll {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 4px 0;
+    gap: 12px;
+    isolation: isolate;
+    width: var(--category-scroll-width);
+    min-height: 54px;
+    overflow-x: scroll;
+    overflow-y: visible;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+    box-sizing: border-box;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.category-nav__scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.category-nav__list {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    gap: 12px;
+    list-style: none;
+    margin: 0;
+    min-height: 46px;
+    min-width: min-content;
+}
+
+/* Element BEM: item */
+.category-nav__item {
+    flex: none;
+    flex-shrink: 0;
+    min-height: 46px;
+}
+
+.category-nav__tag {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 16px;
+    gap: 10px;
+    height: 46px;
+    background: #FFFFFF;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    text-align: center;
+    white-space: nowrap;
+    box-sizing: border-box;
+    flex: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Trạng thái tag */
+.category-nav__tag:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.16);
+}
+
+.category-nav__tag:active {
+    transform: translateY(0);
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.12);
+}
+
+.category-nav__tag:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+}
+
+.category-nav__tag-text {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    height: 22px;
+    flex: none;
+}
+
+/* Category 1: Phẫu thuật tiêu hóa - Figma: width: 171px, text-width: 139px */
+.category-nav__item:nth-child(1) .category-nav__tag {
+    width: 171px;
+    background: var(--category-bg-digestive);
+    color: var(--category-text-digestive);
+}
+
+/* Category 2: Phẫu thuật gan mật - Figma: width: 172px, text-width: 140px */
+.category-nav__item:nth-child(2) .category-nav__tag {
+    width: 172px;
+    background: var(--category-bg-hepatobiliary);
+    color: var(--category-text-hepatobiliary);
+}
+
+/* Category 3: Phẫu thuật tim mạch - Figma: width: 181px, text-width: 149px */
+.category-nav__item:nth-child(3) .category-nav__tag {
+    width: 181px;
+    background: var(--category-bg-cardiovascular);
+    color: var(--category-text-cardiovascular);
+}
+
+/* Category 4: Phẫu thuật chấn thương chỉnh hình - Figma: width: 281px, text-width: 249px */
+.category-nav__item:nth-child(4) .category-nav__tag {
+    width: 281px;
+    background: var(--category-bg-orthopedic);
+    color: var(--category-text-orthopedic);
+}
+
+/* Category 5: Phẫu thuật tạo hình - Figma: width: 171px, text-width: 139px */
+.category-nav__item:nth-child(5) .category-nav__tag {
+    width: 171px;
+    background: var(--category-bg-plastic);
+    color: var(--category-text-plastic);
+}
+
+/* Category 6: Phẫu thuật cột sống - Figma: width: 176px, text-width: 144px */
+.category-nav__item:nth-child(6) .category-nav__tag {
+    width: 176px;
+    background: var(--category-bg-spine);
+    color: var(--category-text-spine);
+}
+
+/* Category 7: Phẫu thuật thần kinh - Figma: width: 179px, text-width: 147px */
+.category-nav__item:nth-child(7) .category-nav__tag {
+    width: 179px;
+    background: var(--category-bg-neurosurgery);
+    color: var(--category-text-neurosurgery);
+}
+
+/* Category 8: Phẫu thuật tiết niệu - Figma: width: 171px, text-width: 139px */
+.category-nav__item:nth-child(8) .category-nav__tag {
+    width: 171px;
+    background: var(--category-bg-urology);
+    color: var(--category-text-urology);
+}
+
+/* Category 9: Gây mê hồi sức - Figma: width: 142px, text-width: 110px */
+.category-nav__item:nth-child(9) .category-nav__tag {
+    width: 142px;
+    background: var(--category-bg-anesthesia);
+    color: var(--category-text-anesthesia);
+}
+
+/* Category 10: Điều dưỡng ngoại khoa - Figma: width: 197px, text-width: 165px */
+.category-nav__item:nth-child(10) .category-nav__tag {
+    width: 197px;
+    background: var(--category-bg-nursing);
+    color: var(--category-text-nursing);
+}
+
+/* Category 11: Khác - Figma: width: 68px, text-width: 36px */
+.category-nav__item:nth-child(11) .category-nav__tag {
+    width: 68px;
+    background: var(--category-bg-other);
+    color: var(--category-text-other);
+}
+
+.category-nav__button {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    position: absolute;
+    top: 32px;
+    width: 38px;
+    height: 38px;
+    background: #FDFDFD;
+    border: 1px solid rgba(30, 136, 229, 0.5);
+    box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
+    border-radius: 44px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    z-index: 11;
+    flex: none;
+    order: 11;
+    flex-grow: 0;
+}
+
+.category-nav__button--next {
+    right: 0;
+}
+
+.category-nav__button--prev {
+    left: 80px;
+}
+
+.category-nav__button:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.category-nav__button:active {
+    transform: scale(0.95);
+}
+
+.category-nav__button:focus-visible {
+    outline: 2px solid #1E88E5;
+    outline-offset: 2px;
+}
+
+.category-nav__button-icon {
+    /* position: absolute; */
+    width: 24px;
+    height: 24px;
+    /* left: calc(50% - 12px + 3px);
+    top: calc(50% - 12px); */
+}
+
+.category-nav__button-icon path {
+    fill: #1E88E5;
+}
+
+/* RESPONSIVE BREAKPOINTS */
+
+@media (min-width: 1440px) {
+    /* Rules for 1440px and above are handled by base styles or specific overrides if needed */
+}
+
+/* STRICT RULE: 1439px and below = WRAPPING LAYOUT (No Scroll) */
+@media (max-width: 1439px) {
+    :root {
+        /* Override clamp variables with fixed responsive values */
+        --category-spacing-container-x: 20px;
+        --category-spacing-container-y: 16px;
+        --category-spacing-gap: 12px;
+        --category-container-width: 100%;
+        --category-container-height: auto;
+        --category-scroll-width: 100%;
+    }
+
+    /* Ensure box-sizing prevents padding overload */
+    .category-nav,
+    .category-nav * {
+        box-sizing: border-box;
+    }
+
+    .category-nav__container {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        padding: 24px 32px;
+        /* Consistent padding */
+        margin: 0;
+        align-items: center;
+        /* Center align container content */
+    }
+
+    /* Disable Horizontal Scroll, Enable Wrap */
+    .category-nav__scroll {
+        width: 100%;
+        height: auto;
+        overflow: visible;
+        /* No scroll */
+        flex-wrap: wrap;
+        /* Allow wrapping */
+        justify-content: center;
+        /* Center items */
+        padding-bottom: 0;
+    }
+
+    .category-nav__list {
+        width: 100%;
+        flex-wrap: wrap;
+        /* Allow wrapping */
+        justify-content: center;
+        /* Center items */
+        height: auto;
+        gap: 12px;
+        /* Spacing between rows */
+        padding-right: 0;
+        min-width: 0;
+    }
+
+    .category-nav__item {
+        flex: none;
+        height: auto;
+    }
+
+    .category-nav__tag {
+        width: auto !important;
+        /* Override fixed widths */
+        height: 40px;
+        /* Responsive height */
+        padding: 8px 16px;
+        font-size: 15px;
+    }
+
+    /* Hide Navigation Buttons */
+    .category-nav__button {
+        display: none !important;
+    }
+}
+
+/* Mobile (≤ 767px) */
+@media (max-width: 767px) {
+    :root {
+        --category-spacing-container-x: 16px;
+        --category-spacing-container-y: 16px;
+        --category-spacing-gap: 8px;
+    }
+
+    .category-nav__container {
+        padding: 16px 0;
+        /* Reduced padding for mobile */
+    }
+
+    .category-nav__list {
+        gap: 8px;
+    }
+
+    .category-nav__tag {
+        height: 38px;
+        padding: 8px 14px;
+        font-size: 14px;
+    }
+}
+
+/* 4k (> 1440px) */
+@media screen and (min-width: 1441px) {
+    .category-nav__container {
+        width: 1440px;
+        height: 94px;
+        margin: 0 auto;
+        padding: 24px 80px;
+        align-items: flex-start;
+    }
+
+    .category-nav__scroll {
+        width: 1280px;
+        height: 46px;
+    }
+
+    .category-nav__list {
+        gap: 12px;
+    }
+
+    .category-nav__button {
+        width: 38px;
+        height: 38px;
+    }
+
+    .category-nav__button--prev {
+        left: 80px;
+    }
+
+    .category-nav__button--next {
+        right: 80px;
+    }
+}

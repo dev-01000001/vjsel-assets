@@ -1,0 +1,288 @@
+/* ==========================================================================
+   CTA SECTION COMPONENT
+   Thành phần kêu gọi hành động (CTA) - 100% Khớp thiết kế Figma 1440px
+   Note: Đồng bộ hóa thông số chính xác từ Figma Specs
+   ========================================================================== */
+
+:root {
+    /* Màu sắc đặc thù (Exact Figma Colors) */
+    --cta-bg: #FFFFFF;
+    --cta-card-bg: linear-gradient(0deg, #E6F2FF, #E6F2FF), #FFFFFF;
+    --cta-heading-color: #212636;
+    --cta-text-color: #667085;
+    --cta-primary-btn-bg: #007FFF;
+    --cta-primary-btn-text: #FDFDFD;
+    --cta-secondary-btn-text: #434A60;
+}
+
+/* Container chính (Content)
+   1440px Fill x 441px Hug */
+.cta-section {
+    width: 1440px;
+    /* Restored fixed width */
+    min-height: 441px;
+    padding: 48px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    background: var(--cta-bg);
+    margin: 0 auto;
+    /* Centering for large screens */
+}
+
+.cta-section__container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex: none;
+    flex-grow: 0;
+}
+
+/* Thẻ card trung tâm (Scroll Card)
+   1062px x 345px */
+.cta-section__card {
+    width: 1062px;
+    /* Restored fixed width */
+    height: 345px;
+    /* Restored fixed height */
+    background: var(--cta-card-bg);
+    border-radius: 16px;
+    padding: 40px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+/* Khối nội dung văn bản (Text)
+   1014px x 125px */
+.cta-section__text {
+    width: 1014px;
+    /* Restored fixed width */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+}
+
+/* Tiêu đề (Ready To Submit?)
+   H2 - Merriweather Bold 48px */
+.cta-section__title {
+    width: 100%;
+    font-family: 'Merriweather', serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 140%;
+    /* 67px */
+    letter-spacing: -0.01em;
+    color: var(--cta-heading-color);
+    margin: 0;
+}
+
+/* Mô tả (Description)
+   Body1 - Roboto Regular 16px */
+.cta-section__description {
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    /* 22px */
+    color: var(--cta-text-color);
+    margin: 0;
+}
+
+.cta-section__description-line {
+    margin: 0;
+    padding: 0;
+}
+
+.cta-section__description-line:first-child {
+    margin-bottom: 2px;
+}
+
+/* Khối nút hành động (CTAs)
+   195px x 100px */
+.cta-section__actions {
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Nút cơ bản */
+.cta-section__button {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 140%;
+    border: none;
+    cursor: pointer;
+    border-radius: 100px;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.cta-section__button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.cta-section__button:active {
+    transform: translateY(0);
+}
+
+/* Nút dạng Contained (Primary)
+   180px x 48px */
+.cta-section__button--primary {
+    width: 100%;
+    height: 48px;
+    background: var(--cta-primary-btn-bg);
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 22px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s ease;
+    color: var(--cta-primary-btn-text);
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 140%;
+}
+
+.cta-section__button--primary:hover {
+    filter: brightness(0.9);
+}
+
+/* Nút dạng Text (Secondary)
+   195px x 48px */
+.cta-section__button--text {
+    width: 100%;
+    height: 48px;
+    background: transparent;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 11px 16px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--cta-secondary-btn-text);
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 140%;
+    text-decoration-line: underline;
+}
+
+.cta-section__button--text:hover {
+    opacity: 0.8;
+}
+
+/* RESPONSIVE Adjustments (Duy trì tính linh hoạt) */
+@media (max-width: 1439px) {
+    .cta-section {
+        width: 100%;
+        /* Override to responsive */
+        padding: 48px 24px;
+    }
+
+    .cta-section__card {
+        width: 100%;
+        /* Override to responsive */
+        height: auto;
+        /* Override to responsive */
+    }
+
+    .cta-section__text {
+        width: 100%;
+        /* Override to responsive */
+    }
+}
+
+@media (max-width: 1024px) {
+    .cta-section {
+        padding: 40px 24px;
+    }
+
+    .cta-section__card {
+        padding: 36px 20px;
+        gap: 32px;
+    }
+
+    .cta-section__title {
+        font-size: 40px;
+        line-height: normal;
+    }
+
+    .cta-section__description {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 767px) {
+    .cta-section {
+        padding: 32px 16px;
+        min-height: auto;
+    }
+
+    .cta-section__card {
+        height: auto;
+        padding: 32px 20px;
+        gap: 32px;
+    }
+
+    .cta-section__title {
+        font-size: 32px;
+    }
+
+    .cta-section__actions {
+        width: 100%;
+        height: auto;
+    }
+
+    .cta-section__button--primary,
+    .cta-section__button--text {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cta-section {
+        padding: 24px 12px;
+    }
+
+    .cta-section__card {
+        padding: 24px 12px;
+        gap: 20px;
+        border-radius: 12px;
+    }
+
+    .cta-section__title {
+        font-size: 24px;
+    }
+
+    .cta-section__button--primary,
+    .cta-section__button--text {
+        max-width: 100%;
+    }
+}

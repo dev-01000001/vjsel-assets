@@ -1,0 +1,23 @@
+/* ========================================
+   Trang chi tiết - File CSS chính
+   Import base reset và body styles
+   ======================================== */
+
+/* Header điều hướng */
+@import url('Style/Header/header.css');
+
+@import url('Style/Category/category-nav.css');
+
+/* Base reset và biến CSS - dùng chung cho tất cả trang */
+@import url('basereset.css');
+
+/* Styles riêng cho trang chi tiết */
+@import url('Style/Body/body.css');
+
+/* Phần từ khóa liên quan */
+@import url('Style/RelatedKeywords/relatedkeywords.css');
+
+/* Phần bài viết liên quan */
+@import url('Style/RelatedPosts/relateposts.css');
+
+@import url('Style/Footer/footer.css');

@@ -1,0 +1,1141 @@
+/* ========================================
+   PHẦN BÀI VIẾT LIÊN QUAN - THEO FIGMA
+   BEM: related-posts
+   Kích thước: 1440x1072px
+   ======================================== */
+
+/* ----------------------------------------
+   Block BEM: related-posts (Content)
+   Figma: width 1440px, height 1072px
+   ---------------------------------------- */
+.related-posts {
+    /* Layout tự động */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 48px 80px;
+    gap: 10px;
+
+    width: 100%;
+    max-width: 1440px;
+    /* Xóa chiều cao cố định để nội dung tự động, hoặc set 1072px nếu cần thiết */
+    min-height: 1072px;
+    height: auto;
+
+    /* Trong layout tự động */
+    flex: none;
+    order: 4;
+    flex-grow: 0;
+
+    margin: 0 auto;
+    background-color: #fafafa;
+    box-sizing: border-box;
+    /* Extend background to full viewport width */
+    box-shadow: 0 0 0 100vw #FAFAFA;
+    clip-path: inset(0 -100vw);
+}
+
+/* ----------------------------------------
+   Element BEM: related-posts__container (Hero)
+   Figma: width 1280px, height 976px
+   ---------------------------------------- */
+.related-posts__container {
+    /* Layout tự động */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    gap: 24px;
+
+    width: 1280px;
+    /* Xóa chiều cao cố định cho container để cho phép grid wrap */
+    min-height: 976px;
+    height: auto;
+
+    /* Trong layout tự động */
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+/* ========================================
+   COMPONENT TAB BÀI VIẾT
+   BEM: post-tabs
+   Figma: 1280x58px
+   ======================================== */
+
+/* ----------------------------------------
+   Block BEM: post-tabs (Tab container)
+   Figma: width 1280px, height 58px
+   ---------------------------------------- */
+.post-tabs {
+    /* Layout tự động */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 8px;
+    gap: 24px;
+
+    width: 1280px;
+    height: 58px;
+
+    background: #E6F2FF;
+    border-radius: 100px;
+
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+    /* Horizontal scroll - học từ tabs-group */
+    overflow-x: auto;
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE/Edge */
+    flex-wrap: nowrap;
+    /* Không cho wrap xuống dòng */
+}
+
+/* Ẩn scrollbar cho WebKit browsers */
+.post-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+/* ----------------------------------------
+   Element: post-tabs__tab
+   Figma: height 42px, padding 4px 12px
+   ---------------------------------------- */
+.post-tabs__tab {
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 12px;
+    gap: 10px;
+
+    height: 42px;
+
+    border-radius: 100px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    /* Reset button styles */
+    font: inherit;
+    outline: none;
+
+    /* Inside auto layout */
+    flex: none;
+    flex-grow: 0;
+}
+
+/* ----------------------------------------
+   Modifier: post-tabs__tab--active
+   Figma: background #007FFF
+   ---------------------------------------- */
+.post-tabs__tab--active {
+    background: #007FFF;
+}
+
+/* ----------------------------------------
+   Trạng thái: post-tabs__tab hover
+   ---------------------------------------- */
+.post-tabs__tab:not(.post-tabs__tab--active):hover {
+    background: rgba(0, 127, 255, 0.1);
+}
+
+/* ----------------------------------------
+   Element BEM: post-tabs__text
+   Figma: Merriweather 24px, line-height 140%
+   ---------------------------------------- */
+.post-tabs__text {
+    height: 34px;
+
+    /* Kiểu chữ H5 */
+    font-family: var(--font-merriweather);
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    /* Điều chỉnh từ 24px để khớp với tabs giống heading trong Figma */
+    line-height: 140%;
+    /* 34px */
+
+    display: flex;
+    align-items: center;
+
+    color: #212636;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Trong layout tự động */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+
+    white-space: nowrap;
+}
+
+/* ----------------------------------------
+   Modifier BEM: Active tab text
+   Figma: font-weight 700, color #FDFDFD
+   ---------------------------------------- */
+.post-tabs__tab--active .post-tabs__text {
+    font-weight: 700;
+    color: #FDFDFD;
+}
+
+/* ========================================
+   LƯỚI BÀI VIẾT (Row - R, R1, R2)
+   Figma: 1280x258px, gap 24px
+   ======================================== */
+
+/* ----------------------------------------
+   Block BEM: posts-grid (Row wrapper)
+   Figma: width 1280px, height 258px
+   ---------------------------------------- */
+.posts-grid {
+    /* Layout tự động - Row layout */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 24px;
+
+    width: 1280px;
+    /* Xóa chiều cao cố định cho grid để cho phép nhiều rows */
+    min-height: 258px;
+    height: auto;
+
+    /* Trong layout tự động */
+    flex: none;
+    align-self: stretch;
+    flex-grow: 0;
+
+    /* Wrap cho nhiều rows */
+    flex-wrap: wrap;
+
+    /* Horizontal scroll - learned from HomePage */
+    overflow-x: auto;
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE/Edge */
+}
+
+/* Hide scrollbar for WebKit browsers */
+.posts-grid::-webkit-scrollbar {
+    display: none;
+}
+
+/* ========================================
+   COMPONENT THẺ BÀI VIẾT (Article)
+   BEM: post-card
+   Figma: 628x258px
+   ======================================== */
+
+/* ----------------------------------------
+   Block BEM: post-card (Article)
+   Figma: width 628px, height 258px
+   ---------------------------------------- */
+.post-card {
+    /* Layout tự động */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 16px;
+
+    width: 628px;
+    height: 258px;
+    min-width: 628px;
+    /* Buộc chiều rộng tối thiểu để không bị thu nhỏ */
+
+    background: #FFFFFF;
+    border-radius: 12px;
+
+    /* Trong layout tự động */
+    flex: 0 0 auto;
+    /* Prevent shrinking in scroll container */
+    order: 0;
+    flex-grow: 1;
+
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* ----------------------------------------
+   Trạng thái: post-card hover
+   ---------------------------------------- */
+.post-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* ----------------------------------------
+   Element BEM: post-card__content (Content)
+   Figma: width 628px, height 258px, padding 24px
+   ---------------------------------------- */
+.post-card__content {
+    /* Layout tự động */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px;
+    gap: 16px;
+
+    width: 628px;
+    height: 258px;
+
+    /* Trong layout tự động */
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+/* ----------------------------------------
+   Element BEM: post-card__image (Image wrapper)
+   Figma: width 580px, height 210px
+   ---------------------------------------- */
+.post-card__image {
+    /* Layout tự động */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 12px;
+
+    width: 580px;
+    height: 210px;
+
+    /* Trong layout tự động */
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+/* ----------------------------------------
+   Element BEM: post-card__main (Main content wrapper)
+   Figma: width 580px, height 210px
+   ---------------------------------------- */
+.post-card__main {
+    /* Layout tự động */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 16px;
+
+    width: 580px;
+    height: 210px;
+
+    /* Trong layout tự động */
+    flex: none;
+    order: 0;
+    flex-grow: 1;
+}
+
+/* ----------------------------------------
+   Element BEM: post-card__title-wrapper (Title + Author wrapper)
+   Figma: width 580px, height 112px
+   ---------------------------------------- */
+.post-card__title-wrapper {
+    /* Layout tự động */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 8px;
+
+    width: 580px;
+    height: 112px;
+
+    /* Trong layout tự động */
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+/* ----------------------------------------
+   Element BEM: post-card__title (Title text)
+   Figma: width 580px, height 56px
+   ---------------------------------------- */
+.post-card__title {
+    width: 580px;
+    height: 56px;
+
+    /* Kiểu chữ H6 */
+    font-family: 'Merriweather';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+    /* 28px */
+
+    display: flex;
+    align-items: center;
+
+    color: #111827;
+
+    /* Trong layout tự động */
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+
+    margin: 0;
+
+    /* Cắt bớt sau 2 dòng */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* ----------------------------------------
+   Element BEM: post-card__authors (Author container)
+   Figma: width 580px, height 20px, gap 8px
+   ---------------------------------------- */
+.post-card__authors {
+    /* Layout tự động */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: flex-start;
+    padding: 0px;
+    gap: 8px;
+
+    width: 580px;
+    height: 20px;
+
+    /* Trong layout tự động */
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+/* ----------------------------------------
+   Element BEM: post-card__label ("Tác giả:")
+   Figma: width 49px, height 20px
+   ---------------------------------------- */
+.post-card__label {
+    width: auto;
+    height: 20px;
+
+    /* typography/Body 2 */
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 140%;
+    /* 20px */
+
+    display: flex;
+    align-items: center;
+
+    color: #667085;
+
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+/* ========================================
+   COMPONENT TAG TÁC GIẢ (User)
+   BEM: author-tag
+   Figma: height 20px, gap 4px
+   ======================================== */
+
+/* ----------------------------------------
+   Block BEM: author-tag (User)
+   Figma: height 20px
+   ---------------------------------------- */
+.author-tag {
+    /* Layout tự động */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 4px;
+
+    height: 20px;
+
+    /* Trong layout tự động */
+    flex: none;
+    flex-grow: 0;
+}
+
+/* ----------------------------------------
+   Element BEM: author-tag__name (Name wrapper)
+   Figma: border-bottom 1px solid #DCDFE4
+   ---------------------------------------- */
+.author-tag__name {
+    box-sizing: border-box;
+
+    /* Layout tự động */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 10px;
+
+    height: 20px;
+
+    border-bottom: 1px solid #DCDFE4;
+
+    /* Kiểu chữ Body 2 */
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 140%;
+    /* 20px */
+
+    display: flex;
+    align-items: center;
+
+    color: #212636;
+
+    /* Trong layout tự động */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+/* ----------------------------------------
+   Element BEM: author-tag__icon (ID Card icon)
+   Figma: width 20px, height 20px
+   ---------------------------------------- */
+.author-tag__icon {
+    width: 20px;
+    height: 20px;
+
+    /* Trong layout tự động */
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+
+    flex-shrink: 0;
+}
+
+/* ========================================
+   THÔNG TIN META BÀI VIẾT
+   Figma: width 342px, height 20px, gap 12px
+   ======================================== */
+
+/* ----------------------------------------
+   Element BEM: post-card__meta (Info)
+   Figma: gap 12px
+   ---------------------------------------- */
+.post-card__meta {
+    /* Layout tự động */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 12px;
+
+    width: auto;
+    max-width: 580px;
+    /* Giới hạn trong card */
+    height: 20px;
+
+    /* Trong layout tự động */
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+}
+
+/* ----------------------------------------
+   Element BEM: post-card__issue
+   Figma: width 165px, height 20px
+   ---------------------------------------- */
+.post-card__issue {
+    width: auto;
+    height: 20px;
+
+    /* Kiểu chữ Body 2 */
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 140%;
+    /* 20px */
+
+    display: flex;
+    align-items: center;
+
+    color: #007FFF;
+
+    /* Trong layout tự động */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+/* ----------------------------------------
+   Element BEM: post-card__dot (Separator)
+   Figma: 4x4px, background #8A94A6
+   ---------------------------------------- */
+.post-card__dot {
+    width: 4px;
+    height: 4px;
+
+    background: #8A94A6;
+    border-radius: 6px;
+
+    /* Trong layout tự động */
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+/* ----------------------------------------
+   Element BEM: post-card__date
+   Figma: width 149px, height 20px
+   ---------------------------------------- */
+.post-card__date {
+    width: auto;
+    height: 20px;
+
+    /* typography/Body 2 */
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 140%;
+    /* 20px */
+
+    display: flex;
+    align-items: center;
+
+    color: #667085;
+
+    /* Inside auto layout */
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+}
+
+/* ----------------------------------------
+   Element BEM: post-card__excerpt
+   Figma: width 580px, height 44px
+   ---------------------------------------- */
+.post-card__excerpt {
+    width: 580px;
+    /* height: 44px; - Remove fixed height to allow expansion */
+    min-height: 44px;
+    /* Set min-height instead of height */
+
+    /* Kiểu chữ Body1 */
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    /* 22px */
+
+    /* display: flex; - Remove flex to allow inline button */
+    /* align-items: center; */
+
+    color: #667085;
+
+    /* Trong layout tự động */
+    flex: none;
+    order: 2;
+    align-self: stretch;
+    flex-grow: 0;
+
+    margin: 0;
+
+    /* Cắt bớt sau 2 dòng - Removed for JS truncation */
+    /* display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical; */
+    overflow: hidden;
+    /* text-overflow: ellipsis; - Removed, using JS instead */
+}
+
+/* ----------------------------------------
+   Element: inline-read-more (Inline Read More/Collapse button)
+   Learned from HomePage implementation
+   ---------------------------------------- */
+.inline-read-more {
+    display: inline-block;
+    font-family: 'Roboto';
+    font-size: 14px;
+    font-weight: 500;
+    color: #007FFF;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-decoration: none;
+    margin-left: 4px;
+}
+
+.inline-read-more:hover {
+    text-decoration: underline;
+    color: #005bb5;
+}
+
+/* ----------------------------------------
+   Element BEM: post-card__doi (DOI Link)
+   Figma: width 281px, height 22px
+   ---------------------------------------- */
+.post-card__doi {
+    width: auto;
+    max-width: 580px;
+    height: 22px;
+
+    /* Kiểu chữ Body1 */
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    /* 22px */
+
+    display: flex;
+    align-items: center;
+
+    color: #007FFF;
+
+    /* Trong layout tự động */
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.post-card__doi:hover {
+    color: #0074e8;
+    text-decoration: underline;
+}
+
+/* ========================================
+   THIẾT KẾ RESPONSIVE (<= 1439px)
+   ======================================== */
+@media (max-width: 1439px) {
+
+    /* Sửa Auto-Layout */
+    * {
+        box-sizing: border-box;
+    }
+
+    .related-posts {
+        width: 100% !important;
+        height: auto !important;
+        padding: 40px 24px !important;
+    }
+
+    .related-posts__container {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .post-tabs {
+        width: 100% !important;
+        height: auto !important;
+        flex-wrap: nowrap !important;
+        /* Keep tabs on single row */
+        justify-content: flex-start !important;
+        /* Align to start, not center */
+    }
+
+    .posts-grid {
+        width: 100% !important;
+        height: auto !important;
+        flex-wrap: wrap !important;
+        gap: 24px !important;
+        justify-content: center !important;
+    }
+
+    .post-card {
+        width: 100% !important;
+        min-width: 0 !important;
+        /* Cho phép thu nhỏ */
+        height: auto !important;
+        max-width: 580px !important;
+        margin: 0 auto !important;
+    }
+
+    .post-card__content {
+        width: 100% !important;
+        height: auto !important;
+        padding: 24px !important;
+    }
+
+    .post-card__image {
+        width: 100% !important;
+        height: auto !important;
+        flex-direction: column !important;
+    }
+
+    .post-card__main,
+    .post-card__title-wrapper,
+    .post-card__title,
+    .post-card__authors,
+    .post-card__excerpt,
+    .post-card__doi {
+        width: 100% !important;
+        height: auto !important;
+        white-space: normal !important;
+        /* Cho phép wrap */
+    }
+
+    /* Meta info responsive - chuyển sang layout dọc */
+    .post-card__meta {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 4px !important;
+        height: auto !important;
+    }
+
+    /* Ẩn separator dot khi layout dọc */
+    .post-card__dot {
+        display: none !important;
+    }
+
+    /* Sửa clamp */
+    .post-card__title {
+        line-clamp: 2;
+        -webkit-line-clamp: 2;
+    }
+
+    /* Excerpt uses JavaScript truncation, not CSS line-clamp */
+    /* .post-card__excerpt {
+        line-clamp: 2;
+        -webkit-line-clamp: 2;
+    } */
+}
+
+/* ========================================
+   THIẾT KẾ RESPONSIVE (Điều chỉnh breakpoints gốc)
+   ======================================== */
+
+/* ----------------------------------------
+   Tablet: 768px - 1024px
+   ---------------------------------------- */
+@media (max-width: 1024px) {
+    .related-posts {
+        width: 100%;
+        max-width: 1024px;
+        height: auto;
+        padding: 40px 40px;
+    }
+
+    .related-posts__container {
+        width: 100%;
+        max-width: 944px;
+        height: auto;
+    }
+
+    .post-tabs {
+        width: 100%;
+    }
+
+    .posts-grid {
+        width: 100%;
+        gap: 20px;
+    }
+
+    .post-card {
+        width: 100%;
+        max-width: 460px;
+        height: auto;
+    }
+
+    .post-card__content {
+        width: 100%;
+        height: auto;
+    }
+
+    .post-card__title,
+    .post-card__authors,
+    .post-card__excerpt {
+        width: 100%;
+    }
+
+    .post-tabs__text {
+        font-size: 20px;
+    }
+
+    .post-card__title {
+        font-size: 18px;
+        height: auto;
+    }
+}
+
+/* ----------------------------------------
+   Mobile: < 768px
+   ---------------------------------------- */
+@media (max-width: 768px) {
+    .related-posts {
+        width: 100%;
+        height: auto;
+        padding: 32px 20px;
+    }
+
+    .related-posts__container {
+        width: 100%;
+        height: auto;
+    }
+
+    .post-tabs {
+        width: 100%;
+        height: auto;
+        padding: 6px;
+        gap: 8px;
+        /* Reduce gap for better fit */
+        /* Keep flex-direction: row (horizontal) */
+        /* overflow-x: auto; - Already set in base */
+        flex-wrap: nowrap !important;
+        /* Force single row */
+    }
+
+    .post-tabs__tab {
+        width: auto !important;
+        /* Override fixed widths */
+        flex: 0 0 auto;
+        /* Prevent shrinking */
+        min-width: fit-content;
+        padding: 4px 8px;
+        /* Reduce padding to save space */
+        height: 38px;
+    }
+
+    .post-tabs__text {
+        font-size: 16px;
+        height: auto;
+    }
+
+    .posts-grid {
+        width: 100%;
+        flex-direction: column;
+        gap: 16px;
+        height: auto;
+    }
+
+    .post-card {
+        width: 100%;
+        height: auto;
+    }
+
+    .post-card__content {
+        width: 100%;
+        height: auto;
+        padding: 20px;
+        gap: 12px;
+    }
+
+    .post-card__title {
+        width: 100%;
+        height: auto;
+        font-size: 16px;
+    }
+
+    .post-card__authors {
+        width: 100%;
+        height: auto;
+        /* Giữ flex-direction: row để authors nằm ngang */
+        /* flex-wrap: wrap từ base CSS sẽ wrap khi cần */
+    }
+
+    .post-card__meta {
+        width: 100%;
+    }
+
+    .post-card__excerpt,
+    .post-card__doi {
+        width: 100%;
+        height: auto;
+        min-height: unset;
+        /* Remove min-height for accurate JavaScript measurement */
+    }
+
+    .post-card__label,
+    .post-card__issue,
+    .post-card__date,
+    .author-tag__name {
+        font-size: 12px;
+    }
+
+    .post-card__excerpt,
+    .post-card__doi {
+        font-size: 14px;
+    }
+
+    .load-more-btn {
+        width: 100%;
+        margin-top: 32px;
+    }
+
+    .load-more-btn__text {
+        width: auto;
+    }
+}
+
+/* ----------------------------------------
+   Mobile nhỏ: < 480px
+   ---------------------------------------- */
+@media (max-width: 480px) {
+    .related-posts {
+        padding: 24px 16px;
+    }
+
+    .post-tabs {
+        gap: 8px;
+        padding: 8px;
+    }
+}
+
+/* ========================================
+   KHẢ NĂNG TIẾP CẬN
+   ======================================== */
+
+/* ----------------------------------------
+   Trạng thái focus cho keyboard navigation
+   ---------------------------------------- */
+.post-tabs__tab:focus-visible,
+.post-card:focus-visible,
+.post-card__doi:focus-visible,
+.load-more-btn:focus-visible {
+    outline: 2px solid #007fff;
+    outline-offset: 2px;
+}
+
+/* ----------------------------------------
+   Giảm chuyển động cho accessibility
+   ---------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+
+    .post-tabs__tab,
+    .post-card,
+    .post-card__doi,
+    .load-more-btn {
+        transition: none;
+    }
+
+    .post-card:hover {
+        transform: none;
+    }
+}
+
+/* ========================================
+   NÚT TẢI THÊM (Button/Outlined)
+   BEM: load-more-btn
+   Figma: 199x48px
+   ======================================== */
+
+/* ----------------------------------------
+   Block BEM: load-more-btn
+   Figma: width 199px, height 48px
+   ---------------------------------------- */
+.load-more-btn {
+    box-sizing: border-box;
+
+    /* Layout tự động */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 22px;
+    gap: 8px;
+
+    width: 147px;
+    height: 48px;
+
+    background: #FDFDFD;
+    border: 1px solid rgba(30, 136, 229, 0.5);
+    border-radius: 44px;
+
+    /* Trong layout tự động */
+    flex: none;
+    order: 4;
+    flex-grow: 0;
+
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    /* Đẩy nút xuống cuối container */
+    margin-top: auto;
+    margin-bottom: 0;
+}
+
+/* ----------------------------------------
+   Element BEM: load-more-btn__text (Button text)
+   Figma: width 129px, height 21px
+   ---------------------------------------- */
+.load-more-btn__text {
+    width: 77px;
+    height: 21px;
+
+    /* Component Button Large */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 140%;
+    /* 21px */
+
+    color: #007FFF;
+
+    /* Trong layout tự động */
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+
+    white-space: nowrap;
+}
+
+/* ----------------------------------------
+   Element BEM: load-more-btn__icon (Send icon)
+   Figma: width 18px, height 22px
+   ---------------------------------------- */
+.load-more-btn__icon {
+    width: 18px;
+    height: 22px;
+
+    /* Trong layout tự động */
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+}
+
+/* ----------------------------------------
+   Trạng thái: load-more-btn hover
+   ---------------------------------------- */
+.load-more-btn:hover {
+    background: #007fff;
+    border-color: #007fff;
+}
+
+.load-more-btn:hover .load-more-btn__text {
+    color: #ffffff;
+}
+
+.load-more-btn:hover .load-more-btn__icon path {
+    fill: #ffffff;
+}
+
+/* ----------------------------------------
+   Trạng thái: load-more-btn active
+   ---------------------------------------- */
+.load-more-btn:active {
+    transform: scale(0.98);
+}

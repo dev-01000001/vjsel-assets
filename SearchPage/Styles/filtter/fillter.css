@@ -1,0 +1,469 @@
+/* ============================================
+   FILTER TOP NAVIGATION - CSS THUẦN
+   Chuyển đổi từ React sang HTML/CSS 1:1
+   Chiều rộng thiết kế: 1440px
+   Namespace: filter-topnav, filter-search-box, filter-advanced-btn
+   ============================================ */
+
+/* ============================================
+   CSS VARIABLES - Biến thiết kế chuẩn Figma
+   ============================================ */
+:root {
+    /* Màu sắc - Colors */
+    --filter-color-bg-nav: #ffffff;
+    /* Nền navigation */
+    --filter-color-bg-search: #fafafa;
+    /* Nền search box */
+    --filter-color-text-primary: #212636;
+    /* Text chính */
+    --filter-color-text-secondary: #667085;
+    /* Text phụ */
+    --filter-color-icon-primary: #667085;
+    /* Icon search */
+    --filter-color-icon-secondary: #343330;
+    /* Icon advanced */
+
+    /* Typography - Font chữ */
+    --filter-font-inter: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --filter-font-roboto: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+    /* Spacing Desktop 1440px - Khoảng cách chính xác theo Figma */
+    --filter-spacing-container-x: 80px;
+    /* Padding trái/phải container */
+    --filter-spacing-elements-gap: 24px;
+    /* Khoảng cách giữa search và button */
+    --filter-spacing-search-inner-x: 16px;
+    /* Padding ngang trong search box */
+    --filter-spacing-search-inner-y: 6px;
+    /* Padding dọc trong search box */
+    --filter-spacing-field-gap: 16px;
+    /* Khoảng cách icon và input */
+    --filter-spacing-advanced-gap: 4px;
+    /* Khoảng cách icon và text button */
+
+    /* Sizes - Kích thước chính xác */
+    --filter-container-width: 1440px;
+    /* Chiều rộng container */
+    --filter-container-height: 80px;
+    /* Chiều cao container */
+    --filter-search-width: 1127px;
+    /* Chiều rộng search box */
+    --filter-search-height: 56px;
+    /* Chiều cao search box */
+    --filter-button-width: 129px;
+    /* Chiều rộng nút (HUG content) */
+    --filter-button-height: 24px;
+    /* Chiều cao nút (HUG content) */
+    --filter-icon-size: 24px;
+    /* Kích thước icon */
+    --filter-border-radius-pill: 360px;
+    /* Border radius dạng pill */
+}
+
+/* ============================================
+   TOP NAVIGATION BLOCK - Block chính
+   ============================================ */
+.filter-topnav {
+    background-color: transparent;
+    width: 930px;
+    flex: none;
+    flex-shrink: 0;
+    /* Note: Width = 1280 - 326 (sidebar) - 24 (gap) = 930px */
+    /* Bằng với width của main-content */
+}
+
+.filter-topnav__container {
+    width: 100%;
+    height: 56px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: var(--filter-spacing-elements-gap);
+    padding: 0;
+    /* Note: Container chứa search box và button */
+}
+
+/* ============================================
+   SEARCH BOX SECTION - Phần ô tìm kiếm
+   ============================================ */
+.filter-topnav__search-wrapper {
+    flex: 1;
+    height: var(--filter-search-height);
+    max-width: 777px;
+    /* Note: Wrapper tự động mở rộng với flex: 1 */
+}
+
+.filter-search-box {
+    background-color: var(--filter-color-bg-search);
+    height: 100%;
+    border-radius: var(--filter-border-radius-pill);
+    width: 100%;
+    /* Note: Box chứa search, bo tròn dạng pill (360px) */
+}
+
+.filter-search-box__inner {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: var(--filter-spacing-search-inner-y) var(--filter-spacing-search-inner-y) var(--filter-spacing-search-inner-y) var(--filter-spacing-search-inner-x);
+    /* Note: Inner padding đối xứng theo chiều dọc, padding trái lớn hơn */
+}
+
+.filter-search-box__field {
+    display: flex;
+    align-items: center;
+    gap: var(--filter-spacing-field-gap);
+    flex: 1 0 0;
+    min-width: 0;
+    /* Note: Field chứa icon và input, khoảng cách 16px */
+}
+
+.filter-search-box__icon {
+    width: var(--filter-icon-size);
+    height: var(--filter-icon-size);
+    flex-shrink: 0;
+    color: var(--filter-color-icon-primary);
+    /* Note: Icon search 24x24px, màu #667085 */
+}
+
+.filter-search-box__input {
+    /* Typography - Theo đúng Figma specs */
+    font-family: var(--filter-font-inter);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: normal;
+
+    /* Layout */
+    flex: 1 0 0;
+    min-width: 0;
+    max-width: 267px;
+
+    /* Styling */
+    color: var(--filter-color-text-primary);
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+    /* Note: Input field với font Inter 16px, max-width theo text bounding box */
+}
+
+.filter-search-box__input::placeholder {
+    color: var(--filter-color-text-primary);
+    opacity: 1;
+    /* Note: Placeholder màu giống text chính */
+}
+
+.filter-search-box__input:focus {
+    outline: none;
+    /* Note: Bỏ outline mặc định khi focus */
+}
+
+/* ============================================
+   ADVANCED SEARCH BUTTON - Nút tìm kiếm nâng cao
+   ============================================ */
+.filter-topnav__advanced-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--filter-spacing-advanced-gap);
+    width: var(--filter-button-width);
+    height: var(--filter-button-height);
+    flex-shrink: 0;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    /* Note: Button HUG content 129x24px, gap 4px giữa icon và text */
+}
+
+.filter-topnav__advanced-btn:hover {
+    opacity: 0.8;
+    /* Note: Hiệu ứng hover giảm opacity */
+}
+
+.filter-topnav__advanced-btn:active {
+    opacity: 0.6;
+    /* Note: Hiệu ứng active giảm opacity mạnh hơn */
+}
+
+.filter-topnav__advanced-btn:focus-visible {
+    outline: 2px solid var(--filter-color-icon-secondary);
+    outline-offset: 2px;
+    border-radius: 4px;
+    /* Note: Focus outline cho accessibility */
+}
+
+.filter-advanced-btn__icon {
+    width: var(--filter-icon-size);
+    height: var(--filter-icon-size);
+    flex-shrink: 0;
+    color: var(--filter-color-icon-secondary);
+    /* Note: Icon sliders 24x24px, màu #343330 */
+}
+
+.filter-advanced-btn__text {
+    /* Typography - Theo đúng Figma specs */
+    font-family: var(--filter-font-roboto);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: normal;
+
+    /* Styling */
+    color: var(--filter-color-text-secondary);
+    white-space: nowrap;
+    /* Note: Text Roboto 14px, màu #667085, không xuống dòng */
+}
+
+/* ============================================
+   RESPONSIVE BREAKPOINTS - Điểm chuyển đổi responsive
+   ============================================ */
+
+/* Laptop & Tablet (Below 1440px) */
+@media (max-width: 1439px) {
+    :root {
+        --filter-spacing-container-x: 20px;
+        --filter-container-width: 100% !important;
+        --filter-search-width: 100% !important;
+    }
+
+    .filter-topnav {
+        width: 100% !important;
+    }
+
+    .filter-topnav__container {
+        width: 100% !important;
+        height: auto !important;
+        padding-top: 12px !important;
+        padding-bottom: 12px !important;
+        gap: 16px !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+    }
+
+    .filter-topnav__search-wrapper {
+        width: 100% !important;
+        height: auto !important;
+        flex: 1 !important;
+        min-width: 0 !important;
+    }
+
+    .filter-search-box {
+        width: 100% !important;
+        height: 56px !important;
+    }
+
+    .filter-search-box__input {
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+    .filter-topnav__advanced-btn {
+        width: auto !important;
+        height: auto !important;
+        flex-shrink: 0 !important;
+    }
+}
+
+/* Mobile (≤ 767px) - Keep horizontal layout */
+@media (max-width: 767px) {
+    .filter-topnav {
+        width: 100% !important;
+        order: 2;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background: #ffffff;
+        box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .filter-topnav__container {
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        align-items: center !important;
+        padding: 12px 16px !important;
+        gap: 12px !important;
+    }
+
+    .filter-topnav__search-wrapper {
+        max-width: 100% !important;
+        flex: 1 !important;
+        min-width: 0 !important;
+    }
+
+    .filter-search-box__input {
+        font-size: 14px !important;
+    }
+
+    .filter-topnav__advanced-btn {
+        width: auto !important;
+        height: auto !important;
+        min-height: 44px !important;
+        flex-shrink: 0 !important;
+        padding: 8px 12px !important;
+        /* Touch target */
+    }
+
+    .filter-advanced-btn__text {
+        font-size: 13px !important;
+    }
+}
+
+/* Extra Small Mobile (≤ 375px) */
+@media (max-width: 375px) {
+    .filter-topnav__container {
+        gap: 8px !important;
+    }
+
+    .filter-search-box__input {
+        font-size: 13px !important;
+        padding-left: 8px !important;
+    }
+
+    .filter-advanced-btn__text {
+        font-size: 12px !important;
+    }
+
+    .filter-topnav__advanced-btn {
+        padding: 6px 10px !important;
+    }
+}
+
+/* ============================================
+   PRINT STYLES - Kiểu in ấn
+   ============================================ */
+@media print {
+    .filter-topnav__advanced-btn {
+        display: none;
+        /* Note: Ẩn button advanced khi in */
+    }
+
+    .filter-topnav {
+        background-color: white;
+        /* Note: Nền trắng khi in */
+    }
+
+    .filter-search-box {
+        border: 1px solid #ccc;
+        /* Note: Thêm viền cho search box khi in */
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY - Hỗ trợ khả năng tiếp cận
+   ============================================ */
+
+/* High Contrast Mode - Chế độ tương phản cao */
+@media (prefers-contrast: high) {
+    .filter-search-box {
+        border: 2px solid currentColor;
+        /* Note: Viền rõ ràng cho contrast cao */
+    }
+
+    .filter-topnav__advanced-btn:focus-visible {
+        outline-width: 3px;
+        /* Note: Outline dày hơn cho focus */
+    }
+}
+
+/* Reduced Motion - Giảm chuyển động */
+@media (prefers-reduced-motion: reduce) {
+    .filter-topnav__advanced-btn {
+        transition: none;
+        /* Note: Tắt animation cho người nhạy cảm chuyển động */
+    }
+}
+
+/* Focus Visible - Hiển thị focus rõ ràng */
+.filter-topnav *:focus-visible {
+    outline: 2px solid var(--filter-color-icon-secondary);
+    outline-offset: 2px;
+    /* Note: Outline mặc định cho tất cả element khi focus */
+}
+
+/* Screen Reader Only - Chỉ dành cho screen reader */
+.filter-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+    /* Note: Class ẩn visual nhưng vẫn đọc được bởi screen reader */
+}
+
+/* ============================================
+   INTERACTIVE STATES - Trạng thái tương tác
+   ============================================ */
+
+/* Search Box Focus State - Trạng thái focus của search box */
+.filter-search-box--focused {
+    box-shadow: 0 0 0 3px rgba(33, 38, 54, 0.1);
+    background-color: #ffffff;
+    /* Note: Highlight search box khi focus vào input */
+}
+
+/* Loading State - Trạng thái đang tải */
+.filter-search-box--loading::after {
+    content: '';
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--filter-color-bg-search);
+    border-top-color: var(--filter-color-icon-primary);
+    border-radius: 50%;
+    animation: filter-spin 0.6s linear infinite;
+    /* Note: Icon loading quay tròn khi đang tìm kiếm */
+}
+
+@keyframes filter-spin {
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
+}
+
+/* Advanced Search Active State - Trạng thái active của advanced search */
+.filter-advanced-active .filter-topnav__advanced-btn {
+    background-color: rgba(102, 112, 133, 0.1);
+    border-radius: 4px;
+    /* Note: Highlight button khi advanced search được kích hoạt */
+}
+
+/* ============================================
+   UTILITY CLASSES - Class tiện ích
+   ============================================ */
+
+/* Hide element but keep in DOM - Ẩn nhưng giữ trong DOM */
+.filter-hidden {
+    display: none !important;
+    /* Note: Ẩn hoàn toàn element */
+}
+
+/* Visually hidden but accessible - Ẩn visual nhưng vẫn accessible */
+.filter-visually-hidden {
+    position: absolute !important;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    width: 1px;
+    height: 1px;
+    word-wrap: normal;
+    /* Note: Tương tự sr-only nhưng có !important */
+}
+
+/* No pointer events - Tắt tương tác chuột */
+.filter-disabled {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+    /* Note: Disable element, mờ đi và không click được */
+}
