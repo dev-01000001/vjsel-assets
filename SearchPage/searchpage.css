@@ -2,14 +2,14 @@
 /* Import theo thứ tự: Base Reset → Filter Component → Body Content */
 
 /* 1. Base Reset & Common Styles - Styles dùng chung, không ảnh hưởng thiết kế */
-@import url('https://dn.media-soft.cloud/original/assets/SearchPage/basereset.css');
+@import url('https://cdn.media-soft.cloud/original/assets/SearchPage/basereset.css');
 
 
 /* Site Header */
-@import url('https://dn.media-soft.cloud/original/assets/SearchPage/Styles/Header/header.css');
+@import url('https://cdn.media-soft.cloud/original/assets/SearchPage/Styles/Header/header.css');
 
 /* 2. Filter Top Navigation - Component độc lập với namespace filter-* */
-@import url('https://dn.media-soft.cloud/original/assets/SearchPage/Styles/filtter/fillter.css');
+@import url('https://cdn.media-soft.cloud/original/assets/SearchPage/Styles/filtter/fillter.css');
 
 /* 3. Body Content - Styles riêng cho search page body, thiết kế 1440px */
-@import url('https://dn.media-soft.cloud/original/assets/SearchPage/Styles/body/body.css');
+@import url('https://cdn.media-soft.cloud/original/assets/SearchPage/Styles/body/body.css');
