@@ -138,7 +138,7 @@
     /* Layout */
     flex: 1 0 0;
     min-width: 0;
-    max-width: 267px;
+    width: 100%;
 
     /* Styling */
     color: var(--filter-color-text-primary);
@@ -146,7 +146,7 @@
     border: none;
     outline: none;
     padding: 0;
-    /* Note: Input field với font Inter 16px, max-width theo text bounding box */
+    /* Note: Input field với font Inter 16px, tự động mở rộng với flex */
 }
 
 .filter-search-box__input::placeholder {

@@ -16,7 +16,8 @@
     margin: 0 auto;
     background: #FFFFFF;
     border-bottom: 1px solid #DCDFE4;
-    position: relative;
+    position: sticky;
+    top: 0;
     z-index: 1100;
 }
 
