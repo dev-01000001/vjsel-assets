@@ -18,7 +18,7 @@
 
     width: 100%;
     max-width: 1440px;
-    height: 1072px;
+    height: auto;
 
     /* Trong layout tự động */
     flex: none;
@@ -33,6 +33,12 @@
     clip-path: inset(0 -100vw);
 }
 
+
+    .related-posts {
+        padding: 48px 16px; /* Giảm padding trên mobile */
+    }
+
+
 /* ----------------------------------------
    Element BEM: related-posts__container (Hero)
    Figma: width 1280px, height 976px
@@ -45,8 +51,8 @@
     padding: 0px;
     gap: 24px;
 
-    width: 1280px;
-    height: 976px;
+    width: 100%;
+    height: auto;
 
     /* Trong layout tự động */
     flex: none;
@@ -73,7 +79,7 @@
     padding: 8px;
     gap: 24px;
 
-    width: 1280px;
+    width: 100%;
     height: 58px;
 
     background: #E6F2FF;
@@ -194,24 +200,29 @@
    Figma: width 1280px, height 258px
    ---------------------------------------- */
 .posts-grid {
-    /* Auto layout - Row layout */
-    display: flex;
-    flex-direction: row;
+    /* Auto layout - Grid layout */
+    display: grid;
     align-items: flex-start;
     padding: 0px;
     gap: 24px;
 
-    width: 1280px;
-    height: 258px;
+    width: 100%;
+    height: auto;
 
     /* Inside auto layout */
     flex: none;
     align-self: stretch;
     flex-grow: 0;
 
-    /* Wrap cho nhiều rows */
-    flex-wrap: wrap;
+    /* 1 cột cho màn hình nhỏ (<= 768px) */
+    grid-template-columns: 1fr;
+}
 
+/* Từ 769px trở đi là 2 cột */
+@media screen and (min-width: 769px) {
+    .posts-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 /* ========================================
@@ -232,8 +243,8 @@
     padding: 0px;
     gap: 16px;
 
-    width: 628px;
-    height: 258px;
+    width: 100%;
+    height: auto;
 
     background: #FFFFFF;
     border-radius: 12px;
@@ -265,11 +276,11 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 24px;
+    padding: 24px; 
     gap: 16px;
 
-    width: 628px;
-    height: 258px;
+    width: 100%;
+    height: auto;
 
     /* Inside auto layout */
     flex: none;
@@ -290,8 +301,8 @@
     padding: 0px;
     gap: 12px;
 
-    width: 580px;
-    height: 210px;
+    width: 100%;
+    height: auto;
 
     /* Inside auto layout */
     flex: none;
@@ -312,8 +323,8 @@
     padding: 0px;
     gap: 16px;
 
-    width: 580px;
-    height: 210px;
+    width: 100%;
+    height: auto;
 
     /* Inside auto layout */
     flex: none;
@@ -333,8 +344,8 @@
     padding: 0px;
     gap: 8px;
 
-    width: 580px;
-    height: 112px;
+    width: 100%;
+    height: auto;
 
     /* Inside auto layout */
     flex: none;
@@ -348,8 +359,8 @@
    Figma: width 580px, height 56px
    ---------------------------------------- */
 .post-card__title {
-    width: 580px;
-    height: 56px;
+    width: 100%;
+    height: auto;
 
     /* typography/H6 */
     font-family: 'Merriweather';
@@ -394,8 +405,8 @@
     padding: 0px;
     gap: 8px;
 
-    width: 580px;
-    height: 20px;
+    width: 100%;
+    min-height: 20px;
 
     /* Inside auto layout */
     flex: none;
@@ -527,8 +538,9 @@
     padding: 0px;
     gap: 12px;
 
-    width: 342px;
-    height: 20px;
+    width: 100%;
+    /* height: 20px; */
+    height: auto;
 
     /* Inside auto layout */
     flex: none;
@@ -541,7 +553,8 @@
    Figma: width 165px, height 20px
    ---------------------------------------- */
 .post-card__issue {
-    width: 165px;
+    /* width: 165px; */
+    width: auto;
     height: 20px;
 
     /* typography/Body 2 */
@@ -585,7 +598,8 @@
    Figma: width 149px, height 20px
    ---------------------------------------- */
 .post-card__date {
-    width: 149px;
+    /* width: 149px; */
+    width: auto;
     height: 20px;
 
     /* typography/Body 2 */
@@ -612,9 +626,10 @@
    Figma: width 580px, height 44px
    ---------------------------------------- */
 .post-card__excerpt {
-    width: 580px;
+    width: 100%;
     /* height: 44px; - Bỏ fixed height cho phép mở rộng */
     min-height: 44px;
+    height: auto;
     /* Đặt min-height thay vì height */
 
     /* typography/Body1 */
@@ -743,7 +758,6 @@
         min-width: 0 !important;
         /* Allow shrinking */
         height: auto !important;
-        max-width: 580px !important;
         margin: 0 auto !important;
     }
 
@@ -829,13 +843,14 @@
 
     .post-card {
         width: 100%;
-        max-width: 460px;
+        /* max-width: 460px; */
         height: auto;
     }
 
     .post-card__content {
         width: 100%;
         height: auto;
+        
     }
 
     .post-card__title,
