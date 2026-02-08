@@ -55,32 +55,41 @@ document.addEventListener("DOMContentLoaded", function () {
   // TOC SCROLL SPY
   // Tự động active menu bên phải khi scroll
   // ========================================
-  
+
   // Lấy tất cả các link trong TOC
   const tocLinks = document.querySelectorAll(".toc-list__link");
-  
+
   // Lấy tất cả các section dựa trên href của link
-  const sectionIds = ["tom-tat", "doi-tuong-phuong-phap", "ket-qua", "ban-luan", "ket-luan", "tai-lieu-tham-khao"];
-  
+  const sectionIds = [
+    "tom-tat",
+    "doi-tuong-phuong-phap",
+    "ket-qua",
+    "ban-luan",
+    "ket-luan",
+    "tai-lieu-tham-khao",
+  ];
+
   // Biến cờ để tránh conflict khi click
   let isScrolling = false;
   let scrollTimeout;
 
   function setActiveLink(targetId) {
     console.log("setActiveLink called with:", targetId); // DEBUG
-    
+
     // Xóa active khỏi tất cả toc-list__item
     const allItems = document.querySelectorAll(".toc-list__item");
     console.log("Found toc-list__item:", allItems.length); // DEBUG
-    
-    allItems.forEach(item => {
+
+    allItems.forEach((item) => {
       item.classList.remove("toc-list__item--active");
     });
-    
+
     // Tìm link có href tương ứng và active parent (toc-list__item)
-    const activeLink = document.querySelector(`.toc-list__link[href="#${targetId}"]`);
+    const activeLink = document.querySelector(
+      `.toc-list__link[href="#${targetId}"]`,
+    );
     console.log("Active link found:", activeLink); // DEBUG
-    
+
     if (activeLink) {
       const parentItem = activeLink.closest(".toc-list__item");
       console.log("Parent item:", parentItem); // DEBUG
@@ -93,11 +102,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function onScroll() {
     if (isScrolling) return;
-    
+
     const scrollPos = window.scrollY + 200; // offset từ top
-    
+
     let currentSection = sectionIds[0]; // Mặc định là section đầu tiên
-    
+
     for (let i = 0; i < sectionIds.length; i++) {
       const section = document.getElementById(sectionIds[i]);
       if (section) {
@@ -107,18 +116,21 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
     }
-    
+
     // Nếu scroll gần cuối trang, active mục cuối
-    if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight - 100) {
+    if (
+      window.innerHeight + window.scrollY >=
+      document.body.scrollHeight - 100
+    ) {
       currentSection = sectionIds[sectionIds.length - 1];
     }
-    
+
     setActiveLink(currentSection);
   }
 
   // Lắng nghe sự kiện scroll
   window.addEventListener("scroll", onScroll);
-  
+
   // Xử lý khi trang load với hash URL (ví dụ: #ket-luan)
   function handleInitialHash() {
     const hash = window.location.hash;
@@ -135,33 +147,33 @@ document.addEventListener("DOMContentLoaded", function () {
   // Chạy lần đầu khi load trang
   // Ưu tiên check hash URL trước, nếu không có thì check scroll position
   const hasHash = handleInitialHash();
-  
+
   if (!hasHash) {
     onScroll();
   }
-  
+
   // KHÔNG gọi onScroll trong setTimeout nếu đã có hash
   // vì nó sẽ ghi đè lại trạng thái active đúng
 
   // Xử lý click vào TOC link
-  tocLinks.forEach(link => {
-    link.addEventListener("click", function(e) {
+  tocLinks.forEach((link) => {
+    link.addEventListener("click", function (e) {
       e.preventDefault();
-      
+
       const targetId = this.getAttribute("href").substring(1); // Bỏ dấu #
       const targetSection = document.getElementById(targetId);
-      
+
       if (targetSection) {
         // Tạm dừng scroll spy
         isScrolling = true;
         clearTimeout(scrollTimeout);
-        
+
         // Active ngay lập tức
         setActiveLink(targetId);
-        
+
         // Cập nhật URL hash (không reload trang)
         history.pushState(null, null, `#${targetId}`);
-        
+
         // Cuộn đến section
         const headerOffset = 120;
         const elementPosition = targetSection.offsetTop;
@@ -169,9 +181,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         window.scrollTo({
           top: offsetPosition,
-          behavior: "smooth"
+          behavior: "smooth",
         });
-        
+
         // Sau 1 giây, bật lại scroll spy
         scrollTimeout = setTimeout(() => {
           isScrolling = false;
@@ -179,9 +191,9 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
-  
+
   // Lắng nghe sự kiện hash change (khi user bấm back/forward)
-  window.addEventListener("hashchange", function() {
+  window.addEventListener("hashchange", function () {
     handleInitialHash();
   });
 
@@ -208,18 +220,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Mục lục
-  const tocItems = document.querySelectorAll(".toc-list__item");
-  tocItems.forEach((item) => {
-    item.addEventListener("click", function () {
-      // Xóa active khỏi tất cả mục
-      tocItems.forEach((i) => i.classList.remove("toc-list__item--active"));
-      // Thêm active cho mục được click
-      this.classList.add("toc-list__item--active");
-      console.log("TOC item clicked:", this.textContent);
-      // Thêm cuộn mượt đến phần nếu cần
-    });
-  });
+  // Mục lục - Đã xóa duplicate handler (xử lý bởi TOC SCROLL SPY ở trên)
 
   // Các nút sidebar
   const actionButtons = document.querySelectorAll(".action-sidebar__btn");
@@ -244,9 +245,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Cuộn để căn giữa tab đang active
       this.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'center'
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center",
       });
 
       // Lấy loại tab
@@ -428,7 +429,8 @@ document.addEventListener("DOMContentLoaded", function () {
       // Kiểm tra xem có phần tử nào bị đẩy xuống dòng dưới không
       const children = Array.from(container.children);
       for (let i = 0; i < children.length; i++) {
-        if (Math.abs(children[i].offsetTop - baseTop) > 10) { // Check chênh lệch > 10px
+        if (Math.abs(children[i].offsetTop - baseTop) > 10) {
+          // Check chênh lệch > 10px
           hasOverflow = true;
           break;
         }
@@ -437,20 +439,20 @@ document.addEventListener("DOMContentLoaded", function () {
       // Nếu đã có nút Mở rộng/Thu gọn thì kiểm tra lại
       const existingBtn = container.querySelector(".inline-read-more");
       if (existingBtn) {
-         if (existingBtn.textContent === "Thu gọn") return; // Đang mở rộng thì không can thiệp
-         existingBtn.remove(); // Xóa đi tính lại
-         // Unhide all
-         Array.from(container.children).forEach(c => c.style.display = "");
-         // Đo lại overflow sau khi reset
-         hasOverflow = false;
-         for (let i = 0; i < container.children.length; i++) {
-            if (Math.abs(container.children[i].offsetTop - baseTop) > 10) {
-              hasOverflow = true;
-              break;
-            }
-         }
-      } 
-      
+        if (existingBtn.textContent === "Thu gọn") return; // Đang mở rộng thì không can thiệp
+        existingBtn.remove(); // Xóa đi tính lại
+        // Unhide all
+        Array.from(container.children).forEach((c) => (c.style.display = ""));
+        // Đo lại overflow sau khi reset
+        hasOverflow = false;
+        for (let i = 0; i < container.children.length; i++) {
+          if (Math.abs(container.children[i].offsetTop - baseTop) > 10) {
+            hasOverflow = true;
+            break;
+          }
+        }
+      }
+
       if (!hasOverflow) return;
 
       // 2. Thêm nút Mở rộng logic
@@ -458,60 +460,60 @@ document.addEventListener("DOMContentLoaded", function () {
       const btn = document.createElement("button");
       btn.className = "inline-read-more";
       btn.textContent = "Mở rộng";
-      btn.style.marginLeft = "4px"; 
-      
+      btn.style.marginLeft = "4px";
+
       // Append nút vào cuối
       container.appendChild(btn);
 
       // 3. Ẩn bớt các element cho đến khi nút Mở rộng nằm cùng dòng với element đầu tiên
       const allChildren = Array.from(container.children);
       const itemsToHide = allChildren.slice(0, -1).reverse(); // Duyệt ngược từ cuối lên (trừ btn)
-      
+
       const isBtnOnFirstLine = () => {
-          const first = container.firstElementChild;
-          if (!first) return true;
-          const currentBaseTop = first.offsetTop;
-          return Math.abs(btn.offsetTop - currentBaseTop) <= 10;
+        const first = container.firstElementChild;
+        if (!first) return true;
+        const currentBaseTop = first.offsetTop;
+        return Math.abs(btn.offsetTop - currentBaseTop) <= 10;
       };
 
       if (!isBtnOnFirstLine()) {
-          for (let item of itemsToHide) {
-              if (item.classList.contains("post-card__label")) continue;
+        for (let item of itemsToHide) {
+          if (item.classList.contains("post-card__label")) continue;
 
-              item.style.display = "none";
-              
-              if (isBtnOnFirstLine()) {
-                  break; 
-              }
+          item.style.display = "none";
+
+          if (isBtnOnFirstLine()) {
+            break;
           }
+        }
       }
 
       // 4. Xử lý sự kiện click
       btn.onclick = (e) => {
-          e.stopPropagation();
-          e.preventDefault();
+        e.stopPropagation();
+        e.preventDefault();
 
-          if (btn.textContent === "Mở rộng") {
-              // Mở rộng: Hiện tất cả
-              Array.from(container.children).forEach(c => c.style.display = "");
-              btn.textContent = "Thu gọn";
-          } else {
-              // Thu gọn: Chạy lại logic ẩn
-              btn.textContent = "Mở rộng";
-              const currentChildren = Array.from(container.children);
-              const tags = currentChildren.slice(0, -1).reverse();
-              
-              // Unhide hết để tính toán lại chính xác vị trí ban đầu
-              Array.from(container.children).forEach(c => c.style.display = "");
+        if (btn.textContent === "Mở rộng") {
+          // Mở rộng: Hiện tất cả
+          Array.from(container.children).forEach((c) => (c.style.display = ""));
+          btn.textContent = "Thu gọn";
+        } else {
+          // Thu gọn: Chạy lại logic ẩn
+          btn.textContent = "Mở rộng";
+          const currentChildren = Array.from(container.children);
+          const tags = currentChildren.slice(0, -1).reverse();
 
-              if (!isBtnOnFirstLine()) {
-                  for (let item of tags) {
-                      if (item.classList.contains("post-card__label")) continue;
-                      item.style.display = "none";
-                      if (isBtnOnFirstLine()) break;
-                  }
-              }
+          // Unhide hết để tính toán lại chính xác vị trí ban đầu
+          Array.from(container.children).forEach((c) => (c.style.display = ""));
+
+          if (!isBtnOnFirstLine()) {
+            for (let item of tags) {
+              if (item.classList.contains("post-card__label")) continue;
+              item.style.display = "none";
+              if (isBtnOnFirstLine()) break;
+            }
           }
+        }
       };
     };
 
@@ -520,14 +522,14 @@ document.addEventListener("DOMContentLoaded", function () {
     // Xử lý resize
     let resizeTimer;
     window.addEventListener("resize", () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-            authorContainers.forEach(container => {
-                 const btn = container.querySelector(".inline-read-more");
-                 if (btn && btn.textContent === "Thu gọn") return;
-                 processContainer(container);
-            });
-        }, 250);
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        authorContainers.forEach((container) => {
+          const btn = container.querySelector(".inline-read-more");
+          if (btn && btn.textContent === "Thu gọn") return;
+          processContainer(container);
+        });
+      }, 250);
     });
   }
 

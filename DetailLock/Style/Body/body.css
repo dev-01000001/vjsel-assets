@@ -1789,3 +1789,20 @@ html {
         margin: 0 !important;
     }
 }
+
+/* ========================================
+   Mobile + Tablet: Tắt active xanh TOC (≤ 1023px)
+   ======================================== */
+@media (max-width: 1023px) {
+    .toc-list__item--active {
+        border-left: 2px solid #DCDFE4 !important;
+        color: #667085 !important;
+        font-family: var(--font-roboto) !important;
+        font-weight: 400 !important;
+    }
+
+    .toc-list__item:hover {
+        color: #667085 !important;
+        border-left-color: #DCDFE4 !important;
+    }
+}

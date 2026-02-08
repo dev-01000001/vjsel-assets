@@ -56,7 +56,8 @@ html {
     align-items: flex-start;
     padding: 12px 80px 48px 0px;
     gap: 24px;
-    width: 33.5%; /* Was 467px fixed */
+    width: 33.5%;
+    /* Was 467px fixed */
     min-width: 320px;
     height: auto;
     flex: none;
@@ -120,11 +121,15 @@ html {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    padding: 4px 0; /* Add padding to avoid cutting off shadows/content */
+    padding: 4px 0;
+    /* Add padding to avoid cutting off shadows/content */
     gap: 12px;
-    width: auto; /* Was 845px */
-    flex: 1; /* Allow flexible width */
-    height: auto; /* Was 80px - Changed to auto to fit content */
+    width: auto;
+    /* Was 845px */
+    flex: 1;
+    /* Allow flexible width */
+    height: auto;
+    /* Was 80px - Changed to auto to fit content */
     /* min-height: 80px; */
     overflow-x: auto;
     overflow-y: hidden;
@@ -149,7 +154,8 @@ html {
     padding: 0;
     gap: 4px;
     width: 220px;
-    height: auto; /* Was 80px - Let it grow */
+    height: auto;
+    /* Was 80px - Let it grow */
     /* min-height: 80px; */
     flex: none;
     flex-grow: 0;
@@ -264,7 +270,8 @@ html {
     justify-content: center;
     align-items: center;
     padding: 0;
-    position: static; /* Was absolute */
+    position: static;
+    /* Was absolute */
     width: 38px;
     height: 38px;
     /* removed left/top */
@@ -275,8 +282,10 @@ html {
     cursor: pointer;
     transition: all 0.2s;
     z-index: 10;
-    flex: none; /* Prevent shrinking */
-    margin-left: auto; /* Push to right if container is flex */
+    flex: none;
+    /* Prevent shrinking */
+    margin-left: auto;
+    /* Push to right if container is flex */
 }
 
 .author-list__scroll-btn:hover {
@@ -548,9 +557,12 @@ html {
     align-items: flex-start;
     padding: 0;
     gap: 24px;
-    width: auto; /* Changed from 100% to auto to prevent overflow */
-    flex: 1; /* Allow to grow and fill remaining space */
-    min-width: 0; /* Allow shrinking for text wrapping */
+    width: auto;
+    /* Changed from 100% to auto to prevent overflow */
+    flex: 1;
+    /* Allow to grow and fill remaining space */
+    min-width: 0;
+    /* Allow shrinking for text wrapping */
     order: 1;
 }
 
@@ -615,7 +627,8 @@ html {
     font-weight: 400;
     font-size: 16px;
     line-height: 140%;
-    display: block; /* Changed from flex to block for text flow */
+    display: block;
+    /* Changed from flex to block for text flow */
     color: #212636;
     flex: none;
     order: 1;
@@ -653,7 +666,8 @@ html {
     font-weight: 400;
     font-size: 16px;
     line-height: 140%;
-    display: block; /* Changed from flex to block */
+    display: block;
+    /* Changed from flex to block */
     color: #212636;
     flex: none;
     order: 1;
@@ -672,7 +686,8 @@ html {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    width: 100%; /* Ensure container takes full width */
+    width: 100%;
+    /* Ensure container takes full width */
 }
 
 /* ref (Figma Frame: ref) */
@@ -717,14 +732,16 @@ html {
     font-weight: 400;
     font-size: 16px;
     line-height: 140%;
-    display: block; /* Changed for better text flow */
+    display: block;
+    /* Changed for better text flow */
     color: #212636;
     flex: none;
     order: 1;
     flex-grow: 1;
     z-index: 1;
     letter-spacing: 0.005em;
-    word-break: break-word; /* Changed to break-word for better reading */
+    word-break: break-word;
+    /* Changed to break-word for better reading */
 }
 
 /* link (Figma Frame: link) */
@@ -735,13 +752,18 @@ html {
     align-items: center;
     padding: 0;
     gap: 10px;
-    position: static; /* Was absolute */
-    width: auto; /* Was 50px */
-    height: auto; /* Was 20px */
-    margin: 0 0 0 8px; /* Add left margin */
+    position: static;
+    /* Was absolute */
+    width: auto;
+    /* Was 50px */
+    height: auto;
+    /* Was 20px */
+    margin: 0 0 0 8px;
+    /* Add left margin */
     vertical-align: middle;
     flex: none;
-    order: 2; /* Order likely ignored if inside text block, but kept for safety */
+    order: 2;
+    /* Order likely ignored if inside text block, but kept for safety */
     flex-grow: 0;
 }
 
@@ -772,7 +794,8 @@ html {
 }
 
 .btn--primary {
-    width: 100%; /* Was 339px */
+    width: 100%;
+    /* Was 339px */
     height: 38px;
     background: #007FFF;
     order: 1;
@@ -790,7 +813,8 @@ html {
 
 .btn--secondary {
     box-sizing: border-box;
-    width: 100%; /* Was 339px */
+    width: 100%;
+    /* Was 339px */
     height: 38px;
     background: #FDFDFD;
     border: 1px solid rgba(30, 136, 229, 0.5);
@@ -811,7 +835,8 @@ html {
     display: flex;
     flex-direction: row;
     box-sizing: border-box;
-    width: auto; /* Was 228px */
+    width: auto;
+    /* Was 228px */
     height: 32px;
     justify-content: center;
     align-items: center;
@@ -859,8 +884,10 @@ html {
     align-items: flex-start;
     padding: 24px;
     gap: 16px;
-    width: 100%; /* Was 387px */
-    height: auto; /* Was 456px */
+    width: 100%;
+    /* Was 387px */
+    height: auto;
+    /* Was 456px */
     background: #FFFFFF;
     border-radius: 12px;
     flex: none;
@@ -869,8 +896,10 @@ html {
 }
 
 .access-card__title {
-    width: 100%; /* Was 165px */
-    height: auto; /* Was 28px */
+    width: 100%;
+    /* Was 165px */
+    height: auto;
+    /* Was 28px */
     font-family: var(--font-merriweather);
     font-style: normal;
     font-weight: 700;
@@ -885,7 +914,8 @@ html {
 }
 
 .access-card__divider {
-    width: 100%; /* Was 339px */
+    width: 100%;
+    /* Was 339px */
     height: 0;
     border: 1px solid #DCDFE4;
     flex: none;
@@ -903,7 +933,8 @@ html {
     align-items: flex-start;
     padding: 0;
     gap: 0;
-    width: 100%; /* Was 339px */
+    width: 100%;
+    /* Was 339px */
     flex: none;
     order: 4;
     align-self: stretch;
@@ -920,7 +951,8 @@ html {
     align-items: flex-start;
     padding: 0;
     gap: 0;
-    width: 100%; /* Was 339px */
+    width: 100%;
+    /* Was 339px */
     height: 52px;
     flex: none;
     align-self: stretch;
@@ -934,7 +966,8 @@ html {
     align-items: center;
     padding: 4px 0px;
     gap: 4px;
-    width: 33.33%; /* Was 113px */
+    width: 33.33%;
+    /* Was 113px */
     height: 52px;
     box-sizing: border-box;
     flex: none;
@@ -980,8 +1013,10 @@ html {
     align-items: center;
     padding: 12px;
     gap: 12px;
-    width: 100%; /* Was 339px */
-    height: auto; /* Was 188px */
+    width: 100%;
+    /* Was 339px */
+    height: auto;
+    /* Was 188px */
     background: #F3F9FF;
     border-radius: 12px;
     flex: none;
@@ -989,21 +1024,25 @@ html {
 }
 
 .citation-box__text {
-    width: 100%; /* Was 315px */
-    height: auto; /* Was 120px */
+    width: 100%;
+    /* Was 315px */
+    height: auto;
+    /* Was 120px */
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 140%;
-    display: block; /* Changed from flex to block */
+    display: block;
+    /* Changed from flex to block */
     color: #212636;
     flex: none;
     order: 0;
     align-self: stretch;
     flex-grow: 0;
     margin: 0;
-    word-break: break-word; /* Ensure long words/URLs break */
+    word-break: break-word;
+    /* Ensure long words/URLs break */
     overflow-wrap: break-word;
 }
 
@@ -1016,8 +1055,10 @@ html {
     align-items: flex-start;
     padding: 24px;
     gap: 16px;
-    width: 100%; /* Was 387px */
-    height: auto; /* Was 248px */
+    width: 100%;
+    /* Was 387px */
+    height: auto;
+    /* Was 248px */
     background: #FFFFFF;
     border-radius: 12px;
     flex: none;
@@ -1026,8 +1067,10 @@ html {
 }
 
 .issue-card__title {
-    width: 100%; /* Was 159px */
-    height: auto; /* Was 34px */
+    width: 100%;
+    /* Was 159px */
+    height: auto;
+    /* Was 34px */
     font-family: var(--font-merriweather);
     font-style: normal;
     font-weight: 700;
@@ -1047,8 +1090,10 @@ html {
     align-items: flex-start;
     padding: 0;
     gap: 16px;
-    width: 100%; /* Was 339px */
-    height: auto; /* Was 150px */
+    width: 100%;
+    /* Was 339px */
+    height: auto;
+    /* Was 150px */
     flex: none;
     order: 1;
     align-self: stretch;
@@ -1056,7 +1101,8 @@ html {
 }
 
 .issue-card__cover {
-    width: 107px; /* Kept fixed for image consistency */
+    width: 107px;
+    /* Kept fixed for image consistency */
     height: 150px;
     box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
     flex: none;
@@ -1071,15 +1117,19 @@ html {
     align-items: flex-start;
     padding: 0;
     gap: 4px;
-    width: auto; /* Was 216px */
-    height: auto; /* Was 80px */
-    flex: 1; /* Allow to fill remaining space */
+    width: auto;
+    /* Was 216px */
+    height: auto;
+    /* Was 80px */
+    flex: 1;
+    /* Allow to fill remaining space */
     order: 1;
     flex-grow: 1;
 }
 
 .issue-card__name {
-    width: 100%; /* Was 216px */
+    width: 100%;
+    /* Was 216px */
     font-family: var(--font-merriweather);
     font-style: normal;
     font-weight: 700;
@@ -1117,15 +1167,18 @@ html {
     align-items: flex-start;
     padding: 24px;
     gap: 16px;
-    width: 100%; /* Was 387px */
-    height: auto; /* Was 332px */
+    width: 100%;
+    /* Was 387px */
+    height: auto;
+    /* Was 332px */
     background: #FFFFFF;
     border-radius: 12px;
     flex: none;
     order: 2;
-    align-self: flex-start; /* Changed from stretch to flex-start for sticky to work */
+    align-self: flex-start;
+    /* Changed from stretch to flex-start for sticky to work */
     flex-grow: 0;
-    
+
     /* Sticky positioning */
     position: sticky;
     top: 90px;
@@ -1133,8 +1186,10 @@ html {
 }
 
 .toc-card__title {
-    width: 100%; /* Was 114px */
-    height: auto; /* Was 34px */
+    width: 100%;
+    /* Was 114px */
+    height: auto;
+    /* Was 34px */
     font-family: var(--font-merriweather);
     font-style: normal;
     font-weight: 700;
@@ -1154,7 +1209,8 @@ html {
     align-items: flex-start;
     padding: 0;
     gap: 4px;
-    width: 100%; /* Was 339px */
+    width: 100%;
+    /* Was 339px */
     flex: none;
     order: 1;
     align-self: stretch;
@@ -1169,8 +1225,10 @@ html {
     align-items: flex-start;
     padding: 4px 8px;
     gap: 4px;
-    width: 100%; /* Was 339px */
-    height: auto; /* Was 30px */
+    width: 100%;
+    /* Was 339px */
+    height: auto;
+    /* Was 30px */
     border-left: 2px solid #DCDFE4;
     flex: none;
     align-self: stretch;
@@ -1230,7 +1288,8 @@ html {
     .article__sidebar {
         width: calc((100% - 32px) * 0.335);
         flex: none;
-        padding-right: 24px; /* Adjusted padding */
+        padding-right: 24px;
+        /* Adjusted padding */
     }
 
     .article__header,
@@ -1277,7 +1336,8 @@ html {
         width: calc(50% - 12px) !important;
         order: 2;
         /* Adjust sticky behavior if needed, currently it might just sit in flow */
-        position: static !important; /* Disable sticky in this specific layout if it causes issues, or keep it */
+        position: static !important;
+        /* Disable sticky in this specific layout if it causes issues, or keep it */
         height: auto !important;
     }
 }
@@ -1352,7 +1412,8 @@ html {
     }
 
     .author-list__scroll-btn {
-        display: flex !important; /* Show scroll button */
+        display: flex !important;
+        /* Show scroll button */
         position: static !important;
         margin-left: auto !important;
     }
@@ -1559,7 +1620,8 @@ html {
         width: 100% !important;
         padding: 0 24px !important;
         align-items: stretch !important;
-        gap: 24px !important; /* Ensure gap between columns */
+        gap: 24px !important;
+        /* Ensure gap between columns */
     }
 
     /* First row: Access Card - Full Width */
@@ -1571,17 +1633,36 @@ html {
 
     /* Second row: Issue Card (Left) & TOC Card (Right) */
     .issue-card {
-        width: calc(50% - 12px) !important; /* 50% minus half gap */
+        width: calc(50% - 12px) !important;
+        /* 50% minus half gap */
         order: 1;
         height: auto !important;
         margin: 0 !important;
     }
 
     .toc-card {
-        width: calc(50% - 12px) !important; /* 50% minus half gap */
+        width: calc(50% - 12px) !important;
+        /* 50% minus half gap */
         order: 2;
-        position: static !important; 
+        position: static !important;
         height: auto !important;
         margin: 0 !important;
+    }
+}
+
+/* ========================================
+   Mobile + Tablet: Tắt active xanh TOC (≤ 1023px)
+   ======================================== */
+@media (max-width: 1023px) {
+    .toc-list__item--active {
+        border-left: 2px solid #DCDFE4 !important;
+        color: #667085 !important;
+        font-family: var(--font-roboto) !important;
+        font-weight: 400 !important;
+    }
+
+    .toc-list__item:hover {
+        color: #667085 !important;
+        border-left-color: #DCDFE4 !important;
     }
 }
