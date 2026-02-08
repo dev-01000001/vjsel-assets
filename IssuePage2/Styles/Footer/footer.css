@@ -417,7 +417,7 @@
         min-width: 0 !important;
         box-sizing: border-box !important;
         position: sticky !important;
-        top: 0 !important;
+        top: var(--header-sticky-top, 0px) !important;
     }
 
     .related-posts,

@@ -220,6 +220,46 @@
     arrowsContainer.style.display = hasOverflow ? "flex" : "none";
   }
 
+  /**
+   * System B: dùng sticky với top âm để chỉ hiện nav row khi scroll
+   * Logo + Actions bị đẩy lên trên viewport, chỉ nav dính lại
+   */
+  function updateStickyOffset() {
+    if (systemType !== "B") return;
+    var header = document.querySelector(".site-header");
+    if (!header || !navParent) return;
+
+    if (window.innerWidth < BREAKPOINT) {
+      // Bắt buộc reflow trước khi đo
+      header.offsetHeight;
+
+      // navParent = .site-header__nav
+      // offsetTop = khoảng cách từ top padding-edge của header đến top nav
+      var navTop = navParent.offsetTop;
+
+      // Fallback: nếu offsetTop = 0 (chưa reflow kịp), tính thủ công
+      if (navTop <= 0) {
+        // Đo chiều cao logo row = max(logo.offsetHeight, actions.offsetHeight) + padding-top + gap
+        var logo = header.querySelector(".site-header__logo");
+        var actions = header.querySelector(".site-header__actions");
+        var logoH = logo ? logo.offsetHeight : 0;
+        var actionsH = actions ? actions.offsetHeight : 0;
+        var rowH = Math.max(logoH, actionsH);
+        // Lấy computed padding-top và gap
+        var cs = window.getComputedStyle(header);
+        var padTop = parseFloat(cs.paddingTop) || 0;
+        var rowGap = parseFloat(cs.rowGap) || parseFloat(cs.gap) || 0;
+        navTop = padTop + rowH + rowGap;
+      }
+
+      if (navTop > 0) {
+        header.style.setProperty("--header-sticky-top", "-" + navTop + "px");
+      }
+    } else {
+      header.style.removeProperty("--header-sticky-top");
+    }
+  }
+
   function handleResize() {
     var width = window.innerWidth;
 
@@ -240,11 +280,23 @@
         teardownDom();
       }
     }
+
+    // Tính lại sticky offset (đợi 1 frame để layout xong)
+    requestAnimationFrame(function () {
+      updateStickyOffset();
+    });
   }
 
   function init() {
     if (!detectNavSystem()) return;
     handleResize();
+
+    // Tính lại sau khi mọi thứ đã load xong (fonts, images, etc.)
+    if (systemType === "B") {
+      window.addEventListener("load", function () {
+        updateStickyOffset();
+      });
+    }
 
     var resizeTimer;
     window.addEventListener("resize", function () {
