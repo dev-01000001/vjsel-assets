@@ -32,3 +32,8 @@ body {
     background-color: var(--color-bg-white);
     line-height: 1.4;
 }
+
+.swiper {
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}

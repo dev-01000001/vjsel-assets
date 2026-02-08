@@ -1,10 +1,17 @@
 /* ========================================
-   Style phần body trang chi tiết
-   Các component theo bố cục Figma
+   Detail Page Body Styles - Figma Synchronized
+   All component styles matching Figma auto-layout
    ======================================== */
 
 /* ========================================
-   Container nội dung chính
+   Smooth Scroll Behavior
+   ======================================== */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ========================================
+   Main Content Container
    ======================================== */
 .article {
     width: 100%;
@@ -22,7 +29,7 @@
 .article__content {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: stretch;
     padding: 0;
     gap: 48px;
     width: 100%;
@@ -49,16 +56,19 @@
     align-items: flex-start;
     padding: 12px 80px 48px 0px;
     gap: 24px;
-    width: 467px;
-    height: 944px;
+    width: 33.5%;
+    /* Was 467px fixed */
+    min-width: 320px;
+    height: auto;
     flex: none;
     order: 1;
     flex-grow: 1;
     position: relative;
+    box-sizing: border-box;
 }
 
 /* ========================================
-   Tiêu đề bài viết
+   Article Header
    ======================================== */
 .article__header {
     display: flex;
@@ -67,7 +77,7 @@
     padding: 12px 0 24px 80px;
     gap: 24px;
     width: 925px;
-    height: 320px;
+    height: auto;
     flex: none;
     order: 0;
     align-self: stretch;
@@ -77,14 +87,14 @@
 
 .article__title {
     width: 845px;
-    height: 90px;
+    height: auto;
     font-family: var(--font-merriweather);
     font-style: normal;
     font-weight: 700;
     font-size: 32px;
     line-height: 140%;
     letter-spacing: 0.5px;
-    /* Giãn rộng chu text */
+    /* Adjust spacing to match Figma rendering width - Force wider text */
     display: flex;
     align-items: center;
     color: #111827;
@@ -94,31 +104,47 @@
 }
 
 /* ========================================
-   Danh sách tác giả
+   Author List & Cards
    ======================================== */
+.author-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    gap: 12px;
+    order: 1;
+    align-self: stretch;
+}
+
 .author-list {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    padding: 0;
+    padding: 4px 0;
+    /* Add padding to avoid cutting off shadows/content */
     gap: 12px;
-    width: 845px;
-    height: 80px;
-    flex: none;
-    order: 1;
-    align-self: stretch;
-    flex-grow: 0;
+    width: auto;
+    /* Was 845px */
+    flex: 1;
+    /* Allow flexible width */
+    height: auto;
+    /* Was 80px - Changed to auto to fit content */
+    /* min-height: 80px; */
     overflow-x: auto;
     overflow-y: hidden;
     position: relative;
     scroll-behavior: smooth;
-    /* Ẩn thanh cuộn */
+    /* Hide scrollbar */
     scrollbar-width: none;
+    /* Firefox */
     -ms-overflow-style: none;
+    /* IE and Edge */
 }
 
 .author-list::-webkit-scrollbar {
     display: none;
+    /* Chrome, Safari, Opera */
 }
 
 .author-card {
@@ -128,7 +154,9 @@
     padding: 0;
     gap: 4px;
     width: 220px;
-    height: 80px;
+    height: auto;
+    /* Was 80px - Let it grow */
+    /* min-height: 80px; */
     flex: none;
     flex-grow: 0;
 }
@@ -182,7 +210,7 @@
     padding: 0;
     gap: 0px;
     width: 168px;
-    height: 80px;
+    /* height: 80px; */
     flex: none;
     order: 1;
     flex-grow: 1;
@@ -233,7 +261,7 @@
 }
 
 /* ========================================
-   Nút cuộn danh sách tác giả
+   Author List Scroll Button
    ======================================== */
 .author-list__scroll-btn {
     box-sizing: border-box;
@@ -242,11 +270,11 @@
     justify-content: center;
     align-items: center;
     padding: 0;
-    position: absolute;
+    position: static;
+    /* Was absolute */
     width: 38px;
     height: 38px;
-    left: 906px;
-    top: 136px;
+    /* removed left/top */
     background: #FDFDFD;
     border: 1px solid rgba(30, 136, 229, 0.5);
     box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
@@ -254,6 +282,10 @@
     cursor: pointer;
     transition: all 0.2s;
     z-index: 10;
+    flex: none;
+    /* Prevent shrinking */
+    margin-left: auto;
+    /* Push to right if container is flex */
 }
 
 .author-list__scroll-btn:hover {
@@ -266,6 +298,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    /* Remove padding that shrinks the icon if box-sizing is border-box */
     padding: 0;
     width: 38px;
     height: 38px;
@@ -273,6 +306,7 @@
     order: 0;
     flex-grow: 0;
     position: relative;
+    /* Context for absolute icon */
 }
 
 .author-list__scroll-icon {
@@ -293,11 +327,11 @@
     object-fit: contain;
     display: block;
     transform: scale(1.4);
-    /* Phóng to icon */
+    /* Visually increase size to match design feel */
 }
 
 /* ========================================
-   Thông tin xuất bản
+   Publication Info
    ======================================== */
 .publication-info {
     display: flex;
@@ -305,7 +339,7 @@
     align-items: center;
     padding: 0;
     gap: 16px;
-    width: 478px;
+    width: 484px;
     height: 22px;
     flex: none;
     order: 2;
@@ -381,7 +415,7 @@
 }
 
 /* ========================================
-   Thống kê bài viết
+   Statistics Row
    ======================================== */
 .stats {
     display: flex;
@@ -430,25 +464,28 @@
 }
 
 /* ========================================
-   Nội dung bài viết & Sidebar hành động
+   Article Body & Action Sidebar
    ======================================== */
 
-/* Khung chứa nội dung chính và sidebar */
+/* Content (Figma Frame: Content) */
+/* Khung chứa nội dung chính và sidebar hành động */
 .article__body {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     padding: 24px 0 48px 80px;
     gap: 24px;
-    width: 925px;
-    min-height: 1768.12px;
+    width: 100%;
+    min-height: auto;
+    /* User strict request: 925x1942 */
     flex: none;
     order: 1;
     align-self: stretch;
     flex-grow: 0;
 }
 
-/* Thanh sidebar các hành động (Like, Share...) */
+/* List (Figma Frame: List) */
+/* Thanh sidebar chứa các hành động (Like, Share, etc.) */
 .action-sidebar {
     display: flex;
     flex-direction: column;
@@ -467,6 +504,7 @@
     align-self: flex-start;
 }
 
+/* Icon (Figma Frame: Icon) */
 /* Nút hành động trong sidebar */
 .action-sidebar__btn {
     display: flex;
@@ -508,15 +546,8 @@
 }
 
 /* ========================================
-   Phần nội dung chính
+   Main Content Sections
    ======================================== */
-
-/* Khu vực hiển thị nội dung bài (Tóm tắt, Kết quả...) */
-/* ============================================
-   KHÓA NỘI DUNG - CSS THUẦN
-   Chuyển từ React sang HTML/CSS 1:1
-   Bố cục BEM, dễ bảo trì
-   ============================================ */
 
 /* 1. Container chính phần khóa nội dung */
 .content-lock {
@@ -784,89 +815,23 @@
     white-space: nowrap;
 }
 
-/* 6. Responsive cho Mobile */
-@media (max-width: 768px) {
-    .content-lock__lockout {
-        padding: 32px 16px;
-        min-height: auto;
-    }
-
-    .content-lock__title {
-        font-size: 18px;
-    }
-
-    .content-lock__description {
-        font-size: 14px;
-        max-width: 100%;
-    }
-
-    .content-lock__benefit-icon {
-        margin-right: 12px;
-    }
-
-    .content-lock__benefit-item {
-        padding: 4px 12px;
-    }
-
-    .content-lock__benefits {
-        max-width: 100%;
-        padding: 8px;
-    }
-
-    .content-lock__btn--signin {
-        width: 100%;
-        max-width: 100%;
-    }
-}
-
-@media (max-width: 480px) {
-    .content-lock__lockout {
-        padding: 24px 12px;
-        gap: 12px;
-    }
-
-    .content-lock__badge {
-        width: 56px;
-        height: 56px;
-        padding: 12px;
-    }
-
-    .content-lock__badge-icon {
-        width: 28px;
-        height: 28px;
-    }
-
-    .content-lock__title {
-        font-size: 16px;
-    }
-
-    .content-lock__description {
-        font-size: 13px;
-    }
-
-    .content-lock__benefit-text {
-        font-size: 13px;
-    }
-
-    .content-lock__btn-text,
-    .content-lock__register-prompt,
-    .content-lock__register-link {
-        font-size: 14px;
-    }
-}
 
 /* ========================================
-   Danh sách tài liệu tham khảo
+   Reference List
    ======================================== */
 
-/* Container danh sách */
+/* Reference List Container */
+/* Danh sách tài liệu tham khảo */
 .reference-list {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    width: 100%;
+    /* Ensure container takes full width */
 }
 
-/* Một mục tài liệu */
+/* ref (Figma Frame: ref) */
+/* Một mục tài liệu tham khảo */
 .reference-item {
     display: flex;
     flex-direction: row;
@@ -874,12 +839,13 @@
     padding: 0;
     gap: 4px;
     isolation: isolate;
-    width: 629px;
+    width: 100%;
     position: relative;
     flex: none;
     flex-grow: 0;
 }
 
+/* Reference Number */
 /* Số thứ tự (1., 2., ...) */
 .reference-item__number {
     width: 24px;
@@ -896,44 +862,49 @@
     z-index: 0;
 }
 
+/* Reference Text */
 /* Nội dung trích dẫn */
 .reference-item__text {
-    width: 601px;
-    height: 66px;
+    width: 100%;
+    height: auto;
     font-family: var(--font-roboto);
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 140%;
-    display: flex;
-    align-items: center;
+    display: block;
+    /* Changed for better text flow */
     color: #212636;
     flex: none;
     order: 1;
     flex-grow: 1;
     z-index: 1;
     letter-spacing: 0.005em;
-    word-break: break-all;
+    word-break: break-word;
+    /* Changed to break-word for better reading */
 }
 
+/* link (Figma Frame: link) */
 /* Các icon liên kết (PDF, Link) */
 .reference-item__links {
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
     align-items: center;
     padding: 0;
     gap: 10px;
-    position: absolute;
-    width: 50px;
-    height: 20px;
-    left: 188px;
-    top: 46px;
+    position: static;
+    /* Was absolute */
+    width: auto;
+    /* Was 50px */
+    height: auto;
+    /* Was 20px */
+    margin: 0 0 0 8px;
+    /* Add left margin */
+    vertical-align: middle;
     flex: none;
     order: 2;
+    /* Order likely ignored if inside text block, but kept for safety */
     flex-grow: 0;
-    z-index: 2;
-    margin: 0;
-    vertical-align: baseline;
 }
 
 .reference-item__link-icon {
@@ -944,7 +915,7 @@
 }
 
 /* ========================================
-   Các kiểu nút
+   Button Components
    ======================================== */
 .btn {
     display: flex;
@@ -963,7 +934,8 @@
 }
 
 .btn--primary {
-    width: 339px;
+    width: 100%;
+    /* Was 339px */
     height: 38px;
     background: #007FFF;
     order: 1;
@@ -981,7 +953,8 @@
 
 .btn--secondary {
     box-sizing: border-box;
-    width: 339px;
+    width: 100%;
+    /* Was 339px */
     height: 38px;
     background: #FDFDFD;
     border: 1px solid rgba(30, 136, 229, 0.5);
@@ -1002,7 +975,8 @@
     display: flex;
     flex-direction: row;
     box-sizing: border-box;
-    width: 205px;
+    width: auto;
+    /* Was 228px */
     height: 32px;
     justify-content: center;
     align-items: center;
@@ -1042,7 +1016,7 @@
 }
 
 /* ========================================
-   Card truy cập
+   Access Card
    ======================================== */
 .access-card {
     display: flex;
@@ -1050,8 +1024,10 @@
     align-items: flex-start;
     padding: 24px;
     gap: 16px;
-    width: 387px;
-    height: 260px;
+    width: 100%;
+    /* Was 387px */
+    height: auto;
+    /* Was 456px */
     background: #FFFFFF;
     border-radius: 12px;
     flex: none;
@@ -1060,8 +1036,10 @@
 }
 
 .access-card__title {
-    width: 179px;
-    height: 28px;
+    width: 100%;
+    /* Was 165px */
+    height: auto;
+    /* Was 28px */
     font-family: var(--font-merriweather);
     font-style: normal;
     font-weight: 700;
@@ -1076,7 +1054,8 @@
 }
 
 .access-card__divider {
-    width: 339px;
+    width: 100%;
+    /* Was 339px */
     height: 0;
     border: 1px solid #DCDFE4;
     flex: none;
@@ -1086,7 +1065,7 @@
 }
 
 /* ========================================
-   Phần trích dẫn
+   Citation Section Container
    ======================================== */
 .citation-container {
     display: flex;
@@ -1094,7 +1073,8 @@
     align-items: flex-start;
     padding: 0;
     gap: 0;
-    width: 339px;
+    width: 100%;
+    /* Was 339px */
     flex: none;
     order: 4;
     align-self: stretch;
@@ -1102,7 +1082,7 @@
 }
 
 /* ========================================
-   Tab trích dẫn
+   Citation Tabs
    ======================================== */
 .citation-tabs {
     display: flex;
@@ -1111,7 +1091,8 @@
     align-items: flex-start;
     padding: 0;
     gap: 0;
-    width: 339px;
+    width: 100%;
+    /* Was 339px */
     height: 52px;
     flex: none;
     align-self: stretch;
@@ -1125,7 +1106,8 @@
     align-items: center;
     padding: 4px 0px;
     gap: 4px;
-    width: 113px;
+    width: 33.33%;
+    /* Was 113px */
     height: 52px;
     box-sizing: border-box;
     flex: none;
@@ -1144,7 +1126,7 @@
     transition: all 0.2s;
 }
 
-/* .citation-tabs__tab:hover {
+.citation-tabs__tab:hover {
     color: var(--color-primary);
 }
 
@@ -1158,11 +1140,54 @@
     height: 20px;
     flex: none;
     flex-grow: 0;
-} */
+}
+
 
 
 /* ========================================
-   Card số phát hành
+   Citation Box
+   ======================================== */
+.citation-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+    gap: 12px;
+    width: 100%;
+    /* Was 339px */
+    height: auto;
+    /* Was 188px */
+    background: #F3F9FF;
+    border-radius: 12px;
+    flex: none;
+    flex-grow: 0;
+}
+
+.citation-box__text {
+    width: 100%;
+    /* Was 315px */
+    height: auto;
+    /* Was 120px */
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 140%;
+    display: block;
+    /* Changed from flex to block */
+    color: #212636;
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+    margin: 0;
+    word-break: break-word;
+    /* Ensure long words/URLs break */
+    overflow-wrap: break-word;
+}
+
+/* ========================================
+   Issue Card
    ======================================== */
 .issue-card {
     display: flex;
@@ -1170,8 +1195,10 @@
     align-items: flex-start;
     padding: 24px;
     gap: 16px;
-    width: 387px;
-    height: 248px;
+    width: 100%;
+    /* Was 387px */
+    height: auto;
+    /* Was 248px */
     background: #FFFFFF;
     border-radius: 12px;
     flex: none;
@@ -1180,8 +1207,10 @@
 }
 
 .issue-card__title {
-    width: 64px;
-    height: 34px;
+    width: 100%;
+    /* Was 159px */
+    height: auto;
+    /* Was 34px */
     font-family: var(--font-merriweather);
     font-style: normal;
     font-weight: 700;
@@ -1201,8 +1230,10 @@
     align-items: flex-start;
     padding: 0;
     gap: 16px;
-    width: 339px;
-    height: 150px;
+    width: 100%;
+    /* Was 339px */
+    height: auto;
+    /* Was 150px */
     flex: none;
     order: 1;
     align-self: stretch;
@@ -1211,6 +1242,7 @@
 
 .issue-card__cover {
     width: 107px;
+    /* Kept fixed for image consistency */
     height: 150px;
     box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
     flex: none;
@@ -1225,15 +1257,19 @@
     align-items: flex-start;
     padding: 0;
     gap: 4px;
-    width: 216px;
-    height: 80px;
-    flex: none;
+    width: auto;
+    /* Was 216px */
+    height: auto;
+    /* Was 80px */
+    flex: 1;
+    /* Allow to fill remaining space */
     order: 1;
     flex-grow: 1;
 }
 
 .issue-card__name {
-    width: 216px;
+    width: 100%;
+    /* Was 216px */
     font-family: var(--font-merriweather);
     font-style: normal;
     font-weight: 700;
@@ -1263,7 +1299,7 @@
 }
 
 /* ========================================
-   Mục lục
+   Table of Contents
    ======================================== */
 .toc-card {
     display: flex;
@@ -1271,19 +1307,29 @@
     align-items: flex-start;
     padding: 24px;
     gap: 16px;
-    width: 387px;
-    height: 332px;
+    width: 100%;
+    /* Was 387px */
+    height: auto;
+    /* Was 332px */
     background: #FFFFFF;
     border-radius: 12px;
     flex: none;
     order: 2;
-    align-self: stretch;
+    align-self: flex-start;
+    /* Changed from stretch to flex-start for sticky to work */
     flex-grow: 0;
+
+    /* Sticky positioning */
+    position: sticky;
+    top: 90px;
+    z-index: 10;
 }
 
 .toc-card__title {
-    width: 157px;
-    height: 34px;
+    width: 100%;
+    /* Was 114px */
+    height: auto;
+    /* Was 34px */
     font-family: var(--font-merriweather);
     font-style: normal;
     font-weight: 700;
@@ -1303,7 +1349,8 @@
     align-items: flex-start;
     padding: 0;
     gap: 4px;
-    width: 339px;
+    width: 100%;
+    /* Was 339px */
     flex: none;
     order: 1;
     align-self: stretch;
@@ -1318,8 +1365,10 @@
     align-items: flex-start;
     padding: 4px 8px;
     gap: 4px;
-    width: 339px;
-    height: 30px;
+    width: 100%;
+    /* Was 339px */
+    height: auto;
+    /* Was 30px */
     border-left: 2px solid #DCDFE4;
     flex: none;
     align-self: stretch;
@@ -1332,6 +1381,13 @@
     color: #667085;
     cursor: pointer;
     transition: all 0.2s;
+}
+
+.toc-list__link {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+    width: 100%;
 }
 
 .toc-list__item:hover {
@@ -1349,34 +1405,112 @@
     color: #0074E8;
 }
 
-/* ========================================
-   RESPONSIVE (<= 1439px)
-   ======================================== */
-@media (max-width: 1439px) {
 
-    /* Reset toàn cục trong scope */
+/* ========================================
+   Responsive Desktop (1024px - 1440px)
+   ======================================== */
+@media (min-width: 1024px) and (max-width: 1439px) {
+    .article__container {
+        max-width: 100%;
+        padding: 0 24px;
+    }
+
+    .article__content {
+        max-width: 100%;
+        gap: 32px;
+    }
+
+    .article__left {
+        width: calc((100% - 32px) * 0.665);
+        flex: none;
+    }
+
+    .article__sidebar {
+        width: calc((100% - 32px) * 0.335);
+        flex: none;
+        padding-right: 24px;
+        /* Adjusted padding */
+    }
+
+    .article__header,
+    .article__title,
+    .author-list,
+    .article__body {
+        width: 100%;
+    }
+
+    /* Fix absolute positioned elements */
+    .author-list__scroll-btn {
+        margin-left: auto;
+    }
+}
+
+/* ========================================
+   Responsive Tablet (768px - 1023px)
+   ======================================== */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .article__sidebar {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        width: 100% !important;
+        padding: 0 24px !important;
+        align-items: stretch !important;
+    }
+
+    /* First row: Access Card */
+    .access-card {
+        width: 100% !important;
+        order: 0;
+    }
+
+    /* Second row: Issue Card + TOC Card */
+    .issue-card {
+        width: calc(50% - 12px) !important;
+        order: 1;
+        height: auto !important;
+        /* Ensure equal height behavior if needed, flex stretch handles it */
+    }
+
+    .toc-card {
+        width: calc(50% - 12px) !important;
+        order: 2;
+        /* Adjust sticky behavior if needed, currently it might just sit in flow */
+        position: static !important;
+        /* Disable sticky in this specific layout if it causes issues, or keep it */
+        height: auto !important;
+    }
+}
+
+@media (max-width: 1023px) {
+
+    /* Global Reset within scope */
     * {
         box-sizing: border-box;
     }
 
-    /* 1. Container và Layout chính */
+    /* 1. Main Container & Layout */
     .article__container {
         width: 100% !important;
         max-width: 100% !important;
         padding: 0 !important;
         overflow-x: hidden;
+        /* Prevent horizontal scroll */
     }
 
     .article__content {
         width: 100% !important;
         height: auto !important;
         flex-direction: column !important;
+        /* Stack Content and Sidebar */
         padding: 0 16px !important;
+        /* Reduced padding for mobile */
         gap: 24px !important;
         align-items: center !important;
+        /* Center content */
     }
 
-    /* 2. Cột nội dung bên trái */
+    /* 2. Left Content Column */
     .article__left {
         width: 100% !important;
         max-width: 100% !important;
@@ -1402,19 +1536,32 @@
         hyphens: auto !important;
     }
 
-    .author-list {
+    .author-wrapper {
         width: 100% !important;
-        justify-content: center !important;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 12px !important;
+    }
+
+    .author-list {
+        width: auto !important;
+        flex: 1 !important;
+        justify-content: flex-start !important;
+        overflow-x: auto !important;
     }
 
     .author-list__scroll-btn {
-        display: none !important;
+        display: flex !important;
+        /* Show scroll button */
+        position: static !important;
+        margin-left: auto !important;
     }
 
     .stats {
         width: 100% !important;
         height: auto !important;
-        justify-content: center !important;
+        justify-content: left !important;
         flex-wrap: wrap !important;
     }
 
@@ -1444,7 +1591,7 @@
         display: none !important;
     }
 
-    /* 5a. Các thành phần nội dung bên trong */
+    /* 5a. Main Content Inner Components */
     .content-main,
     .content-section,
     .content-section--highlight,
@@ -1486,16 +1633,17 @@
         width: 100% !important;
         height: auto !important;
         word-break: break-word !important;
+        /* Ensure long text wraps */
         white-space: normal !important;
     }
 
     .reference-item__links {
         position: static !important;
-        margin-top: 8px !important;
-        padding-left: 28px !important;
+        margin-top: 0px !important;
+        padding-left: 8px !important;
     }
 
-    /* 7. Component Sidebar & Card */
+    /* 7. Sidebar Components & Cards Overrides */
     .access-card,
     .issue-card,
     .toc-card,
@@ -1549,7 +1697,7 @@
         line-height: 1.4 !important;
     }
 
-    /* Thành phần trích dẫn */
+    /* Citation Components */
     .citation-container,
     .citation-tabs,
     .citation-box,
@@ -1579,7 +1727,7 @@
         box-sizing: border-box !important;
     }
 
-    /* Thông tin xuất bản */
+    /* Publication Info */
     .publication-info {
         width: 100% !important;
         flex-wrap: wrap !important;
@@ -1587,13 +1735,57 @@
         gap: 8px !important;
     }
 
+    /* Ensure no negative margins or shifts */
     * {
         margin-left: 0 !important;
         margin-right: 0 !important;
     }
 
+    /* Restore specific margins where needed (like auto centering) */
     .post-card,
     .article__container {
         margin: 0 auto !important;
+    }
+}
+
+/* ========================================
+   Tablet Specific Overrides (768px - 1023px)
+   Placed LAST to override general mobile styles
+   ======================================== */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .article__sidebar {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        width: 100% !important;
+        padding: 0 24px !important;
+        align-items: stretch !important;
+        gap: 24px !important;
+        /* Ensure gap between columns */
+    }
+
+    /* First row: Access Card - Full Width */
+    .access-card {
+        width: 100% !important;
+        order: 0;
+        margin-bottom: 0 !important;
+    }
+
+    /* Second row: Issue Card (Left) & TOC Card (Right) */
+    .issue-card {
+        width: calc(50% - 12px) !important;
+        /* 50% minus half gap */
+        order: 1;
+        height: auto !important;
+        margin: 0 !important;
+    }
+
+    .toc-card {
+        width: calc(50% - 12px) !important;
+        /* 50% minus half gap */
+        order: 2;
+        position: static !important;
+        height: auto !important;
+        margin: 0 !important;
     }
 }

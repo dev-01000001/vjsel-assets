@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initializeLoadMore();
   initializeAccessibility();
   initReadMore(); // Thêm function "Mở rộng" cho abstract
+  initAuthorsReadMore(); // Thêm function "Mở rộng" cho danh sách tác giả
 
   console.log("Search page initialized");
 });
@@ -431,7 +432,7 @@ function createDemoArticles(count) {
 
                                     <!-- Article image -->
                                     <div class="article-card__thumbnail">
-                                        <img src="https://cdn.media-soft.cloud/original/assets/SearchPage/asset/img_body/img_body1.png" alt="Article thumbnail"
+                                        <img src="asset/img_body/img_body1.png" alt="Article thumbnail"
                                             class="article-card__thumbnail-img">
                                     </div>
                                 </div>
@@ -697,6 +698,58 @@ function trackEvent(category, action, label = "", value = 0) {
   console.log("Event tracked:", { category, action, label, value });
 }
 
+// ===== AUTHORS READ MORE FUNCTIONALITY =====
+// Xử lý nút Mở rộng / Thu gọn cho danh sách tác giả
+function initAuthorsReadMore() {
+  const authorContainers = document.querySelectorAll(".authors-list");
+
+  authorContainers.forEach((container) => {
+    const list = container.querySelector(".authors-list__items");
+    if (!list) return;
+
+    const authors = list.querySelectorAll(".authors-list__author");
+
+    // Nếu có <= 1 tác giả thì không cần nút mở rộng
+    if (authors.length <= 1) {
+      return;
+    }
+
+    // Kiểm tra xem có bị overflow không
+    const listScrollWidth = list.scrollWidth;
+    const listClientWidth = list.clientWidth;
+
+    // Nếu không bị overflow (tất cả tác giả vừa 1 dòng) thì không cần nút
+    if (listScrollWidth <= listClientWidth + 10) {
+      return;
+    }
+
+    // Thêm nút Mở rộng vào container (parent của list)
+    const expandBtn = document.createElement("button");
+    expandBtn.className = "inline-read-more";
+    expandBtn.textContent = "Mở rộng";
+    expandBtn.style.marginLeft = "8px";
+    expandBtn.style.flexShrink = "0";
+
+    expandBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+
+      if (list.classList.contains("authors-list__items--expanded")) {
+        // Thu gọn
+        container.classList.remove("authors-list--expanded");
+        list.classList.remove("authors-list__items--expanded");
+        expandBtn.textContent = "Mở rộng";
+      } else {
+        // Mở rộng
+        container.classList.add("authors-list--expanded");
+        list.classList.add("authors-list__items--expanded");
+        expandBtn.textContent = "Thu gọn";
+      }
+    });
+
+    container.appendChild(expandBtn);
+  });
+}
+
 // ===== READ MORE FUNCTIONALITY - Học từ HomePage =====
 // Xử lý nút Xem thêm / Thu gọn cho abstract
 function initReadMore() {
@@ -715,7 +768,7 @@ function initReadMore() {
     const maxHeight = lineHeight * 2;
 
     // Reset về full text để đo
-    element.innerHTML = fullText;
+    element.textContent = fullText;
 
     // Nếu không bị tràn thì thôi
     if (element.scrollHeight <= maxHeight + 2) {
@@ -729,14 +782,16 @@ function initReadMore() {
     let middle;
     let result = "";
 
-    const suffix = '... <button class="inline-read-more">Mở rộng</button>';
+    const suffixText = "Mở rộng";
+    const suffix =
+      '... <button class="inline-read-more">' + suffixText + "</button>";
 
-    // Loop tối đa 20 lần cho performance
+    // Loop binary search
     while (start <= end) {
       middle = Math.floor((start + end) / 2);
       element.innerHTML = fullText.slice(0, middle) + suffix;
 
-      if (element.offsetHeight <= maxHeight + 2) {
+      if (element.scrollHeight <= maxHeight + 2) {
         result = fullText.slice(0, middle);
         start = middle + 1;
       } else {
@@ -756,6 +811,7 @@ function initReadMore() {
         element.innerHTML =
           fullText + ' <button class="inline-read-more">Thu gọn</button>';
         element.classList.add("article-card__abstract--expanded");
+        element.style.maxHeight = "none";
 
         // Gán sự kiện thu gọn cho nút mới tạo
         element
@@ -763,6 +819,7 @@ function initReadMore() {
           .addEventListener("click", (ev) => {
             ev.stopPropagation();
             element.classList.remove("article-card__abstract--expanded");
+            element.style.maxHeight = "";
             truncate(element); // Cắt lại
           });
       });

@@ -194,6 +194,85 @@ function initTagListExpand() {
     });
 }
 
+function initAuthorsExpand() {
+    const authorLists = document.querySelectorAll('.article-card__authors');
+    
+    authorLists.forEach(list => {
+        // Reset state for re-calculation
+        const existingBtn = list.querySelector('.inline-read-more');
+        if (existingBtn) {
+            existingBtn.remove();
+        }
+        list.classList.remove('expanded');
+        const authors = Array.from(list.querySelectorAll('.article-card__author'));
+        authors.forEach(a => a.style.display = ''); // Reset display
+
+        // Check overflow
+        // Note: list needs max-height or height limited in CSS to detect scrollHeight > clientHeight
+        // list.clientHeight is confined by max-height: 24px
+        if (list.scrollHeight > list.clientHeight + 2) { 
+            // Create "Mở rộng" button
+            const btn = document.createElement('button');
+            btn.className = 'inline-read-more';
+            btn.innerText = 'Mở rộng';
+            // btn.style.cssText is removed as styles are now in .inline-read-more class
+            
+            list.appendChild(btn);
+            
+            const hiddenAuthors = [];
+            
+            // Loop to hide items until button fits on the first line
+            let safety = 100;
+            while (safety-- > 0) {
+                 // Check if button is wrapped to next line
+                 // Since list detects wrapping, if button is wrapped, it's vertically offset
+                 // We assume 1st line offsetTop is small (e.g. 0-5px depending on padding)
+                 // If btn.offsetTop > 10px, it's likely on 2nd line.
+                 if (btn.offsetTop > 12) { 
+                     // Hide last visible author
+                     let lastVisible = null;
+                     for(let i = authors.length -1; i >= 0; i--) {
+                         if (authors[i].style.display !== 'none') {
+                             lastVisible = authors[i];
+                             break;
+                         }
+                     }
+                     
+                     if (lastVisible) {
+                         lastVisible.style.display = 'none';
+                         hiddenAuthors.push(lastVisible);
+                     } else {
+                         // If checks fail (no visible authors left but btn still wraps?)
+                         break;
+                     }
+                 } else {
+                     break; // Fits cleanly
+                 }
+            }
+            
+            // Click handler
+            let isExpanded = false;
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                
+                isExpanded = !isExpanded;
+                if (isExpanded) {
+                    // Expand
+                    hiddenAuthors.forEach(a => a.style.display = '');
+                    list.classList.add('expanded');
+                    btn.innerText = 'Thu gọn';
+                } else {
+                    // Collapse
+                    hiddenAuthors.forEach(a => a.style.display = 'none');
+                    list.classList.remove('expanded');
+                    btn.innerText = 'Mở rộng';
+                }
+            });
+        }
+    });
+}
+
 // Khởi tạo sự kiện
 function init() {
     // Sự kiện nút chuyển tab kế tiếp
@@ -221,6 +300,7 @@ function init() {
     // Sử dụng setTimeout để đảm bảo layout đã được render xong (font, styles)
     setTimeout(initReadMore, 100);
     setTimeout(initTagListExpand, 100);
+    setTimeout(initAuthorsExpand, 100);
     
     // Initial scroll for active tab
     setTimeout(() => {
@@ -232,6 +312,7 @@ function init() {
     window.addEventListener('resize', () => {
         // Debounce simple
         setTimeout(initTagListExpand, 200);
+        setTimeout(initAuthorsExpand, 200);
     });
 }
 

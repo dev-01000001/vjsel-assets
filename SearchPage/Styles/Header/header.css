@@ -11,12 +11,14 @@
     align-items: center;
     padding: 12px 80px;
     gap: 62px;
-    width: 1440px;
+    width: 100%;
+    max-width: 1440px;
     height: 74px;
     margin: 0 auto;
     background: #FFFFFF;
     border-bottom: 1px solid #DCDFE4;
-    position: relative;
+    position: sticky;
+    top: 0;
     z-index: 1100;
 }
 
@@ -189,6 +191,8 @@
 /* Responsive 1440px */
 @media (max-width: 1439px) {
     .site-header {
+        position: sticky !important;
+        top: var(--header-sticky-top, 0px) !important;
         width: 100% !important;
         height: auto !important;
         min-height: 84px !important;
@@ -298,6 +302,8 @@
 
 @media (max-width: 375px) {
     .site-header {
+        position: sticky !important;
+        top: var(--header-sticky-top, 0px) !important;
         padding: 12px 10px !important;
         min-height: 80px !important;
     }

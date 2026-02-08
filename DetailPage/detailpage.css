@@ -4,20 +4,20 @@
    ======================================== */
 
 /* Header điều hướng */
-@import url('https://cdn.media-soft.cloud/original/assets/DetailPage/Style/Header/header.css');
+@import url('Style/Header/header.css');
 
-@import url('https://cdn.media-soft.cloud/original/assets/DetailPage/Style/Category/category-nav.css');
+@import url('Style/Category/category-nav.css');
 
 /* Base reset và biến CSS - dùng chung cho tất cả trang */
-@import url('https://cdn.media-soft.cloud/original/assets/DetailPage/basereset.css');
+@import url('basereset.css');
 
 /* Styles riêng cho trang chi tiết */
-@import url('https://cdn.media-soft.cloud/original/assets/DetailPage/Style/Body/body.css');
+@import url('Style/Body/body.css');
 
 /* Phần từ khóa liên quan */
-@import url('https://cdn.media-soft.cloud/original/assets/DetailPage/Style/RelatedKeywords/relatedkeywords.css');
+@import url('Style/RelatedKeywords/relatedkeywords.css');
 
 /* Phần bài viết liên quan */
-@import url('https://cdn.media-soft.cloud/original/assets/DetailPage/Style/RelatedPosts/relateposts.css');
+@import url('Style/RelatedPosts/relateposts.css');
 
-@import url('https://cdn.media-soft.cloud/original/assets/DetailPage/Style/Footer/footer.css');
+@import url('Style/Footer/footer.css');

@@ -48,7 +48,7 @@
     --category-scroll-height: 46px;
 }
 
-/* Block BEM: category-nav */
+/* Block: category-nav */
 .category-nav {
     width: 100%;
     background-color: #fafafa;
@@ -57,37 +57,36 @@
 
 .category-nav__container {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 24px 80px;
-    gap: 24px;
-    width: var(--category-container-width);
-    height: var(--category-container-height);
-    position: relative;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 20px;
+    gap: 16px;
+    width: 100%;
+    max-width: var(--category-container-width);
+    margin: 0 auto;
     box-sizing: border-box;
-    flex: none;
-    order: 1;
-    flex-grow: 0;
+}
+
+/* Button order control */
+.category-nav__button--prev {
+    order: 0;
 }
 
 .category-nav__scroll {
+    order: 1;
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 4px 0;
-    gap: 12px;
+    padding: 8px 0;
+    /* gap: 12px; Removed for Swiper */
     isolation: isolate;
-    width: var(--category-scroll-width);
-    min-height: 54px;
-    overflow-x: scroll;
-    overflow-y: visible;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    flex: 1;
+    min-width: 0;
+    overflow: visible;
     position: relative;
     box-sizing: border-box;
-    flex: none;
-    order: 0;
-    flex-grow: 0;
 }
 
 .category-nav__scroll::-webkit-scrollbar {
@@ -98,19 +97,37 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 0;
-    gap: 12px;
+    padding: 0 150px 0 15px;
+    /* gap: 12px; Removed for Swiper */
     list-style: none;
     margin: 0;
     min-height: 46px;
     min-width: min-content;
 }
 
-/* Element BEM: item */
+/* Element: item */
 .category-nav__item {
-    flex: none;
+    flex: none; /* Important for Swiper auto width */
+    width: auto;
     flex-shrink: 0;
     min-height: 46px;
+}
+
+/* Last item needs extra space */
+.category-nav__item:last-child {
+    margin-right: 0 !important;
+    padding-right: 50px;
+}
+
+.category-nav__item:last-child .category-nav__tag {
+    margin-right: 100px;
+}
+
+/* Override Swiper default slide width */
+.category-nav__scroll .swiper-slide,
+.swiper-slide.category-nav__item {
+    width: auto !important;
+    flex-shrink: 0;
 }
 
 .category-nav__tag {
@@ -140,7 +157,7 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* Trạng thái tag */
+/* Tag states */
 .category-nav__tag:hover {
     transform: translateY(-2px);
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.16);
@@ -246,9 +263,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    align-self: center;
     padding: 0;
-    position: absolute;
-    top: 32px;
+    position: static;
     width: 38px;
     height: 38px;
     background: #FDFDFD;
@@ -258,17 +275,15 @@
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     z-index: 11;
-    flex: none;
-    order: 11;
-    flex-grow: 0;
+    flex-shrink: 0;
 }
 
 .category-nav__button--next {
-    right: 0;
+    order: 2;
 }
 
 .category-nav__button--prev {
-    left: 80px;
+    order: 0;
 }
 
 .category-nav__button:hover {
@@ -286,22 +301,21 @@
 }
 
 .category-nav__button-icon {
-    /* position: absolute; */
     width: 24px;
     height: 24px;
-    /* left: calc(50% - 12px + 3px);
-    top: calc(50% - 12px); */
 }
 
 .category-nav__button-icon path {
     fill: #1E88E5;
 }
 
-/* RESPONSIVE BREAKPOINTS */
-
-@media (min-width: 1440px) {
-    /* Rules for 1440px and above are handled by base styles or specific overrides if needed */
+/* Swiper Navigation Button States */
+.category-nav__button.swiper-button-disabled {
+    display: flex;
+    pointer-events: none;
+    cursor: default;
 }
+
 
 /* STRICT RULE: 1439px and below = WRAPPING LAYOUT (No Scroll) */
 @media (max-width: 1439px) {
@@ -332,29 +346,29 @@
         /* Center align container content */
     }
 
-    /* Disable Horizontal Scroll, Enable Wrap */
+    /* Keep Horizontal Scroll (User Request) */
     .category-nav__scroll {
-        width: 100%;
+        width: calc(100% - 90px);
         height: auto;
-        overflow: visible;
-        /* No scroll */
-        flex-wrap: wrap;
-        /* Allow wrapping */
-        justify-content: center;
-        /* Center items */
-        padding-bottom: 0;
+        /* overflow-x: scroll; */
+        flex-wrap: nowrap; /* No wrapping */
+        justify-content: flex-start; /* Start from left */
+        padding: 4px 0; /* Reset padding for mobile */
+        margin: auto 45px;
+        scrollbar-width: none;
+    }
+    
+    .category-nav__scroll::-webkit-scrollbar {
+        display: none;
     }
 
     .category-nav__list {
-        width: 100%;
-        flex-wrap: wrap;
-        /* Allow wrapping */
-        justify-content: center;
-        /* Center items */
+        width: auto;
+        flex-wrap: nowrap; /* No wrapping */
+        justify-content: flex-start; /* Start from left */
         height: auto;
         gap: 12px;
-        /* Spacing between rows */
-        padding-right: 0;
+        padding-right: 20px;
         min-width: 0;
     }
 
@@ -372,10 +386,10 @@
         font-size: 15px;
     }
 
-    /* Hide Navigation Buttons */
-    .category-nav__button {
+    /* Hide Navigation Buttons - REVERTED */
+    /* .category-nav__button {
         display: none !important;
-    }
+    } */
 }
 
 /* Mobile (≤ 767px) */
@@ -391,6 +405,25 @@
         /* Reduced padding for mobile */
     }
 
+    .category-nav__scroll {
+        width: calc(100% - 90px); /* Space for buttons */
+        margin: auto 45px;
+        padding: 4px 0;
+    }
+
+    .category-nav__button {
+        display: flex !important; /* Show buttons */
+        top: 20px; /* Adjust vertical position for mobile padding */
+    }
+
+    .category-nav__button--prev {
+        left: 4px; /* Move closer to edge */
+    }
+
+    .category-nav__button--next {
+        right: 4px; /* Move closer to edge */
+    }
+
     .category-nav__list {
         gap: 8px;
     }
@@ -403,18 +436,19 @@
 }
 
 /* 4k (> 1440px) */
-@media screen and (min-width: 1441px) {
+@media screen and (min-width: 1440px) {
     .category-nav__container {
         width: 1440px;
-        height: 94px;
+        height: auto;
         margin: 0 auto;
         padding: 24px 80px;
         align-items: flex-start;
     }
 
     .category-nav__scroll {
-        width: 1280px;
+        width: 1110px;
         height: 46px;
+        margin: auto 45px;
     }
 
     .category-nav__list {

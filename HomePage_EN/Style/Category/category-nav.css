@@ -63,7 +63,7 @@
     gap: 24px;
     width: 100%;
     max-width: var(--category-container-width);
-    height: var(--category-container-height);
+    height: auto;
     position: relative;
     box-sizing: border-box;
     flex: none;
@@ -423,7 +423,7 @@
 @media screen and (min-width: 1440px) {
     .category-nav__container {
         width: 1440px;
-        height: 94px;
+        height: auto;
         margin: 0 auto;
         padding: 24px 80px;
         align-items: flex-start;

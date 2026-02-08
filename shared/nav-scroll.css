@@ -1,0 +1,220 @@
+/* ============================================
+   SHARED NAV-SCROLL - Swiper Navigation Scroll
+   Áp dụng cho tất cả trang: HomePage, DetailPage, 
+   IssuePage, SearchPage, DetailLock, _EN variants
+   
+   Rule: KHÔNG thay đổi thiết kế 1440px
+   Chỉ kích hoạt Swiper + mũi tên ở responsive (< 1440px)
+   ============================================ */
+
+/* --- Arrow Buttons --- */
+.nav-scroll-arrows {
+    display: none;
+    /* Ẩn ở desktop 1440px+ */
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+    margin-left: 8px;
+}
+
+.nav-scroll-prev,
+.nav-scroll-next {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: 1px solid #DCDFE4;
+    border-radius: 6px;
+    background: #FFFFFF;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+    flex-shrink: 0;
+}
+
+.nav-scroll-prev:hover,
+.nav-scroll-next:hover {
+    background: #F5F7FA;
+    border-color: #B8BCC4;
+}
+
+.nav-scroll-prev:active,
+.nav-scroll-next:active {
+    background: #EDF0F3;
+}
+
+.nav-scroll-prev svg,
+.nav-scroll-next svg {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: #667085;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Disabled state */
+.nav-scroll-prev.swiper-button-disabled,
+.nav-scroll-next.swiper-button-disabled {
+    opacity: 0.35;
+    cursor: default;
+    pointer-events: none;
+}
+
+/* --- Swiper container wrapper (chỉ tồn tại khi < 1440px) --- */
+.nav-scroll-swiper {
+    overflow: hidden;
+    width: 100%;
+    flex-shrink: 1;
+    min-width: 0;
+}
+
+/* --- Safety: nếu DOM chưa teardown kịp ở 1440px+ --- */
+@media (min-width: 1440px) {
+    .nav-scroll-swiper {
+        display: contents !important;
+    }
+
+    .nav-scroll-swiper .swiper-wrapper {
+        transform: none !important;
+        transition: none !important;
+    }
+
+    .nav-scroll-arrows {
+        display: none !important;
+    }
+}
+
+/* ============================================
+   RESPONSIVE: < 1440px - Kích hoạt Swiper + Arrows
+   ============================================ */
+@media (max-width: 1439px) {
+
+    /* Show arrows */
+    .nav-scroll-arrows {
+        display: flex;
+    }
+
+    /* Swiper container */
+    .nav-scroll-swiper {
+        overflow: hidden;
+        flex-shrink: 1;
+        min-width: 0;
+    }
+
+    /* ─── System B: .site-header pages (Detail, Issue, Search) ─── */
+    /* Nav row: swiper + arrows side by side */
+    .site-header__nav.nav-scroll-enabled {
+        display: flex !important;
+        align-items: center !important;
+        overflow: visible !important;
+        overflow-x: visible !important;
+    }
+
+    /* Hide default scrollbar since Swiper handles it */
+    .site-header__nav.nav-scroll-enabled::-webkit-scrollbar {
+        display: none !important;
+    }
+
+    .site-header__nav.nav-scroll-enabled {
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+    }
+
+    /* main-nav inside Swiper acts as swiper-wrapper */
+    .site-header__nav .nav-scroll-swiper .main-nav {
+        flex-wrap: nowrap !important;
+        display: flex !important;
+    }
+
+    .site-header__nav .main-nav__item.swiper-slide {
+        width: auto !important;
+        flex-shrink: 0 !important;
+    }
+
+    /* ─── System A: .top-nav pages (HomePage) ─── */
+    /* Container: keep everything in one row (swiper + arrows + actions) */
+    .top-nav__container.nav-scroll-enabled {
+        flex-wrap: nowrap !important;
+    }
+
+    .top-nav__container .nav-scroll-swiper {
+        flex: 1 1 0%;
+        min-width: 0;
+        width: auto;
+    }
+
+    /* Reset conflicting .top-nav__menu responsive styles when Swiper is active */
+    .top-nav__container .top-nav__menu.swiper-wrapper {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow: visible !important;
+        overflow-x: visible !important;
+        justify-content: flex-start !important;
+        gap: 0 !important;
+        order: unset !important;
+        width: 100% !important;
+        max-width: none !important;
+        padding-bottom: 0 !important;
+    }
+
+    .top-nav__item.swiper-slide {
+        width: auto !important;
+        flex-shrink: 0 !important;
+    }
+}
+
+/* ─── Tablet: < 1024px ─── */
+@media (max-width: 1023px) {
+
+    .nav-scroll-prev,
+    .nav-scroll-next {
+        width: 26px;
+        height: 26px;
+    }
+
+    .nav-scroll-prev svg,
+    .nav-scroll-next svg {
+        width: 12px;
+        height: 12px;
+    }
+}
+
+/* ─── Mobile: < 768px ─── */
+@media (max-width: 768px) {
+    .nav-scroll-arrows {
+        gap: 2px;
+        margin-left: 6px;
+    }
+
+    .nav-scroll-prev,
+    .nav-scroll-next {
+        width: 24px;
+        height: 24px;
+        border-radius: 4px;
+    }
+
+    .nav-scroll-prev svg,
+    .nav-scroll-next svg {
+        width: 11px;
+        height: 11px;
+    }
+}
+
+/* ─── Small Mobile: < 375px ─── */
+@media (max-width: 374px) {
+
+    .nav-scroll-prev,
+    .nav-scroll-next {
+        width: 22px;
+        height: 22px;
+    }
+
+    .nav-scroll-prev svg,
+    .nav-scroll-next svg {
+        width: 10px;
+        height: 10px;
+    }
+}

@@ -32,9 +32,6 @@
     --category-bg-other: #D0D0D0;
     --category-text-other: #212636;
 
-    --category-bg-inactive: #F1F1F4;
-    --category-text-inactive: #565E73;
-
     --category-spacing-container-x: 80px;
     --category-spacing-container-y: 24px;
     --category-spacing-gap: 12px;
@@ -51,7 +48,7 @@
     --category-scroll-height: 46px;
 }
 
-/* Block BEM: category-nav */
+/* Block: category-nav */
 .category-nav {
     width: 100%;
     background-color: #fafafa;
@@ -60,37 +57,36 @@
 
 .category-nav__container {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 24px 80px;
-    gap: 24px;
-    width: var(--category-container-width);
-    height: var(--category-container-height);
-    position: relative;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 20px;
+    gap: 16px;
+    width: 100%;
+    max-width: var(--category-container-width);
+    margin: 0 auto;
     box-sizing: border-box;
-    flex: none;
-    order: 1;
-    flex-grow: 0;
+}
+
+/* Button order control */
+.category-nav__button--prev {
+    order: 0;
 }
 
 .category-nav__scroll {
+    order: 1;
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 4px 0;
-    gap: 12px;
+    padding: 8px 0;
+    /* gap: 12px; Removed for Swiper */
     isolation: isolate;
-    width: var(--category-scroll-width);
-    min-height: 54px;
-    overflow-x: scroll;
-    overflow-y: visible;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    flex: 1;
+    min-width: 0;
+    overflow: visible;
     position: relative;
     box-sizing: border-box;
-    flex: none;
-    order: 0;
-    flex-grow: 0;
 }
 
 .category-nav__scroll::-webkit-scrollbar {
@@ -101,19 +97,37 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 0;
-    gap: 12px;
+    padding: 0 150px 0 15px;
+    /* gap: 12px; Removed for Swiper */
     list-style: none;
     margin: 0;
     min-height: 46px;
     min-width: min-content;
 }
 
-/* Element BEM: item */
+/* Element: item */
 .category-nav__item {
-    flex: none;
+    flex: none; /* Important for Swiper auto width */
+    width: auto;
     flex-shrink: 0;
     min-height: 46px;
+}
+
+/* Last item needs extra space */
+.category-nav__item:last-child {
+    margin-right: 0 !important;
+    padding-right: 50px;
+}
+
+.category-nav__item:last-child .category-nav__tag {
+    margin-right: 100px;
+}
+
+/* Override Swiper default slide width */
+.category-nav__scroll .swiper-slide,
+.swiper-slide.category-nav__item {
+    width: auto !important;
+    flex-shrink: 0;
 }
 
 .category-nav__tag {
@@ -143,7 +157,7 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* Trạng thái tag */
+/* Tag states */
 .category-nav__tag:hover {
     transform: translateY(-2px);
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.16);
@@ -167,79 +181,79 @@
     flex: none;
 }
 
-/* Category 1: Health Sciences - Figma: width: 156px */
+/* Category 1: Phẫu thuật tiêu hóa - Figma: width: 171px, text-width: 139px */
 .category-nav__item:nth-child(1) .category-nav__tag {
-    width: 156px;
+    width: 171px;
     background: var(--category-bg-digestive);
     color: var(--category-text-digestive);
 }
 
-/* Category 2: Hepatobiliary surgery - Figma: width: 184px */
+/* Category 2: Phẫu thuật gan mật - Figma: width: 172px, text-width: 140px */
 .category-nav__item:nth-child(2) .category-nav__tag {
-    width: 184px;
-    background: var(--category-bg-inactive);
-    color: var(--category-text-inactive);
+    width: 172px;
+    background: var(--category-bg-hepatobiliary);
+    color: var(--category-text-hepatobiliary);
 }
 
-/* Category 3: Thoracic-Vascular Surgery - Figma: width: 219px */
+/* Category 3: Phẫu thuật tim mạch - Figma: width: 181px, text-width: 149px */
 .category-nav__item:nth-child(3) .category-nav__tag {
-    width: 219px;
-    background: var(--category-bg-inactive);
-    color: var(--category-text-inactive);
-}
-
-/* Category 4: Orthopaedic Surgery - Figma: width: 178px */
-.category-nav__item:nth-child(4) .category-nav__tag {
-    width: 178px;
-    background: var(--category-bg-inactive);
-    color: var(--category-text-inactive);
-}
-
-/* Category 5: Plastic Surgery - Figma: width: 139px */
-.category-nav__item:nth-child(5) .category-nav__tag {
-    width: 139px;
-    background: var(--category-bg-inactive);
-    color: var(--category-text-inactive);
-}
-
-/* Category 6: Spine Surgery - Figma: width: 130px */
-.category-nav__item:nth-child(6) .category-nav__tag {
-    width: 130px;
-    background: var(--category-bg-inactive);
-    color: var(--category-text-inactive);
-}
-
-/* Category 7: Neurological Surgery - Figma: width: 181px */
-.category-nav__item:nth-child(7) .category-nav__tag {
     width: 181px;
-    background: var(--category-bg-inactive);
-    color: var(--category-text-inactive);
+    background: var(--category-bg-cardiovascular);
+    color: var(--category-text-cardiovascular);
 }
 
-/* Category 8: Urological surgery - Figma: width: 161px */
+/* Category 4: Phẫu thuật chấn thương chỉnh hình - Figma: width: 281px, text-width: 249px */
+.category-nav__item:nth-child(4) .category-nav__tag {
+    width: 281px;
+    background: var(--category-bg-orthopedic);
+    color: var(--category-text-orthopedic);
+}
+
+/* Category 5: Phẫu thuật tạo hình - Figma: width: 171px, text-width: 139px */
+.category-nav__item:nth-child(5) .category-nav__tag {
+    width: 171px;
+    background: var(--category-bg-plastic);
+    color: var(--category-text-plastic);
+}
+
+/* Category 6: Phẫu thuật cột sống - Figma: width: 176px, text-width: 144px */
+.category-nav__item:nth-child(6) .category-nav__tag {
+    width: 176px;
+    background: var(--category-bg-spine);
+    color: var(--category-text-spine);
+}
+
+/* Category 7: Phẫu thuật thần kinh - Figma: width: 179px, text-width: 147px */
+.category-nav__item:nth-child(7) .category-nav__tag {
+    width: 179px;
+    background: var(--category-bg-neurosurgery);
+    color: var(--category-text-neurosurgery);
+}
+
+/* Category 8: Phẫu thuật tiết niệu - Figma: width: 171px, text-width: 139px */
 .category-nav__item:nth-child(8) .category-nav__tag {
-    width: 161px;
+    width: 171px;
     background: var(--category-bg-urology);
     color: var(--category-text-urology);
 }
 
-/* Category 9: Anesthesia - Figma: width: 112px */
+/* Category 9: Gây mê hồi sức - Figma: width: 142px, text-width: 110px */
 .category-nav__item:nth-child(9) .category-nav__tag {
-    width: 112px;
+    width: 142px;
     background: var(--category-bg-anesthesia);
     color: var(--category-text-anesthesia);
 }
 
-/* Category 10: Surgical Nursing - Figma: width: 150px */
+/* Category 10: Điều dưỡng ngoại khoa - Figma: width: 197px, text-width: 165px */
 .category-nav__item:nth-child(10) .category-nav__tag {
-    width: 150px;
+    width: 197px;
     background: var(--category-bg-nursing);
     color: var(--category-text-nursing);
 }
 
-/* Category 11: Others - Figma: width: 80px */
+/* Category 11: Khác - Figma: width: 68px, text-width: 36px */
 .category-nav__item:nth-child(11) .category-nav__tag {
-    width: 80px;
+    width: 68px;
     background: var(--category-bg-other);
     color: var(--category-text-other);
 }
@@ -249,9 +263,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    align-self: center;
     padding: 0;
-    position: absolute;
-    top: 32px;
+    position: static;
     width: 38px;
     height: 38px;
     background: #FDFDFD;
@@ -261,17 +275,15 @@
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     z-index: 11;
-    flex: none;
-    order: 11;
-    flex-grow: 0;
+    flex-shrink: 0;
 }
 
 .category-nav__button--next {
-    right: 0;
+    order: 2;
 }
 
 .category-nav__button--prev {
-    left: 80px;
+    order: 0;
 }
 
 .category-nav__button:hover {
@@ -297,11 +309,13 @@
     fill: #1E88E5;
 }
 
-/* RESPONSIVE BREAKPOINTS */
-
-@media (min-width: 1440px) {
-    /* Rules for 1440px and above are handled by base styles or specific overrides if needed */
+/* Swiper Navigation Button States */
+.category-nav__button.swiper-button-disabled {
+    display: flex;
+    pointer-events: none;
+    cursor: default;
 }
+
 
 /* STRICT RULE: 1439px and below = WRAPPING LAYOUT (No Scroll) */
 @media (max-width: 1439px) {
@@ -315,7 +329,7 @@
         --category-scroll-width: 100%;
     }
 
-    /* Đảm bảo box-sizing tránh padding quá tải */
+    /* Ensure box-sizing prevents padding overload */
     .category-nav,
     .category-nav * {
         box-sizing: border-box;
@@ -332,29 +346,29 @@
         /* Center align container content */
     }
 
-    /* Tắt cuộn ngang, Bật wrap */
+    /* Keep Horizontal Scroll (User Request) */
     .category-nav__scroll {
-        width: 100%;
+        width: calc(100% - 90px);
         height: auto;
-        overflow: visible;
-        /* No scroll */
-        flex-wrap: wrap;
-        /* Allow wrapping */
-        justify-content: center;
-        /* Center items */
-        padding-bottom: 0;
+        /* overflow-x: scroll; */
+        flex-wrap: nowrap; /* No wrapping */
+        justify-content: flex-start; /* Start from left */
+        padding: 4px 0; /* Reset padding for mobile */
+        margin: auto 45px;
+        scrollbar-width: none;
+    }
+    
+    .category-nav__scroll::-webkit-scrollbar {
+        display: none;
     }
 
     .category-nav__list {
-        width: 100%;
-        flex-wrap: wrap;
-        /* Allow wrapping */
-        justify-content: center;
-        /* Center items */
+        width: auto;
+        flex-wrap: nowrap; /* No wrapping */
+        justify-content: flex-start; /* Start from left */
         height: auto;
         gap: 12px;
-        /* Spacing between rows */
-        padding-right: 0;
+        padding-right: 20px;
         min-width: 0;
     }
 
@@ -372,10 +386,10 @@
         font-size: 15px;
     }
 
-    /* Ẩn nút điều hướng */
-    .category-nav__button {
+    /* Hide Navigation Buttons - REVERTED */
+    /* .category-nav__button {
         display: none !important;
-    }
+    } */
 }
 
 /* Mobile (≤ 767px) */
@@ -388,7 +402,26 @@
 
     .category-nav__container {
         padding: 16px 0;
-        /* Giảm padding cho mobile */
+        /* Reduced padding for mobile */
+    }
+
+    .category-nav__scroll {
+        width: calc(100% - 90px); /* Space for buttons */
+        margin: auto 45px;
+        padding: 4px 0;
+    }
+
+    .category-nav__button {
+        display: flex !important; /* Show buttons */
+        top: 20px; /* Adjust vertical position for mobile padding */
+    }
+
+    .category-nav__button--prev {
+        left: 4px; /* Move closer to edge */
+    }
+
+    .category-nav__button--next {
+        right: 4px; /* Move closer to edge */
     }
 
     .category-nav__list {
@@ -403,18 +436,19 @@
 }
 
 /* 4k (> 1440px) */
-@media screen and (min-width: 1441px) {
+@media screen and (min-width: 1440px) {
     .category-nav__container {
         width: 1440px;
-        height: 94px;
+        height: auto;
         margin: 0 auto;
         padding: 24px 80px;
         align-items: flex-start;
     }
 
     .category-nav__scroll {
-        width: 1280px;
+        width: 1110px;
         height: 46px;
+        margin: auto 45px;
     }
 
     .category-nav__list {

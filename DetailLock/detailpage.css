@@ -1,23 +1,23 @@
 /* ========================================
    Trang chi tiết - File CSS chính
-   Import reset và style body
+   Import base reset và body styles
    ======================================== */
 
-/* Thanh điều hướng header */
-@import url('https://cdn.media-soft.cloud/original/assets/DetailLock/Style/Header/header.css');
+/* Header điều hướng */
+@import url('Style/Header/header.css');
 
-@import url('https://cdn.media-soft.cloud/original/assets/DetailLock/Style/Category/category-nav.css');
+@import url('Style/Category/category-nav.css');
 
-/* Reset CSS và biến toàn cục */
-@import url('https://cdn.media-soft.cloud/original/assets/DetailLock/basereset.css');
+/* Base reset và biến CSS - dùng chung cho tất cả trang */
+@import url('basereset.css');
 
-/* Style riêng cho trang chi tiết */
-@import url('https://cdn.media-soft.cloud/original/assets/DetailLock/Style/Body/body.css');
+/* Styles riêng cho trang chi tiết */
+@import url('Style/Body/body.css');
 
 /* Phần từ khóa liên quan */
-@import url('https://cdn.media-soft.cloud/original/assets/DetailLock/Style/RelatedKeywords/relatedkeywords.css');
+@import url('Style/RelatedKeywords/relatedkeywords.css');
 
 /* Phần bài viết liên quan */
-@import url('https://cdn.media-soft.cloud/original/assets/DetailLock/Style/RelatedPosts/relateposts.css');
+@import url('Style/RelatedPosts/relateposts.css');
 
-@import url('https://cdn.media-soft.cloud/original/assets/DetailLock/Style/Footer/footer.css');
+@import url('Style/Footer/footer.css');

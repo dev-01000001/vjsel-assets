@@ -29,7 +29,7 @@ html {
 .article__content {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: stretch;
     padding: 0;
     gap: 48px;
     width: 100%;
@@ -56,12 +56,14 @@ html {
     align-items: flex-start;
     padding: 12px 80px 48px 0px;
     gap: 24px;
-    width: 467px;
-    height: 1144px;
+    width: 33.5%; /* Was 467px fixed */
+    min-width: 320px;
+    height: auto;
     flex: none;
     order: 1;
     flex-grow: 1;
     position: relative;
+    box-sizing: border-box;
 }
 
 /* ========================================
@@ -74,7 +76,7 @@ html {
     padding: 12px 0 24px 80px;
     gap: 24px;
     width: 925px;
-    height: 320px;
+    height: auto;
     flex: none;
     order: 0;
     align-self: stretch;
@@ -84,7 +86,7 @@ html {
 
 .article__title {
     width: 845px;
-    height: 90px;
+    height: auto;
     font-family: var(--font-merriweather);
     font-style: normal;
     font-weight: 700;
@@ -103,18 +105,27 @@ html {
 /* ========================================
    Author List & Cards
    ======================================== */
+.author-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    gap: 12px;
+    order: 1;
+    align-self: stretch;
+}
+
 .author-list {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    padding: 0;
+    padding: 4px 0; /* Add padding to avoid cutting off shadows/content */
     gap: 12px;
-    width: 845px;
-    height: 80px;
-    flex: none;
-    order: 1;
-    align-self: stretch;
-    flex-grow: 0;
+    width: auto; /* Was 845px */
+    flex: 1; /* Allow flexible width */
+    height: auto; /* Was 80px - Changed to auto to fit content */
+    /* min-height: 80px; */
     overflow-x: auto;
     overflow-y: hidden;
     position: relative;
@@ -138,7 +149,8 @@ html {
     padding: 0;
     gap: 4px;
     width: 220px;
-    height: 80px;
+    height: auto; /* Was 80px - Let it grow */
+    /* min-height: 80px; */
     flex: none;
     flex-grow: 0;
 }
@@ -192,7 +204,7 @@ html {
     padding: 0;
     gap: 0px;
     width: 168px;
-    height: 80px;
+    /* height: 80px; */
     flex: none;
     order: 1;
     flex-grow: 1;
@@ -252,11 +264,10 @@ html {
     justify-content: center;
     align-items: center;
     padding: 0;
-    position: absolute;
+    position: static; /* Was absolute */
     width: 38px;
     height: 38px;
-    left: 906px;
-    top: 136px;
+    /* removed left/top */
     background: #FDFDFD;
     border: 1px solid rgba(30, 136, 229, 0.5);
     box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
@@ -264,6 +275,8 @@ html {
     cursor: pointer;
     transition: all 0.2s;
     z-index: 10;
+    flex: none; /* Prevent shrinking */
+    margin-left: auto; /* Push to right if container is flex */
 }
 
 .author-list__scroll-btn:hover {
@@ -453,8 +466,8 @@ html {
     align-items: flex-start;
     padding: 24px 0 48px 80px;
     gap: 24px;
-    width: 925px;
-    min-height: 1942px;
+    width: 100%;
+    min-height: auto;
     /* User strict request: 925x1942 */
     flex: none;
     order: 1;
@@ -535,11 +548,10 @@ html {
     align-items: flex-start;
     padding: 0;
     gap: 24px;
-    width: 781px;
-    /* 1870px height in Figma, keeping auto for dynamic content */
-    flex: none;
+    width: auto; /* Changed from 100% to auto to prevent overflow */
+    flex: 1; /* Allow to grow and fill remaining space */
+    min-width: 0; /* Allow shrinking for text wrapping */
     order: 1;
-    flex-grow: 1;
 }
 
 /* Content (Figma Frame: Content) */
@@ -550,7 +562,7 @@ html {
     align-items: flex-start;
     padding: 0;
     gap: 16px;
-    width: 781px;
+    width: 100%;
     flex: none;
     align-self: stretch;
     flex-grow: 0;
@@ -566,7 +578,7 @@ html {
     align-items: flex-start;
     padding: 24px;
     gap: 16px;
-    width: 781px;
+    width: 100%;
     background: #F3F9FF;
     flex: none;
     order: 0;
@@ -577,8 +589,8 @@ html {
 /* Quantum Error Correc (Title) */
 /* Tiêu đề của section highlight - chỉnh width 733px để tránh tràn (781 - 48 padding) */
 .content-section--highlight .content-section__title {
-    width: 733px;
-    height: 28px;
+    width: 100%;
+    height: auto;
     font-family: var(--font-merriweather);
     font-style: normal;
     font-weight: 700;
@@ -596,15 +608,14 @@ html {
 /* This paper introduce (Body Text) */
 /* Nội dung text của section highlight - chỉnh width 733px */
 .content-section--highlight .content-section__text {
-    width: 733px;
-    height: 176px;
+    width: 100%;
+    height: auto;
     font-family: var(--font-roboto);
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 140%;
-    display: flex;
-    align-items: center;
+    display: block; /* Changed from flex to block for text flow */
     color: #212636;
     flex: none;
     order: 1;
@@ -616,8 +627,8 @@ html {
 /* Normal Section Title */
 /* Tiêu đề section thường */
 .content-section__title {
-    width: 781px;
-    height: 28px;
+    width: 100%;
+    height: auto;
     font-family: var(--font-merriweather);
     font-style: normal;
     font-weight: 700;
@@ -635,15 +646,14 @@ html {
 /* Normal Section Text */
 /* Nội dung text section thường */
 .content-section__text {
-    width: 781px;
-    height: 176px;
+    width: 100%;
+    height: auto;
     font-family: var(--font-roboto);
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 140%;
-    display: flex;
-    align-items: center;
+    display: block; /* Changed from flex to block */
     color: #212636;
     flex: none;
     order: 1;
@@ -662,6 +672,7 @@ html {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    width: 100%; /* Ensure container takes full width */
 }
 
 /* ref (Figma Frame: ref) */
@@ -673,7 +684,7 @@ html {
     padding: 0;
     gap: 4px;
     isolation: isolate;
-    width: 629px;
+    width: 100%;
     position: relative;
     flex: none;
     flex-grow: 0;
@@ -699,43 +710,39 @@ html {
 /* Reference Text */
 /* Nội dung trích dẫn */
 .reference-item__text {
-    width: 601px;
-    height: 66px;
+    width: 100%;
+    height: auto;
     font-family: var(--font-roboto);
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 140%;
-    display: flex;
-    align-items: center;
+    display: block; /* Changed for better text flow */
     color: #212636;
     flex: none;
     order: 1;
     flex-grow: 1;
     z-index: 1;
     letter-spacing: 0.005em;
-    word-break: break-all;
+    word-break: break-word; /* Changed to break-word for better reading */
 }
 
 /* link (Figma Frame: link) */
 /* Các icon liên kết (PDF, Link) */
 .reference-item__links {
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
     align-items: center;
     padding: 0;
     gap: 10px;
-    position: absolute;
-    width: 50px;
-    height: 20px;
-    left: 188px;
-    top: 46px;
+    position: static; /* Was absolute */
+    width: auto; /* Was 50px */
+    height: auto; /* Was 20px */
+    margin: 0 0 0 8px; /* Add left margin */
+    vertical-align: middle;
     flex: none;
-    order: 2;
+    order: 2; /* Order likely ignored if inside text block, but kept for safety */
     flex-grow: 0;
-    z-index: 2;
-    margin: 0;
-    vertical-align: baseline;
 }
 
 .reference-item__link-icon {
@@ -765,7 +772,7 @@ html {
 }
 
 .btn--primary {
-    width: 339px;
+    width: 100%; /* Was 339px */
     height: 38px;
     background: #007FFF;
     order: 1;
@@ -783,7 +790,7 @@ html {
 
 .btn--secondary {
     box-sizing: border-box;
-    width: 339px;
+    width: 100%; /* Was 339px */
     height: 38px;
     background: #FDFDFD;
     border: 1px solid rgba(30, 136, 229, 0.5);
@@ -804,7 +811,7 @@ html {
     display: flex;
     flex-direction: row;
     box-sizing: border-box;
-    width: 228px;
+    width: auto; /* Was 228px */
     height: 32px;
     justify-content: center;
     align-items: center;
@@ -852,8 +859,8 @@ html {
     align-items: flex-start;
     padding: 24px;
     gap: 16px;
-    width: 387px;
-    height: 456px;
+    width: 100%; /* Was 387px */
+    height: auto; /* Was 456px */
     background: #FFFFFF;
     border-radius: 12px;
     flex: none;
@@ -862,8 +869,8 @@ html {
 }
 
 .access-card__title {
-    width: 165px;
-    height: 28px;
+    width: 100%; /* Was 165px */
+    height: auto; /* Was 28px */
     font-family: var(--font-merriweather);
     font-style: normal;
     font-weight: 700;
@@ -878,7 +885,7 @@ html {
 }
 
 .access-card__divider {
-    width: 339px;
+    width: 100%; /* Was 339px */
     height: 0;
     border: 1px solid #DCDFE4;
     flex: none;
@@ -896,7 +903,7 @@ html {
     align-items: flex-start;
     padding: 0;
     gap: 0;
-    width: 339px;
+    width: 100%; /* Was 339px */
     flex: none;
     order: 4;
     align-self: stretch;
@@ -913,7 +920,7 @@ html {
     align-items: flex-start;
     padding: 0;
     gap: 0;
-    width: 339px;
+    width: 100%; /* Was 339px */
     height: 52px;
     flex: none;
     align-self: stretch;
@@ -927,7 +934,7 @@ html {
     align-items: center;
     padding: 4px 0px;
     gap: 4px;
-    width: 113px;
+    width: 33.33%; /* Was 113px */
     height: 52px;
     box-sizing: border-box;
     flex: none;
@@ -973,8 +980,8 @@ html {
     align-items: center;
     padding: 12px;
     gap: 12px;
-    width: 339px;
-    height: 188px;
+    width: 100%; /* Was 339px */
+    height: auto; /* Was 188px */
     background: #F3F9FF;
     border-radius: 12px;
     flex: none;
@@ -982,21 +989,22 @@ html {
 }
 
 .citation-box__text {
-    width: 315px;
-    height: 120px;
+    width: 100%; /* Was 315px */
+    height: auto; /* Was 120px */
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 140%;
-    display: flex;
-    align-items: center;
+    display: block; /* Changed from flex to block */
     color: #212636;
     flex: none;
     order: 0;
     align-self: stretch;
     flex-grow: 0;
     margin: 0;
+    word-break: break-word; /* Ensure long words/URLs break */
+    overflow-wrap: break-word;
 }
 
 /* ========================================
@@ -1008,8 +1016,8 @@ html {
     align-items: flex-start;
     padding: 24px;
     gap: 16px;
-    width: 387px;
-    height: 248px;
+    width: 100%; /* Was 387px */
+    height: auto; /* Was 248px */
     background: #FFFFFF;
     border-radius: 12px;
     flex: none;
@@ -1018,8 +1026,8 @@ html {
 }
 
 .issue-card__title {
-    width: 159px;
-    height: 34px;
+    width: 100%; /* Was 159px */
+    height: auto; /* Was 34px */
     font-family: var(--font-merriweather);
     font-style: normal;
     font-weight: 700;
@@ -1039,8 +1047,8 @@ html {
     align-items: flex-start;
     padding: 0;
     gap: 16px;
-    width: 339px;
-    height: 150px;
+    width: 100%; /* Was 339px */
+    height: auto; /* Was 150px */
     flex: none;
     order: 1;
     align-self: stretch;
@@ -1048,7 +1056,7 @@ html {
 }
 
 .issue-card__cover {
-    width: 107px;
+    width: 107px; /* Kept fixed for image consistency */
     height: 150px;
     box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
     flex: none;
@@ -1063,15 +1071,15 @@ html {
     align-items: flex-start;
     padding: 0;
     gap: 4px;
-    width: 216px;
-    height: 80px;
-    flex: none;
+    width: auto; /* Was 216px */
+    height: auto; /* Was 80px */
+    flex: 1; /* Allow to fill remaining space */
     order: 1;
     flex-grow: 1;
 }
 
 .issue-card__name {
-    width: 216px;
+    width: 100%; /* Was 216px */
     font-family: var(--font-merriweather);
     font-style: normal;
     font-weight: 700;
@@ -1109,19 +1117,24 @@ html {
     align-items: flex-start;
     padding: 24px;
     gap: 16px;
-    width: 387px;
-    height: 332px;
+    width: 100%; /* Was 387px */
+    height: auto; /* Was 332px */
     background: #FFFFFF;
     border-radius: 12px;
     flex: none;
     order: 2;
-    align-self: stretch;
+    align-self: flex-start; /* Changed from stretch to flex-start for sticky to work */
     flex-grow: 0;
+    
+    /* Sticky positioning */
+    position: sticky;
+    top: 90px;
+    z-index: 10;
 }
 
 .toc-card__title {
-    width: 114px;
-    height: 34px;
+    width: 100%; /* Was 114px */
+    height: auto; /* Was 34px */
     font-family: var(--font-merriweather);
     font-style: normal;
     font-weight: 700;
@@ -1141,7 +1154,7 @@ html {
     align-items: flex-start;
     padding: 0;
     gap: 4px;
-    width: 339px;
+    width: 100%; /* Was 339px */
     flex: none;
     order: 1;
     align-self: stretch;
@@ -1156,8 +1169,8 @@ html {
     align-items: flex-start;
     padding: 4px 8px;
     gap: 4px;
-    width: 339px;
-    height: 30px;
+    width: 100%; /* Was 339px */
+    height: auto; /* Was 30px */
     border-left: 2px solid #DCDFE4;
     flex: none;
     align-self: stretch;
@@ -1194,16 +1207,82 @@ html {
     color: #0074E8;
 }
 
+
 /* ========================================
-   RESPONSIVE DESIGN (<= 1439px)
+   Responsive Desktop (1024px - 1440px)
    ======================================== */
+@media (min-width: 1024px) and (max-width: 1439px) {
+    .article__container {
+        max-width: 100%;
+        padding: 0 24px;
+    }
+
+    .article__content {
+        max-width: 100%;
+        gap: 32px;
+    }
+
+    .article__left {
+        width: calc((100% - 32px) * 0.665);
+        flex: none;
+    }
+
+    .article__sidebar {
+        width: calc((100% - 32px) * 0.335);
+        flex: none;
+        padding-right: 24px; /* Adjusted padding */
+    }
+
+    .article__header,
+    .article__title,
+    .author-list,
+    .article__body {
+        width: 100%;
+    }
+
+    /* Fix absolute positioned elements */
+    .author-list__scroll-btn {
+        margin-left: auto;
+    }
+}
+
 /* ========================================
-   RESPONSIVE DESIGN (<= 1439px)
+   Responsive Tablet (768px - 1023px)
    ======================================== */
-/* ========================================
-   RESPONSIVE DESIGN (<= 1439px)
-   ======================================== */
-@media (max-width: 1439px) {
+@media (min-width: 768px) and (max-width: 1023px) {
+    .article__sidebar {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        width: 100% !important;
+        padding: 0 24px !important;
+        align-items: stretch !important;
+    }
+
+    /* First row: Access Card */
+    .access-card {
+        width: 100% !important;
+        order: 0;
+    }
+
+    /* Second row: Issue Card + TOC Card */
+    .issue-card {
+        width: calc(50% - 12px) !important;
+        order: 1;
+        height: auto !important;
+        /* Ensure equal height behavior if needed, flex stretch handles it */
+    }
+
+    .toc-card {
+        width: calc(50% - 12px) !important;
+        order: 2;
+        /* Adjust sticky behavior if needed, currently it might just sit in flow */
+        position: static !important; /* Disable sticky in this specific layout if it causes issues, or keep it */
+        height: auto !important;
+    }
+}
+
+@media (max-width: 1023px) {
 
     /* Global Reset within scope */
     * {
@@ -1257,19 +1336,31 @@ html {
         hyphens: auto !important;
     }
 
-    .author-list {
+    .author-wrapper {
         width: 100% !important;
-        justify-content: center !important;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 12px !important;
+    }
+
+    .author-list {
+        width: auto !important;
+        flex: 1 !important;
+        justify-content: flex-start !important;
+        overflow-x: auto !important;
     }
 
     .author-list__scroll-btn {
-        display: none !important;
+        display: flex !important; /* Show scroll button */
+        position: static !important;
+        margin-left: auto !important;
     }
 
     .stats {
         width: 100% !important;
         height: auto !important;
-        justify-content: center !important;
+        justify-content: left !important;
         flex-wrap: wrap !important;
     }
 
@@ -1347,8 +1438,8 @@ html {
 
     .reference-item__links {
         position: static !important;
-        margin-top: 8px !important;
-        padding-left: 28px !important;
+        margin-top: 0px !important;
+        padding-left: 8px !important;
     }
 
     /* 7. Sidebar Components & Cards Overrides */
@@ -1453,5 +1544,44 @@ html {
     .post-card,
     .article__container {
         margin: 0 auto !important;
+    }
+}
+
+/* ========================================
+   Tablet Specific Overrides (768px - 1023px)
+   Placed LAST to override general mobile styles
+   ======================================== */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .article__sidebar {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        width: 100% !important;
+        padding: 0 24px !important;
+        align-items: stretch !important;
+        gap: 24px !important; /* Ensure gap between columns */
+    }
+
+    /* First row: Access Card - Full Width */
+    .access-card {
+        width: 100% !important;
+        order: 0;
+        margin-bottom: 0 !important;
+    }
+
+    /* Second row: Issue Card (Left) & TOC Card (Right) */
+    .issue-card {
+        width: calc(50% - 12px) !important; /* 50% minus half gap */
+        order: 1;
+        height: auto !important;
+        margin: 0 !important;
+    }
+
+    .toc-card {
+        width: calc(50% - 12px) !important; /* 50% minus half gap */
+        order: 2;
+        position: static !important; 
+        height: auto !important;
+        margin: 0 !important;
     }
 }

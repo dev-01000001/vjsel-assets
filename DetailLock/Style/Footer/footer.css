@@ -13,6 +13,7 @@
     background: linear-gradient(to bottom, #e6f1ff 0%, #ffffff 100%);
     border-top: 1px solid #007fff;
     position: relative;
+    overflow: hidden;
 }
 
 .vjsel-footer__wrapper {
@@ -60,38 +61,40 @@
     flex-direction: row;
     align-items: center;
     padding: 0;
-    gap: 8px;
-    width: 540px;
-    height: 59px;
+    gap: 16px; /* Tăng khoảng cách một chút cho thoáng */
+    width: 100%;
+    height: auto;
     flex: none;
     flex-grow: 0;
 }
 
 .vjsel-footer__logo-image {
     width: 60px;
-    height: 59px;
+    height: auto;
     flex-shrink: 0;
     position: relative;
+    display: flex;
+    align-items: center;
 }
 
 .vjsel-footer__logo-img {
-    width: 60px;
-    height: 59px;
-    object-fit: cover;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
     display: block;
 }
 
 .vjsel-footer__logo-titles {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    justify-content: center;
     padding: 0;
     gap: 4px;
-    width: 472px;
-    height: 47px;
-    text-align: center;
-    flex: none;
-    flex-grow: 0;
+    width: auto;
+    height: auto;
+    text-align: left;
+    flex: 1; /* Cho phép chiếm không gian còn lại */
 }
 
 .vjsel-footer__logo-title {
@@ -99,24 +102,18 @@
     font-style: normal;
     font-weight: 700;
     line-height: 140%;
-    display: flex;
-    align-items: center;
-    text-align: center;
     color: #173595;
-    flex: none;
-    flex-grow: 0;
+    width: 100%;
 }
 
 .vjsel-footer__logo-title--vi {
-    width: 472px;
-    height: 22px;
     font-size: 16px;
+    text-transform: uppercase;
 }
 
 .vjsel-footer__logo-title--en {
-    width: 470px;
-    height: 21px;
-    font-size: 15px;
+    font-size: 14px; /* Giảm nhẹ size tiếng Anh cho cân đối */
+    text-transform: uppercase;
 }
 
 .vjsel-footer__contacts-list {
@@ -264,49 +261,14 @@
    1. Laptop / Desktop Small (1025px to 1439px)
    -------------------------------------------------------------------------- */
 @media screen and (max-width: 1439px) {
-    .vjsel-footer__wrapper {
-        width: 100%;
-        max-width: 100%;
-        height: auto;
-        padding: 40px 24px;
-    }
-
-    .vjsel-footer__content {
-        width: 100%;
-        height: auto;
-        gap: 32px;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-
     .vjsel-footer__info-col {
-        width: 100%;
-        max-width: 100%;
-        flex-grow: 1;
-        height: auto;
-        min-width: 0;
+        max-width: 50%;
     }
+}
 
-    .vjsel-footer__logo-group,
-    .vjsel-footer__contact-item,
-    .vjsel-footer__contact-text,
-    .vjsel-footer__logo-titles,
-    .vjsel-footer__logo-title--vi,
-    .vjsel-footer__logo-title--en {
-        width: 100% !important;
-        max-width: 100% !important;
-        white-space: normal !important;
-        height: auto !important;
-    }
-
-    .vjsel-footer__nav-col--wide,
-    .vjsel-footer__nav-col--narrow {
-        width: auto !important;
-        min-width: 150px;
-    }
-
-    .vjsel-footer__divider {
-        width: 100%;
+@media screen and (max-width: 1300px) {
+    .vjsel-footer__info-col {
+        max-width: 40%;
     }
 }
 
@@ -316,17 +278,20 @@
 @media screen and (max-width: 1024px) {
     .vjsel-footer__wrapper {
         padding: 32px 24px;
+        height: auto; /* Reset fixed height */
     }
 
     .vjsel-footer__content {
         flex-direction: column;
         align-items: flex-start;
         gap: 32px;
+        height: auto; /* Reset fixed height */
     }
 
     .vjsel-footer__info-col {
         width: 100%;
-        max-width: 600px;
+        max-width: 100%; /* Allow full width */
+        height: auto; /* Reset fixed height */
     }
 
     .vjsel-footer__nav-col {
@@ -358,10 +323,27 @@
     .vjsel-footer__logo-group {
         width: 100%;
         height: auto;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
     }
+
+    .vjsel-footer__logo-group .vjsel-footer__logo-titles {
+        flex: 1;
+        width: auto !important;
+        max-width: 100% !important;
+        align-items: flex-start;
+    }
+
+    .vjsel-footer__logo-group .vjsel-footer__logo-titles .vjsel-footer__logo-title--vi,
+    .vjsel-footer__logo-group .vjsel-footer__logo-titles .vjsel-footer__logo-title--en {
+        width: 100% !important;
+        max-width: 100% !important;
+        white-space: normal !important;
+        height: auto !important;
+        text-align: left;
+    }
+
 
     .vjsel-footer__logo-titles {
         width: 100%;
@@ -371,7 +353,7 @@
 
     .vjsel-footer__logo-title--vi,
     .vjsel-footer__logo-title--en {
-        width: 100%;
+        width: auto;
         text-align: left;
         font-size: 14px;
         height: auto;
@@ -398,10 +380,12 @@
    4. Small Mobile (max-width: 480px)
    -------------------------------------------------------------------------- */
 @media screen and (max-width: 480px) {
-    .vjsel-footer__copyright {
-        font-size: 12px;
+
+    .vjsel-footer__logo-title--vi,
+    .vjsel-footer__logo-title--en {
+        font-size: 11px;
         white-space: normal;
-        width: 100%;
+        width: auto;
         text-align: center;
     }
 }
@@ -412,13 +396,14 @@
    ========================================================================== */
 @media screen and (max-width: 1439px) {
 
-    html,
+    /* html,
     body {
         width: 100% !important;
         max-width: 100vw !important;
         overflow-x: hidden !important;
-    }
+    } */
 
+    /* Force all 1440px/1280px containers to be fluid */
     .site-header,
     .related-posts,
     .related-keywords,
@@ -429,13 +414,34 @@
     .related-keywords__title,
     .related-keywords__list,
     .vjsel-footer__wrapper,
-    .vjsel-footer__content {
+    .vjsel-footer__content,
+    .journal-page,
+    .journal-page__container,
+    .journal-page__left-column,
+    .journal-page__right-column,
+    .article-card,
+    .article-card__content,
+    .published-issues__container {
         width: 100% !important;
         max-width: 100% !important;
         min-width: 0 !important;
         box-sizing: border-box !important;
     }
 
+    .journal-page__container {
+        flex-wrap: wrap !important;
+        height: auto !important;
+    }
+
+    .journal-page__left-column,
+    .journal-page__right-column,
+    .article-card {
+        height: auto !important;
+    }
+
+    /* Ensure content centers properly */
+
+    /* Ensure content centers properly */
     .site-header,
     .related-posts,
     .related-keywords,
