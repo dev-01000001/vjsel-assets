@@ -11,7 +11,8 @@
     align-items: center;
     padding: 12px 80px;
     gap: 62px;
-    width: 1440px;
+    width: 100%;
+    max-width: 1440px;
     height: 74px;
     margin: 0 auto;
     background: #FFFFFF;
@@ -190,6 +191,8 @@
 /* Responsive 1440px */
 @media (max-width: 1439px) {
     .site-header {
+        position: sticky !important;
+        top: 0 !important;
         width: 100% !important;
         height: auto !important;
         min-height: 84px !important;
@@ -299,6 +302,8 @@
 
 @media (max-width: 375px) {
     .site-header {
+        position: sticky !important;
+        top: 0 !important;
         padding: 12px 10px !important;
         min-height: 80px !important;
     }

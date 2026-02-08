@@ -60,15 +60,10 @@
     background: var(--top-nav-color-bg);
     box-shadow: var(--top-nav-shadow);
     z-index: 9999;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
     /* overflow: hidden; */
-}
-
-@media (min-width: 769px) {
-    .top-nav {
-        position: -webkit-sticky;
-        position: sticky;
-        top: 0;
-    }
 }
 
 .top-nav__container {

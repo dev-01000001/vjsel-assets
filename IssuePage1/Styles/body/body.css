@@ -969,13 +969,13 @@
     body {
         width: 100%;
         max-width: 100vw;
-        overflow-x: hidden;
+        overflow-x: clip;
     }
 
     .browse-page {
         width: 100%;
         max-width: 100vw;
-        overflow-x: hidden;
+        overflow-x: clip;
     }
 
     /* Scale containers proportionally */
@@ -1280,7 +1280,7 @@
     body {
         width: 100%;
         max-width: 100vw;
-        overflow-x: hidden !important;
+        overflow-x: clip !important;
     }
 
     * {
@@ -1290,7 +1290,7 @@
     .browse-page {
         width: 100%;
         max-width: 100vw;
-        overflow-x: hidden;
+        overflow-x: clip;
     }
 
     .browse-page__breadcrumb-section {

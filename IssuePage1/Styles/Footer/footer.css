@@ -61,7 +61,8 @@
     flex-direction: row;
     align-items: center;
     padding: 0;
-    gap: 16px; /* Tăng khoảng cách một chút cho thoáng */
+    gap: 16px;
+    /* Tăng khoảng cách một chút cho thoáng */
     width: 100%;
     height: auto;
     flex: none;
@@ -94,7 +95,8 @@
     width: auto;
     height: auto;
     text-align: left;
-    flex: 1; /* Cho phép chiếm không gian còn lại */
+    flex: 1;
+    /* Cho phép chiếm không gian còn lại */
 }
 
 .vjsel-footer__logo-title {
@@ -112,7 +114,8 @@
 }
 
 .vjsel-footer__logo-title--en {
-    font-size: 14px; /* Giảm nhẹ size tiếng Anh cho cân đối */
+    font-size: 14px;
+    /* Giảm nhẹ size tiếng Anh cho cân đối */
     text-transform: uppercase;
 }
 
@@ -278,20 +281,24 @@
 @media screen and (max-width: 1024px) {
     .vjsel-footer__wrapper {
         padding: 32px 24px;
-        height: auto; /* Reset fixed height */
+        height: auto;
+        /* Reset fixed height */
     }
 
     .vjsel-footer__content {
         flex-direction: column;
         align-items: flex-start;
         gap: 32px;
-        height: auto; /* Reset fixed height */
+        height: auto;
+        /* Reset fixed height */
     }
 
     .vjsel-footer__info-col {
         width: 100%;
-        max-width: 100%; /* Allow full width */
-        height: auto; /* Reset fixed height */
+        max-width: 100%;
+        /* Allow full width */
+        height: auto;
+        /* Reset fixed height */
     }
 
     .vjsel-footer__nav-col {
@@ -404,7 +411,15 @@
     } */
 
     /* Force all 1440px/1280px containers to be fluid */
-    .site-header,
+    .site-header {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+        position: sticky !important;
+        top: 0 !important;
+    }
+
     .related-posts,
     .related-keywords,
     .article__content,
