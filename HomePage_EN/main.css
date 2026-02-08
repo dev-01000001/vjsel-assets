@@ -45,7 +45,6 @@
 .top-nav__link:focus-visible,
 .top-nav__btn:focus-visible,
 .top-nav__language:focus-visible,
-.hero__search-input:focus-visible,
 .hero__search-btn:focus-visible {
     outline: 2px solid #007fff;
     outline-offset: 2px;
